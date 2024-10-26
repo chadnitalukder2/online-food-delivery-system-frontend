@@ -23,7 +23,7 @@
             <div class="menu-items">
                <ul>
                 <li><i class="fa-regular fa-heart"></i></li>
-                <li class="btn_login"><a href="" style=" color: #9c4202 ;">Log in</a></li>
+                <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }" style=" color: #9c4202 ;">Login</router-link></li>
                 <li class="btn_singup"><a href="" style=" color: #fff ;" >Sing up </a></li>
                </ul>
             </div>
@@ -69,7 +69,7 @@
 .ofd_nav{
     .header-main{
         background: #fff;
-        padding:  12px 20px;
+        padding:  12px 80px;
         display: flex;
         justify-content: space-between;
         align-items: center;

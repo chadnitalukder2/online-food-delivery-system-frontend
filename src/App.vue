@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Nav from './views/Nav.vue';
+import Nav from './components/Nav.vue';
 </script>
 
 <template>
@@ -8,7 +8,10 @@ import Nav from './views/Nav.vue';
     
     <div class="wrapper">
     <Nav></Nav>
-  
+    <main style=" width: 100%;">
+      <notifications />
+      <router-view></router-view>
+    </main>
     </div>
   </header>
 
