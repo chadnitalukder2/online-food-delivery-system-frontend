@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-footer" >
-                        <router-link to="/forgot-password" class="">Forgot Password?</router-link>
+                        <router-link to="/forgot-password" class="form_forgot_pass">Forgot Password?</router-link>
                         <p class="text-base text-[#adadad]"> Not a member yet?
                             <router-link to="/register" class=""> register </router-link>
                         </p>
@@ -108,13 +108,26 @@
                     cursor: pointer;
                     font-size: 16px;
                     font-weight: 500;
+                    margin-bottom: 10px;
                     transition: all .5s;
                     &:hover{
-                        background: #b04a02;
+                        background: #bb5003;
                     }
                 }
             }
            
+        }
+
+        .form-footer{
+            .form_forgot_pass{
+                text-decoration: none;
+                font-size: 16px;
+                color: #716f6f;
+                transition: all .3s;
+                &:hover{
+                    color:  #0303a4;
+                }
+            }
         }
     }
 
