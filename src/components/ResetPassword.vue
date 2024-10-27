@@ -9,36 +9,30 @@
                 <img src="../assets/baner-img.jpg">
             </div>
             <div class="banner_title">
-                <h1>Login</h1>
+                <h1>Reset Password</h1>
             </div>
         </div>
 
         <div class="login_warper">
             <div class="login_page">
-                <h1 class="form-title">Login</h1>
+                <h1 class="form-title">Reset Password</h1>
                 <form @submit.prevent="handleLogin" method="post">
 
                     <div class="form-header">
-                        <label for="uname"><b>User Email </b></label><br>
-                        <input type="text" placeholder="Enter User Email" name="uname">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
-
-
                         <label for="psw"><b>Password </b></label>
                         <input type="password" placeholder="Enter Password" name="psw">
                         <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
 
+                        <label for="psw"><b> Password Confirmation</b></label>
+                        <input type="password" placeholder="Enter Password Confirmation" name="psw">
+                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+    
                         <label style="margin: 0px; color: red; font-size: 14px;"></label>
-                        <button type="submit" class="login_btn">Login</button>
+                        <button type="submit" class="login_btn">Submit</button>
 
                     </div>
 
-                    <div class="form-footer">
-                        <router-link to="/forgot-password" class="form_forgot_pass">Forgot Password?</router-link>
-                        <p class="text-base text-[#adadad]"> Don't have any account yet?
-                            <router-link to="/register" class=""> Register </router-link>
-                        </p>
-                    </div>
+                 
                 </form>
 
             </div>
@@ -151,29 +145,7 @@
 
         }
 
-        .form-footer {
-            .form_forgot_pass {
-                text-decoration: none;
-                font-size: 16px;
-                color: #716f6f;
-                transition: all .3s;
-
-                &:hover {
-                    color: #0303a4;
-                }
-            }
-
-            .text-base {
-                margin-top: 12px;
-                color: #212121;
-                font-size: 16px;
-
-                a {
-                    color: #9c4202;
-                    text-decoration: none;
-                }
-            }
-        }
+    
     }
 
 }
