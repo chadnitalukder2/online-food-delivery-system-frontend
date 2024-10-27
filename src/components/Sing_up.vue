@@ -11,16 +11,25 @@
             <div class="banner_title">
                 <h1>User Register</h1>
             </div>
-        </div>
 
+        </div>
         <div class="login_warper">
             <div class="login_page">
-                <h1 class="form-title">Login</h1>
+                <h1 class="form-title"> Register</h1>
                 <form @submit.prevent="handleLogin" method="post">
 
                     <div class="form-header">
+                        <label for="uname"><b>User Name </b></label><br>
+                        <input type="text" placeholder="Enter User Name" name="uname">
+                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+
+
                         <label for="uname"><b>User Email </b></label><br>
                         <input type="text" placeholder="Enter User Email" name="uname">
+                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+
+                        <label for="uname"><b>User Phone </b></label><br>
+                        <input type="number" placeholder="Enter User Phone Number" name="uname">
                         <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
 
 
@@ -28,15 +37,19 @@
                         <input type="password" placeholder="Enter Password" name="psw">
                         <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
 
+                        <label for="psw"><b> Password Confirmation</b></label>
+                        <input type="password" placeholder="Enter Password Confirmation" name="psw">
+                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+
+
                         <label style="margin: 0px; color: red; font-size: 14px;"></label>
-                        <button type="submit" class="login_btn">Login</button>
+                        <button type="submit" class="login_btn">Sing up</button>
 
                     </div>
 
                     <div class="form-footer">
-                        <router-link to="/forgot-password" class="form_forgot_pass">Forgot Password?</router-link>
-                        <p class="text-base text-[#adadad]"> Don't have any account yet?
-                            <router-link to="/register" class=""> Register </router-link>
+                        <p class="text-base text-[#adadad]"> Already have an account?
+                            <router-link to="/Login" class=""> Login</router-link>
                         </p>
                     </div>
                 </form>
@@ -76,8 +89,7 @@
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-
-            h1 {
+            h1{
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;

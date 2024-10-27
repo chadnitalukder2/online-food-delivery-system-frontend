@@ -24,7 +24,7 @@
                <ul>
                 <li><i class="fa-regular fa-heart"></i></li>
                 <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }" style=" color: #9c4202 ;">Login</router-link></li>
-                <li class="btn_singup"><a href="" style=" color: #fff ;" >Sing up </a></li>
+                <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }" style=" color: #fff ;">Sing up</router-link></li>
                </ul>
             </div>
 
