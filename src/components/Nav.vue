@@ -37,7 +37,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav {
     font-family: Tahoma;
 
@@ -75,17 +75,18 @@
     }
 
     .ofd_nav {
+        box-shadow: 0 3px 5px rgba(0,0,0,.02),0 0 2px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.08)!important;
         .header-main {
             background: #fff;
             padding: 12px 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 1px 4px 15px #e7e4e4;
+           
 
             .logo {
                 h1 {
-                    color: #3f3636;
+                    color: #212121;
                     font-size: 32px;
                     font-weight: 600;
                     cursor: pointer;

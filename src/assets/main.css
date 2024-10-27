@@ -1,7 +1,7 @@
 @import './base.css';
 
 #app {
-
+    font-family: Tahoma;
 }
 .active{
 color: #9c4202;

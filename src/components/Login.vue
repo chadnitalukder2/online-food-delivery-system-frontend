@@ -49,7 +49,7 @@
 
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
     background: #f0f0f085;
     font-family: Tahoma;
