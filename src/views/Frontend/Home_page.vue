@@ -3,8 +3,8 @@
 </script>
 
 <template>
-    design
-    <section>
+    <!-- header section -->
+    <section class="header_section">
         <div class="container">
             <div class="details_wrapper">
                 <div class="left_details">
@@ -33,14 +33,15 @@
 </template>
 
 <style lang="scss" scoped>
-.container {
+.header_section{
+    .container {
     background: #f7e5e5cf;
 
     .details_wrapper {
         display: flex;
         grid-area: 20px;
         justify-content: space-between;
-        padding: 64px 80px 20px 80px;
+        padding: 64px 80px;
 
         .left_details {
             flex-basis: 58%;
@@ -170,4 +171,6 @@
     }
 
 }
+}
+
 </style>
