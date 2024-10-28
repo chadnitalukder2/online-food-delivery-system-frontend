@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    design
     <section>
         <div class="container">
             <div class="details_wrapper">
@@ -12,8 +13,17 @@
                         <p class="banner-area-subtitle">Our job fill your tummy with delicious food and with fast
                             and free delivery</p>
                     </div>
+                    <form class="search-form">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control form--control" id="search">
+                            <label for="address">Enter Your Favourite restaurant</label>
+                        </div>
+                        <div class="banner-search-btn">
+                            <button class="btn btn--base" type="submit">Search</button>
+                        </div>
+                    </form>
                 </div>
-               
+
                 <div class="banner_img">
                     <img src="../../assets/delivery-girl.png">
                 </div>
@@ -24,39 +34,134 @@
 
 <style lang="scss" scoped>
 .container {
-    background: #FFFAFA;
+    background: #f7e5e5cf;
 
     .details_wrapper {
         display: flex;
+        grid-area: 20px;
         justify-content: space-between;
-        padding: 64px 80px;
-        .left_details{
-            flex-basis: 60%;
+        padding: 64px 80px 20px 80px;
+
+        .left_details {
+            flex-basis: 58%;
+
             .banner-area {
                 font-family: "Poppins", sans-serif;
-                .banner-area-title{
+
+                .banner-area-title {
                     color: #212121;
                     font-size: 60px;
                     margin-bottom: 25px;
                     max-width: 550px;
                     line-height: 1.2;
+                    font-weight: 600;
 
                 }
-                .banner-area-subtitle{
+
+                .banner-area-subtitle {
                     max-width: 400px;
-                    font-size: 18px;
+                    font-size: 20px;
                     margin-bottom: 25px;
                     color: #787878;
                     line-height: 1.5;
 
                 }
             }
+
+            .search-form {
+                color: #999999;
+                border-radius: 10px;
+                background: #fff;
+                width: 100%;
+                max-width: 830px;
+                padding: 25px;
+                display: flex;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+
+                .input-group {
+                    position: relative;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: stretch;
+                    width: 100%;
+
+                    input {
+                        border-radius: 6px !important;
+                        background: #fff;
+                        height: 60px;
+                        padding: 0px 20px 0px 20px;
+                        position: relative;
+                        flex: 1 1 auto;
+                        width: 1%;
+                        min-width: 0;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        color: #787878;
+                        border: 1px solid #ced4da;
+                        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                    }
+
+                    label {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 20px;
+                        transition: 0.2s linear;
+                        background-color: #fff;
+                        padding: 1px 5px;
+                        z-index: 11;
+                        pointer-events: none;
+                    }
+
+                    input:focus {
+                        outline: none;
+                        border: 1px solid #9c4202;
+                    }
+
+                    input:focus+label {
+                        top: 0%;
+                        color: #212121;
+                    }
+
+                }
+
+                .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+                    margin-left: -1px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+                .banner-search-btn {
+                    button {
+                        font-size: 18px;
+                        font-weight: 400;
+                        text-transform: inherit;
+                        text-align: center;
+                        border: 1px solid #9c4202;
+                        color: #fff;
+                        background: #9c4202;
+                        cursor: pointer;
+                        border-radius: 6px !important;
+                        font-family: var(--body-font);
+                        margin-left: 20px !important;
+                        padding: 7px 65px !important;
+                        height: 60px;
+                        transform: all .3s;
+                        &:hover{
+                            background: #a94804;
+                        }
+
+                    }
+                }
+            }
         }
-       
+
 
         .banner_img {
             flex-basis: 40%;
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
             }
