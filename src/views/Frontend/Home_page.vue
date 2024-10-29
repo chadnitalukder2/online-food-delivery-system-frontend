@@ -99,7 +99,7 @@
                     <div class="food-item-box">
                         <div class="food-item-box__thumb">
                             <a href="#">
-                                <img src="../../assets/food-5.png">
+                                <img src="../../assets/food-6.png">
                             </a>
                         </div>
                     </div>
@@ -107,6 +107,19 @@
                         <h1><a href="#">Grilled Dishes</a></h1>
                     </div>
                 </div>
+                <div class="food-item">
+                    <div class="food-item-box">
+                        <div class="food-item-box__thumb">
+                            <a href="#">
+                                <img src="../../assets/food-7.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="food-item__title">
+                        <h1><a href="#">Grilled Dishes</a></h1>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -265,12 +278,12 @@
         .food-category {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 25px;
 
             .food-item {
                 .food-item-box {
-                    width: 180px;
-                    height: 180px;
+                    width: 155px;
+                    height: 155px;
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
@@ -278,10 +291,8 @@
                     background-color: #fff;
                     margin: 0 auto;
                     margin-bottom: 20px;
-&:hover{
-    box-shadow:  0px 0px 11px 0px #9c4202;
+                    transition: all .5s;
 
-}
                     .food-item-box__thumb {
                         width: 115px;
                         height: 115px;
@@ -291,6 +302,7 @@
                         justify-content: center;
                         z-index: 1;
                         background: white;
+
                         img {
                             height: 100%;
                             width: 100%;
@@ -300,17 +312,27 @@
                     }
 
                 }
-                .food-item__title{
+
+                .food-item__title {
                     font-size: 16px;
                     font-weight: 500;
                     text-align: center;
-                    a{
+
+                    a {
                         text-decoration: none;
                         color: #212121;
-                        &:hover{
-                            color: #9c4202;
-                        }
+
                     }
+                }
+
+                &:hover {
+                    .food-item-box {
+                        box-shadow:0px 0px 18px 0px #d5681b70 ;
+                    }
+                    .food-item__title a:hover {
+                        color: #9c4202;
+                    }
+                   
                 }
 
             }
