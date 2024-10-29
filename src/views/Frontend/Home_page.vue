@@ -125,6 +125,19 @@
         </div>
 
     </section>
+    <!-- Restaurant section -->
+    <section class="restaurant_section">
+        <div class="container">
+            <div class="header_section">
+                <div class="section-title">
+                    <h1>Popular Restaurant</h1>
+                </div>
+                <div class="all_restaurant">
+                    <a href="#">View All  <i class="fa-regular fa-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
@@ -327,14 +340,57 @@
 
                 &:hover {
                     .food-item-box {
-                        box-shadow:0px 0px 18px 0px #d5681b70 ;
+                        box-shadow: 0px 0px 18px 0px #d5681b70;
                     }
+
                     .food-item__title a:hover {
                         color: #9c4202;
                     }
-                   
+
                 }
 
+            }
+        }
+    }
+}
+
+//================================
+.restaurant_section {
+    background: #f7f7f7;
+    padding: 0px 80px 64px;
+
+    .container {
+        .header_section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .section-title {
+                h1 {
+                    font-size: 28px;
+                    line-height: 1.2;
+                    font-weight: 600;
+                    position: relative;
+                    color: #212121;
+                    display: inline-block;
+                }
+            }
+
+            .all_restaurant {
+                a {
+                    padding: 8px 16px;
+                    font-size: 16px;
+                    border-radius: 6px;
+                    position: relative;
+                    background: #9c4202;
+                    border: 1px solid ;
+                    color: #fff;
+                    text-decoration: none;
+                    outline: none !important;
+                    &:hover{
+                        
+                    }
+                }
             }
         }
     }
