@@ -345,7 +345,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                             <h1>  <a href="#">Chicken Tehari</a> </h1>
                         </div>
                         <div class="price">
-                            from Tk <span>300</span>
+                            From Tk 300
                         </div>
                         <div class="description">
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
@@ -373,7 +373,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                             <h1>  <a href="#">Chicken Tehari</a> </h1>
                         </div>
                         <div class="price">
-                            from Tk <span>300</span>
+                            From Tk 300
                         </div>
                         <div class="description">
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
@@ -401,7 +401,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                             <h1>  <a href="#">Chicken Tehari</a> </h1>
                         </div>
                         <div class="price">
-                            from Tk <span>300</span>
+                            From Tk 300
                         </div>
                         <div class="description">
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
@@ -429,7 +429,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                             <h1>  <a href="#">Chicken Tehari</a> </h1>
                         </div>
                         <div class="price">
-                            from Tk <span>300</span>
+                            From Tk 300
                         </div>
                         <div class="description">
                             <p>Lorem, ipsum vjjdj ndjj ns nd dolor sit amet consectetur adipisicing.</p>
@@ -900,11 +900,11 @@ a {
 
         .popular-food__item-info {
             .food-name {
-                padding-bottom: 6px;
+                padding-bottom: 10px;
                 h1 {
-                    font-size: 16px;
-                    font-weight: 500;
+                    font-size: 18px;
                     a{
+                        font-weight: 600;
                         color: #212121;
                         &:hover{
                             color: #9c4202;
@@ -914,14 +914,16 @@ a {
             }
 
             .price {
-                color: #5b5858;
-                font-size: 14px;
-                padding-bottom: 8px;
+                color: #787878;
+                font-size: 15px;
+                font-weight: bold;
+                padding-bottom: 10px;
             }
 
             .description {
                 color: #999999;
-                font-size: 14px;
+                font-size: 15px;
+                font-weight: bold
             }
         }
 
