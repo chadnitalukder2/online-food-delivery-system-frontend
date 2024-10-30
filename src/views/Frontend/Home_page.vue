@@ -1,4 +1,8 @@
 <script setup>
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
+
+
 
 </script>
 
@@ -31,98 +35,120 @@
         </div>
     </section>
     <!-- Category section -->
+
     <section class="category_section">
         <div class="row">
-            <div class="food-category">
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-1.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-2.png">
-                            </a>
-                        </div>
 
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-3.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-4.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-5.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-6.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
-                <div class="food-item">
-                    <div class="food-item-box">
-                        <div class="food-item-box__thumb">
-                            <a href="#">
-                                <img src="../../assets/food-7.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="food-item__title">
-                        <h1><a href="#">Grilled Dishes</a></h1>
-                    </div>
-                </div>
+            <!-- <div class="food-category"> -->
 
+            <Carousel :items-to-show="6" iconArrowRight iconArrowLeft>
+                <Slide key="0">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-1.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </Slide>
+                <Slide key="1">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-2.png">
+                                </a>
+                            </div>
 
-            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </Slide>
+                <slide key="2">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-3.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </slide>
+                <slide key="3">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-4.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </slide>
+                <slide key="4">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-5.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </slide>
+                <slide key="5">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-6.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </slide>
+                <slide key="6">
+                    <div class="food-item">
+                        <div class="food-item-box">
+                            <div class="food-item-box__thumb">
+                                <a href="#">
+                                    <img src="../../assets/food-7.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="food-item__title">
+                            <h1><a href="#">Grilled Dishes</a></h1>
+                        </div>
+                    </div>
+                </slide>
+                <template #addons>
+                    <navigation />
+
+                </template>
+
+            </Carousel>
         </div>
+        <!-- </div> -->
 
     </section>
     <!-- Restaurant section -->
@@ -291,9 +317,141 @@
             </div>
         </div>
     </section>
+    <!-- Menu section -->
+    <section class="restaurant_section">
+        <div class="container">
+            <div class="header_section">
+                <div class="section-title">
+                    <h1>Popular Food Item</h1>
+                </div>
+                <div class="all_restaurant">
+                    <a href="#">View All <i class="fa-regular fa-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="popular-foods-wrapper">
+                <div class="food_item">
+                    <div class="food__item-thumb">
+                        <a href="#">
+                            <img src="../../assets/menu-1.png">
+                        </a>
+                    </div>
+                    <div class="add-btn">
+                        <a href="#">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="popular-food__item-info">
+                        <div class="food-name">
+                            <h1>  <a href="#">Chicken Tehari</a> </h1>
+                        </div>
+                        <div class="price">
+                            from Tk <span>300</span>
+                        </div>
+                        <div class="description">
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+                        </div>
+                    </div>
+                    <div class="heart">
+                        <a href="#">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="food_item">
+                    <div class="food__item-thumb">
+                        <a href="#">
+                            <img src="../../assets/menu-2.png">
+                        </a>
+                    </div>
+                    <div class="add-btn">
+                        <a href="#">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="popular-food__item-info">
+                        <div class="food-name">
+                            <h1>  <a href="#">Chicken Tehari</a> </h1>
+                        </div>
+                        <div class="price">
+                            from Tk <span>300</span>
+                        </div>
+                        <div class="description">
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+                        </div>
+                    </div>
+                    <div class="heart">
+                        <a href="#">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="food_item">
+                    <div class="food__item-thumb">
+                        <a href="#">
+                            <img src="../../assets/menu-3.png">
+                        </a>
+                    </div>
+                    <div class="add-btn">
+                        <a href="#">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="popular-food__item-info">
+                        <div class="food-name">
+                            <h1>  <a href="#">Chicken Tehari</a> </h1>
+                        </div>
+                        <div class="price">
+                            from Tk <span>300</span>
+                        </div>
+                        <div class="description">
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+                        </div>
+                    </div>
+                    <div class="heart">
+                        <a href="#">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="food_item">
+                    <div class="food__item-thumb">
+                        <a href="#">
+                            <img src="../../assets/menu-4.png">
+                        </a>
+                    </div>
+                    <div class="add-btn">
+                        <a href="#">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="popular-food__item-info">
+                        <div class="food-name">
+                            <h1>  <a href="#">Chicken Tehari</a> </h1>
+                        </div>
+                        <div class="price">
+                            from Tk <span>300</span>
+                        </div>
+                        <div class="description">
+                            <p>Lorem, ipsum vjjdj ndjj ns nd dolor sit amet consectetur adipisicing.</p>
+                        </div>
+                    </div>
+                    <div class="heart">
+                        <a href="#">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
+a {
+    text-decoration: none;
+}
+
 .header_section {
     .container {
         background: #f7e5e5cf;
@@ -438,74 +596,82 @@
 //================================
 .category_section {
     background: #f7f7f7;
-    padding: 64px 80px;
+    padding: 40px 80px 64px;
 
     .row {
-        .food-category {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
+        // .food-category {
+        //     display: flex;
+        //     flex-wrap: wrap;
+        //     gap: 25px;
 
-            .food-item {
-                .food-item-box {
-                    width: 155px;
-                    height: 155px;
+
+        .food-item {
+            padding: 30px 15px 20px 15px;
+
+            .food-item-box {
+                width: 155px;
+                height: 155px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #fff;
+                margin: 0 auto;
+                margin-bottom: 20px;
+                transition: all .5s;
+
+                .food-item-box__thumb {
+                    width: 115px;
+                    height: 115px;
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background-color: #fff;
-                    margin: 0 auto;
-                    margin-bottom: 20px;
-                    transition: all .5s;
+                    z-index: 1;
+                    background: white;
 
-                    .food-item-box__thumb {
-                        width: 115px;
-                        height: 115px;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
                         border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        z-index: 1;
-                        background: white;
-
-                        img {
-                            height: 100%;
-                            width: 100%;
-                            object-fit: cover;
-                            border-radius: 50%;
-                        }
                     }
                 }
+            }
 
-                .food-item__title {
-                    font-size: 16px;
-                    font-weight: 500;
-                    text-align: center;
-                    a {
-                        text-decoration: none;
-                        color: #212121;
+            .food-item__title {
+                font-size: 16px;
+                font-weight: 500;
+                text-align: center;
 
-                    }
+                a {
+                    text-decoration: none;
+                    color: #212121;
+
+                }
+            }
+
+            &:hover {
+                .food-item-box {
+                    box-shadow: 0px 0px 18px 0px #d5681b70;
                 }
 
-                &:hover {
-                    .food-item-box {
-                        box-shadow: 0px 0px 18px 0px #d5681b70;
-                    }
-
-                    .food-item__title a {
-                        color: #9c4202;
-                    }
-
+                .food-item__title a {
+                    color: #9c4202;
                 }
 
             }
+
         }
+
+
     }
+
 }
 
-//================================
+// }
+
+//=====================================
 .restaurant_section {
     background: #f7f7f7;
     padding: 0px 80px 64px;
@@ -553,17 +719,20 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
+
             .restaurant_item {
                 .restaurant__thumb {
                     position: relative;
                     transition: all ease 0.3s;
                     overflow: hidden;
                     border-radius: 8px 8px 0px 0px;
+
                     .image {
                         transition: all ease 0.3s;
                         width: 100%;
                         height: 175px;
                         display: block;
+
                         img {
                             width: 100%;
                             height: 100%;
@@ -607,6 +776,7 @@
                             width: 43px;
                             height: 40px;
                             border-radius: 6px;
+                            object-fit: cover;
                         }
                     }
 
@@ -629,6 +799,7 @@
                         .restaurant__info-content-location {
                             font-size: 16px;
                             color: #999999;
+
                             i {
                                 color: #9c4202;
                                 font-size: 16px;
@@ -652,9 +823,11 @@
 
             .restaurant_item:hover {
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
                 .image img {
                     transform: scale(1.2);
                 }
+
                 .restaurant__info-content-title a {
                     color: #9c4202 !important;
                 }
@@ -663,6 +836,109 @@
 
 
         }
+    }
+}
+
+//===========================================
+.popular-foods-wrapper {
+    gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .food_item {
+        padding: 15px;
+        height: 100%;
+        border: 0.5px solid rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        background-color: #fff;
+        transition: all ease 0.3s;
+        align-items: center;
+        display: flex;
+
+        .food__item-thumb {
+            position: relative;
+            margin-right: 15px;
+            height: 90px;
+            width: 125px;
+            border-radius: 6px;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover
+            }
+        }
+
+        .add-btn {
+            position: absolute;
+            font-size: 12px;
+            background: #fff;
+            width: 25px;
+            display: flex;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #ddd;
+            justify-content: center;
+            height: 25px;
+            align-items: center;
+            margin: 60px 0px 10px 8px;
+            transition: all ease .3s;
+
+            a {
+                color: #787878;
+            }
+
+            &:hover {
+                background: #f6f5f5;
+
+                a {
+                    color: #9c4202;
+                }
+
+            }
+        }
+
+        .popular-food__item-info {
+            .food-name {
+                padding-bottom: 6px;
+                h1 {
+                    font-size: 16px;
+                    font-weight: 500;
+                    a{
+                        color: #212121;
+                        &:hover{
+                            color: #9c4202;
+                        }
+                    }
+                }
+            }
+
+            .price {
+                color: #5b5858;
+                font-size: 14px;
+                padding-bottom: 8px;
+            }
+
+            .description {
+                color: #999999;
+                font-size: 14px;
+            }
+        }
+
+        .heart {
+            font-size: 18px;
+            margin: -70px 0px 0px 0px;
+            a{
+                color: #999999;
+            }
+        }
+        &:hover{
+            transform: translateY(-5px);
+            .food-name h1 a{
+                color: #9c4202;
+            }
+        }
+
     }
 }
 </style>
