@@ -476,14 +476,12 @@
                             border-radius: 50%;
                         }
                     }
-
                 }
 
                 .food-item__title {
                     font-size: 16px;
                     font-weight: 500;
                     text-align: center;
-
                     a {
                         text-decoration: none;
                         color: #212121;
@@ -496,7 +494,7 @@
                         box-shadow: 0px 0px 18px 0px #d5681b70;
                     }
 
-                    .food-item__title a:hover {
+                    .food-item__title a {
                         color: #9c4202;
                     }
 
@@ -555,30 +553,22 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
-
             .restaurant_item {
                 .restaurant__thumb {
                     position: relative;
                     transition: all ease 0.3s;
                     overflow: hidden;
                     border-radius: 8px 8px 0px 0px;
-
                     .image {
                         transition: all ease 0.3s;
                         width: 100%;
                         height: 175px;
                         display: block;
-
                         img {
                             width: 100%;
                             height: 100%;
+                            transition: all ease .3s;
                         }
-
-                        &:hover {
-                            transform: scale(1.1);
-                        }
-
-
                     }
 
                     .wishlist {
@@ -600,8 +590,6 @@
                         border-radius: 50%;
                         box-shadow: 0px 0px 8px #ddd;
                     }
-
-
                 }
 
                 .restaurant__info {
@@ -635,16 +623,12 @@
                                 font-weight: 600;
                                 color: #212121;
                                 transition: all .3s;
-                                &:hover{
-                                    color: #9c4202;
-                                }
                             }
                         }
 
                         .restaurant__info-content-location {
                             font-size: 16px;
                             color: #999999;
-
                             i {
                                 color: #9c4202;
                                 font-size: 16px;
@@ -664,10 +648,18 @@
                         }
                     }
                 }
-                &:hover{
-                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .restaurant_item:hover {
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                .image img {
+                    transform: scale(1.2);
+                }
+                .restaurant__info-content-title a {
+                    color: #9c4202 !important;
                 }
             }
+
 
 
         }
