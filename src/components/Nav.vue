@@ -16,7 +16,7 @@
                     <ul>
 
                         <li> <router-link active-class="active" :to="{ name: 'home' }">Home</router-link></li>
-                        <li><a href="#">Restaurant</a></li>
+                        <li> <router-link active-class="active" :to="{ name: 'restaurants' }">Restaurant</router-link></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
