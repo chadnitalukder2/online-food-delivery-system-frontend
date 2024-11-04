@@ -13,6 +13,9 @@
             </div>
         </div>
 
+        <div>
+            <h1>All Restaurant</h1>
+        </div>
 
     </div>
 
