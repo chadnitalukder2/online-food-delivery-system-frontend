@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Nav from './components/Nav.vue';
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import Nav from './components/Nav.vue';
       <notifications />
       <router-view></router-view>
     </main>
+    <Footer></Footer>
     </div>
   </header>
 
