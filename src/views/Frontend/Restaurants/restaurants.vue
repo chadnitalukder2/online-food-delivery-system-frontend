@@ -1,6 +1,10 @@
 <script>
-import RestaurantCard from '../Home/Menu_card.vue';
-
+import RestaurantCard from '../Home/Restaurant_card.vue';
+export default {
+  components: {
+    RestaurantCard,
+  },
+}
 </script>
 
 <template>
@@ -25,68 +29,8 @@ import RestaurantCard from '../Home/Menu_card.vue';
                 </div>
             </div>
             <div class="body-section">
-                hello
-                <RestaurantCard></RestaurantCard>
-                <div class="restaurant_item">
-                    <div class="restaurant__thumb">
-                        <div class="image">
-                            <a href="#">
-                                <img src="../../../assets/restaurant-1.png">
-                            </a>
-                        </div>
-                        <div class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="restaurant__info">
-                        <div class="restaurant__info-thumb">
-                            <a href="#">
-                                <img src="../../../assets/res-logo-1.png">
-                            </a>
-                        </div>
-                        <div class="restaurant__info-content">
-                            <h1 class="restaurant__info-content-title">
-                                <a href="#">Garden Fresh</a>
-                            </h1>
-                            <span class="restaurant__info-content-location">
-                                <i class="fa-regular fa-compass"></i> Miami, Florida
-                            </span>
-                            <div class="restaurant__info-content-review">
-                                <span><i class="fa-solid fa-star"></i></span> <span>(5.0)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="restaurant_item">
-                    <div class="restaurant__thumb">
-                        <div class="image">
-                            <a href="#">
-                                <img src="../../../assets/restaurant-1.png">
-                            </a>
-                        </div>
-                        <div class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="restaurant__info">
-                        <div class="restaurant__info-thumb">
-                            <a href="#">
-                                <img src="../../../assets/res-logo-1.png">
-                            </a>
-                        </div>
-                        <div class="restaurant__info-content">
-                            <h1 class="restaurant__info-content-title">
-                                <a href="#">Garden Fresh</a>
-                            </h1>
-                            <span class="restaurant__info-content-location">
-                                <i class="fa-regular fa-compass"></i> Miami, Florida
-                            </span>
-                            <div class="restaurant__info-content-review">
-                                <span><i class="fa-solid fa-star"></i></span> <span>(5.0)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <RestaurantCard/>
+               
             </div>
 
         </div>

@@ -160,7 +160,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                     <h1>Popular Restaurant</h1>
                 </div>
                 <div class="all_restaurant">
-                    <a href="#">View All <i class="fa-regular fa-circle-right"></i></a>
+                    <router-link  :to="{ name: 'restaurants' }">View All <i class="fa-regular fa-circle-right"></i></router-link>
                 </div>
             </div>
             <div class="nearby-restaurant">
@@ -458,7 +458,6 @@ a {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
-
 
         }
     }
