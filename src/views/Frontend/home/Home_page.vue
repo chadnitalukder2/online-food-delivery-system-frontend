@@ -145,7 +145,6 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                 </slide>
                 <template #addons>
                     <navigation />
-
                 </template>
 
             </Carousel>
@@ -166,8 +165,6 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
             </div>
             <div class="nearby-restaurant">
               <RestaurantCard></RestaurantCard>
-
-
             </div>
         </div>
     </section>
@@ -184,8 +181,6 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
             </div>
             <div class="popular-foods-wrapper">
                <MenuCard></MenuCard>
-               
-
             </div>
         </div>
     </section>
@@ -463,9 +458,6 @@ a {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
-
-
-
 
 
         }
