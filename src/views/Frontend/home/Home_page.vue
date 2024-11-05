@@ -162,7 +162,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                 <div class="all_restaurant">
                     <router-link  :to="{ name: 'restaurants' }">View All <i class="fa-regular fa-circle-right"></i></router-link>
                 </div>
-            </div>
+            </div>modiolus
             <div class="nearby-restaurant">
               <RestaurantCard></RestaurantCard>
             </div>
