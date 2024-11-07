@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div class="restaurant-info-box__meta">
-                    <h4 class="restaurant-info-box__meta-title">
+                    <i class="fa-solid fa-location-pin"></i>
+                    <h4 class="menu-title">
                         Urban Eats
                     </h4>
                     <span class="restaurant-info-box__meta-location"><i class="fas fa-map-marker-alt"></i>San Francisco,
@@ -92,15 +93,18 @@
     .restaurant-page {
         padding: 64px 80px;
         background-color: #fff;
+
         .restaurant-info {
             display: flex;
             gap: 30px;
+
             .restaurant-info-box__thumb {
                 .image {
                     width: 90px;
                     height: 90px;
                     border-radius: 8px;
                     overflow: hidden;
+
                     img {
                         width: 100%;
                         height: 100%;
@@ -109,7 +113,14 @@
                 }
             }
 
-            .restaurant-info-box__meta {}
+            .restaurant-info-box__meta {
+                .menu-title {
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 1.2;
+                    color: #212121;
+                }
+            }
 
 
         }

@@ -175,9 +175,6 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                 <div class="section-title">
                     <h1>Popular Food Item</h1>
                 </div>
-                <div class="all_restaurant">
-                    <a href="#">View All <i class="fa-regular fa-circle-right"></i></a>
-                </div>
             </div>
             <div class="popular-foods-wrapper">
                <MenuCard></MenuCard>
