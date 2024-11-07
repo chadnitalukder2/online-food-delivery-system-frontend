@@ -99,7 +99,7 @@
                 .image {
                     width: 90px;
                     height: 90px;
-                    border-radius: 6px;
+                    border-radius: 8px;
                     overflow: hidden;
                     img {
                         width: 100%;
