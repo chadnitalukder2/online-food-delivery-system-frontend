@@ -29,22 +29,29 @@
                         <i class="fa-regular fa-compass"></i>
                         San Francisco,California
                     </div>
-                    <ul class="restaurant-info-box__meta-rating">
-                        <li>
-                            <i class="las la-star active"></i><i class="las la-star active"></i><i
-                                class="las la-star active"></i><i class="las la-star active"></i><i
-                                class="las la-star active"></i>
-                        </li>
+                    <div class="restaurant-rating">
+                        <div class="rating-review">
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
 
-                        <li><span class="badge badge--base badge--sm">OPEN</span></li>
-                        <li class="fav-icon " data-url="https://script.viserlab.com/hungryhub/restaurant/favorite/4"><i
-                                class="far fa-heart"></i></li>
-                    </ul>
-                    <ul class="restaurant-info-box__meta-time">
-                        <li><i class="las la-clock"></i>36 Mins </li>
-                        <li><i class="las la-biking"></i>$6.18 USD
-                        </li>
-                    </ul>
+                        <div class="status">
+                            <span class="badge badge--base badge--sm">OPEN</span>
+                        </div>
+                    </div>
+                    <div class="restaurant-info_meta-time">
+                        <div class="delivery-fee">
+                            <i class="fa-solid fa-calendar-minus"></i>
+                            Delivery Fee 20TK 
+                        </div>
+                        <div class="delivery-time delivery-fee">
+                            <i class="fa-regular fa-clock"></i>
+                            Delivery 45 min
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -120,15 +127,65 @@
                     font-size: 24px;
                     line-height: 1.2;
                     color: #212121;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
                 }
-                .restaurant-location{
-                    margin-bottom: 10px ;
+
+                .restaurant-location {
+                    margin-bottom: 10px;
                     font-size: 18px;
                     color: #919191;
-                    i{
+
+                    i {
                         color: #9c4202;
                         padding-right: 3px;
+                    }
+                }
+
+                .restaurant-rating {
+                    display: flex;
+                    align-items: center;
+                    padding-bottom: 10px;
+                    .rating-review {
+                        margin-right: 20px;
+
+                        i {
+                            color: rgb(253, 216, 6);
+                            font-size: 14px;
+                        }
+                    }
+
+                    .status {
+                        background: #9c4202;
+                        color: #fff;
+                        padding: 5px 10px;
+                        border-radius: 50px;
+                        display: flex;
+                        align-items: center;
+                        span {
+                            letter-spacing: 1px;
+                            font-size: 13px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .restaurant-info_meta-time{
+                    display: flex;
+                    align-items: center;
+                    .delivery-fee{
+                        i{
+                            color: #9c4202;
+                            padding-right: 2px;
+                        }
+                        color: #919191;
+                        padding-right: 12px;
+                        font-size: 14px;
+                        border-right: 1.5px solid #919191;
+                    }
+                    .delivery-time{
+                        padding-right: 0px;
+                        padding-left: 12px;
+                        border-right: none;
                     }
                 }
             }
