@@ -22,12 +22,13 @@
                     </div>
                 </div>
                 <div class="restaurant-info-box__meta">
-                    <i class="fa-solid fa-location-pin"></i>
-                    <h4 class="menu-title">
+                    <h4 class="restaurant-name">
                         Urban Eats
                     </h4>
-                    <span class="restaurant-info-box__meta-location"><i class="fas fa-map-marker-alt"></i>San Francisco,
-                        California</span>
+                    <div class="restaurant-location">
+                        <i class="fa-regular fa-compass"></i>
+                        San Francisco,California
+                    </div>
                     <ul class="restaurant-info-box__meta-rating">
                         <li>
                             <i class="las la-star active"></i><i class="las la-star active"></i><i
@@ -114,11 +115,21 @@
             }
 
             .restaurant-info-box__meta {
-                .menu-title {
+                .restaurant-name {
                     font-weight: 600;
                     font-size: 24px;
                     line-height: 1.2;
                     color: #212121;
+                    margin-bottom: 10px;
+                }
+                .restaurant-location{
+                    margin-bottom: 10px ;
+                    font-size: 18px;
+                    color: #919191;
+                    i{
+                        color: #9c4202;
+                        padding-right: 3px;
+                    }
                 }
             }
 
