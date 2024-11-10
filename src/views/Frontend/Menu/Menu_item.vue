@@ -1,6 +1,5 @@
 <script>
 
-
 </script>
 
 <template>
@@ -45,7 +44,7 @@
                     <div class="restaurant-info_meta-time">
                         <div class="delivery-fee">
                             <i class="fa-solid fa-calendar-minus"></i>
-                            Delivery Fee 20TK 
+                            Delivery Fee 20TK
                         </div>
                         <div class="delivery-time delivery-fee">
                             <i class="fa-regular fa-clock"></i>
@@ -55,6 +54,24 @@
                 </div>
             </div>
 
+        </section>
+
+        <section class="menu-category">
+            <div class="search-bar">
+                <input type="text" placeholder="Search in menu name">
+                <button type="submit" class="search-btn">Search</button>
+            </div>
+            <div class="category">
+                <div class="category-item active"> <a href="#">Burger </a></div>
+                <div class="category-item" ><a href="#">Burger </a></div>
+                <div class="category-item"><a href="#">Burger </a></div>
+                <div class="category-item"><a href="#">Burger </a></div>
+                <div class="category-item"><a href="#">Burger </a></div>
+            </div>
+        </section>
+
+        <section class="menu-card">
+            <h1>hello world</h1>
         </section>
 
     </div>
@@ -99,8 +116,9 @@
     }
 
     .restaurant-page {
-        padding: 64px 80px;
+        padding: 40px 80px;
         background-color: #fff;
+        border-bottom: 1px solid #e6e2e2;
 
         .restaurant-info {
             display: flex;
@@ -145,6 +163,7 @@
                     display: flex;
                     align-items: center;
                     padding-bottom: 10px;
+
                     .rating-review {
                         margin-right: 20px;
 
@@ -161,6 +180,7 @@
                         border-radius: 50px;
                         display: flex;
                         align-items: center;
+
                         span {
                             letter-spacing: 1px;
                             font-size: 13px;
@@ -169,20 +189,23 @@
                     }
                 }
 
-                .restaurant-info_meta-time{
+                .restaurant-info_meta-time {
                     display: flex;
                     align-items: center;
-                    .delivery-fee{
-                        i{
+
+                    .delivery-fee {
+                        i {
                             color: #9c4202;
                             padding-right: 2px;
                         }
+
                         color: #919191;
                         padding-right: 12px;
                         font-size: 14px;
                         border-right: 1.5px solid #919191;
                     }
-                    .delivery-time{
+
+                    .delivery-time {
                         padding-right: 0px;
                         padding-left: 12px;
                         border-right: none;
@@ -192,6 +215,67 @@
 
 
         }
+    }
+
+    .menu-category {
+        background: #fff;
+        padding: 20px 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 1px 2px 4px #f0ecec;
+        .search-bar {
+            display: flex;
+            flex-basis: 20%;
+            input {
+                width: 100%;
+                padding: 6px;
+                border-radius: 6px 0px 0px 6px;
+                font-size: 12px;
+                color: #787878;
+                border: 1px solid #ced4da;
+
+                &:focus {
+                    outline: none;
+                    border: 1px solid #9c4202;
+                }
+            }
+
+            .search-btn {
+                font-size: 12px;
+                background: #9c4202;
+                color: #fff;
+                border: 1px solid #9c4202;
+                border-radius: 0px 6px 6px 0px;
+                padding: 6px;
+                cursor: pointer;
+                transition: all .3s;
+
+                &:hover {
+                    background: #b84e02;
+                }
+            }
+        }
+        .category{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 0 auto;
+            .category-item{
+                a{
+                    text-decoration: none;
+                    color: #333232;
+                    font-size: 16px;
+                    font-weight: 600;
+                    transition: all .3s;
+                    &:hover{
+                        color: #9c4202;
+                    }
+                }
+            }
+        }
+
     }
 
 }
