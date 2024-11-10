@@ -1,5 +1,10 @@
 <script>
-
+import MenuCard from '../Home/Menu_card.vue';
+export default {
+  components: {
+    MenuCard,
+  },
+}
 </script>
 
 <template>
@@ -62,16 +67,29 @@
                 <button type="submit" class="search-btn">Search</button>
             </div>
             <div class="category">
-                <div class="category-item active"> <a href="#">Burger </a></div>
-                <div class="category-item" ><a href="#">Burger </a></div>
+                <div class="category-item active"> <a href="#">All </a></div>
+                <div class="category-item"><a href="#">Appetizers </a></div>
+                <div class="category-item"><a href="#">BBQ </a></div>
                 <div class="category-item"><a href="#">Burger </a></div>
-                <div class="category-item"><a href="#">Burger </a></div>
-                <div class="category-item"><a href="#">Burger </a></div>
+                <div class="category-item"><a href="#">Desserts </a></div>
             </div>
         </section>
 
         <section class="menu-card">
-            <h1>hello world</h1>
+            <div class="menu-item">
+                <div class="section-title">
+                    <h1>Appetizers</h1>
+                </div>
+
+                <div class="menu-card-details">
+                    <MenuCard></MenuCard>
+                </div>
+            </div>
+
+            <div class="delivery-product">
+
+            </div>
+
         </section>
 
     </div>
@@ -225,9 +243,11 @@
         align-items: center;
         gap: 20px;
         box-shadow: 1px 2px 4px #f0ecec;
+
         .search-bar {
             display: flex;
             flex-basis: 20%;
+
             input {
                 width: 100%;
                 padding: 6px;
@@ -257,24 +277,61 @@
                 }
             }
         }
-        .category{
+
+        .category {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
             margin: 0 auto;
-            .category-item{
-                a{
+
+            .category-item {
+                a {
                     text-decoration: none;
-                    color: #333232;
-                    font-size: 16px;
+                    color: #524d4d;
+                    font-size: 14px;
                     font-weight: 600;
                     transition: all .3s;
-                    &:hover{
+
+                    &:hover {
                         color: #9c4202;
                     }
                 }
             }
         }
+
+    }
+
+    .menu-card {
+        padding: 40px 80px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        .menu-item {
+            flex-basis: 65%;
+            .section-title {
+                padding-bottom: 22px;
+                h1 {
+                    font-size: 24px;
+                    line-height: 1.2;
+                    font-weight: 600;
+                    position: relative;
+                    color: #212121;
+                    letter-spacing: 1.1px;
+                    display: inline-block;
+                }
+            }
+
+            .menu-card-details {
+                gap: 20px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+        }
+
+
 
     }
 
