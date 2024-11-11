@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import("../views/Frontend/Menu/Menu_item.vue"),
     },
     {
+      path: "/cart-page",
+      name: "cart-page",
+      component: () => import("../views/Frontend/Cart/cart_page.vue"),
+    },
+    {
       path: "/Login",
       name: "Login",
       component: () => import("../components/Login.vue"),

@@ -16,14 +16,20 @@
                     <ul>
 
                         <li> <router-link active-class="active" :to="{ name: 'home' }">Home</router-link></li>
-                        <li> <router-link active-class="active" :to="{ name: 'restaurants' }">Restaurant</router-link></li>
+                        <li> <router-link active-class="active" :to="{ name: 'restaurants' }">Restaurant</router-link>
+                        </li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="menu-items">
                     <ul>
-                        <li><i class="fa-regular fa-heart"></i></li>
+
+                        <li class="cart">
+                            <router-link active-class="active" :to="{ name: 'cart-page' }">
+                                <i class="far fa-calendar-plus"></i>
+                            </router-link>
+                        </li>
                         <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }"
                                 style=" color: #9c4202 ;">Login</router-link></li>
                         <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
@@ -75,14 +81,15 @@
     }
 
     .ofd_nav {
-        box-shadow: 0 3px 5px rgba(0,0,0,.02),0 0 2px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.08)!important;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
+
         .header-main {
             background: #fff;
             padding: 12px 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-           
+
 
             .logo {
                 h1 {
@@ -101,6 +108,7 @@
             .menu-items {
                 ul {
                     display: flex;
+                    align-items: center;
                     gap: 30px;
 
                     li {
@@ -147,6 +155,17 @@
                     &:hover {
                         transform: scale(1.1);
                         color: #fff;
+                    }
+                }
+
+                .cart {
+                    i {
+                        font-size: 20px;
+                        color: #484646;
+                        transition: all .3s;
+                        &:hover{
+                            color: #9c4202;
+                        }
                     }
                 }
             }
