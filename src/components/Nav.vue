@@ -167,6 +167,11 @@
                             color: #9c4202;
                         }
                     }
+                    .router-link-exact-active{
+                        i{
+                            color: #9c4202;
+                        }
+                    }
                 }
             }
         }

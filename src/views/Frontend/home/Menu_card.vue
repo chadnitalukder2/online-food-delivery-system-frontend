@@ -219,6 +219,7 @@
         .food-name h1 a {
             color: #9c4202;
         }
+
     }
 
 }
