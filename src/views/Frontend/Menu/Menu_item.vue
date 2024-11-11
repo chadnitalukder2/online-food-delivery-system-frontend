@@ -308,7 +308,6 @@ export default {
         gap: 20px;
 
         .menu-item {
-            flex-basis: 65%;
             .section-title {
                 padding-bottom: 22px;
                 h1 {
@@ -325,7 +324,7 @@ export default {
             .menu-card-details {
                 gap: 20px;
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
 
             }
 
