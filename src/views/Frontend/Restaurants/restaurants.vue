@@ -9,6 +9,7 @@ export default {
 
 <template>
     <div class="container">
+
         <div class="title_section">
             <div class="inner-banner">
                 <img src="../../../assets/baner-img.jpg">
@@ -17,7 +18,6 @@ export default {
                 <h1>All restaurants</h1>
             </div>
         </div>
-
         <div class="restaurant-content">
             <div class="header-section">
                 <div class="total-section">
@@ -66,19 +66,16 @@ export default {
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-
             h1 {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
             }
-
         }
     }
 
     .restaurant-content {
         padding: 64px 80px;
-
         .header-section {
             background: #fff;
             box-shadow: 1px solid gray;
@@ -134,8 +131,6 @@ export default {
             gap: 30px;
             padding-top: 30px;
         }
-
-
     }
 
 

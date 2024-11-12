@@ -1,4 +1,5 @@
 <script>
+
 </script>
 
 <template>
@@ -30,21 +31,30 @@
                                 <i class="far fa-calendar-plus"></i>
                             </router-link>
                         </li>
+                        <li class="profile">
+                            <router-link active-class="active" :to="{ name: 'profile-page' }">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </router-link>
+                        </li>
+
                         <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }"
                                 style=" color: #9c4202 ;">Login</router-link></li>
                         <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
                                 style=" color: #fff ;">Sing up</router-link></li>
+                        <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }"
+                                style=" color: #9c4202 ;">Admin</router-link></li>
+                        <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
+                                style=" color: #fff ;">Logout</router-link></li>
                     </ul>
                 </div>
 
             </div>
         </div>
-
     </div>
 </template>
 
 <style lang="scss" scoped>
-.nav {
+.nav{
     font-family: Tahoma;
 
     .top_nav {
@@ -82,14 +92,12 @@
 
     .ofd_nav {
         box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
-
         .header-main {
             background: #fff;
             padding: 12px 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
 
             .logo {
                 h1 {
@@ -158,25 +166,28 @@
                     }
                 }
 
-                .cart {
+                .cart,
+                .profile {
                     i {
                         font-size: 20px;
                         color: #484646;
                         transition: all .3s;
-                        &:hover{
+
+                        &:hover {
                             color: #9c4202;
                         }
                     }
-                    .router-link-exact-active{
-                        i{
+
+                    .router-link-exact-active {
+                        i {
                             color: #9c4202;
                         }
                     }
                 }
+
             }
         }
     }
-
 
 }
 </style>
