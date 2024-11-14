@@ -4,10 +4,10 @@
 
 <template>
     <div class="side-bar-wrapper">
-        <router-link active-class="active">Dashboard</router-link>
-        <router-link active-class="active" >All Category</router-link>
-        <router-link active-class="active">All Brand</router-link>
-        <router-link active-class="active"  >All Product</router-link>
+        <router-link active-class="active" :to="{ name: 'dashboard' }" >Dashboard</router-link>
+        <router-link  >All Category</router-link>
+        <router-link  >All Brand</router-link>
+        <router-link  >All Product</router-link>
     </div>
 </template>
 
@@ -32,7 +32,17 @@
         padding: 10px 15px;
         width: calc(100% - 30px);
         color: #444;
-        &.active {
+        background: #fff;
+        border: 1px solid #9c4202;
+        color: #9c4202;
+        border-radius: 8px;
+        transition: all ease .3s;
+        &:hover{
+            background: #9c4202;
+            color: #fff;
+            border-radius: 8px;
+        }
+        &.router-link-exact-active {
             background: #9c4202;
             color: #fff;
             border-radius: 8px;

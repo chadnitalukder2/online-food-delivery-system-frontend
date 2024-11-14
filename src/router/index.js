@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Frontend/Home/Home_page.vue'
-import Admin from "../views/Admin/index.vue"
+import Home from '../views/Frontend/Home/Home_page.vue';
+import Admin from '../views/Admin/Index.vue';
 
 
 const router = createRouter({
@@ -57,6 +57,11 @@ const router = createRouter({
       name: 'admin',
       component: Admin,
       children: [
+        {
+          path: "dashboard",
+          name: "dashboard",
+          component: () => import("../views/Admin/Dashboard/Dashboard.vue"),
+        },
       ]
     },
 
