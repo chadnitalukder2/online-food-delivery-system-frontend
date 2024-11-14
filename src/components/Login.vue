@@ -1,4 +1,25 @@
 <script>
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const errors = ref(null);
+
+//======================
+const handleLogin = async () => {
+    let response = await axios.post("/login", {
+    email: form.value.email,
+    password: form.value.password,
+  }).then((res) => {
+    console.log(res , 'hello');
+    notify({
+      title: "Login Successful ",
+      type: "success",
+    });
+})
+}
+
 
 </script>
 
@@ -17,7 +38,7 @@
             <div class="login_page">
                 <h1 class="form-title">Login</h1>
                 <form @submit.prevent="handleLogin" method="post">
-
+                    
                     <div class="form-header">
                         <label for="uname"><b>User Email </b></label><br>
                         <input type="text" placeholder="Enter User Email" name="uname">

@@ -41,7 +41,7 @@
                                 style=" color: #9c4202 ;">Login</router-link></li>
                         <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
                                 style=" color: #fff ;">Sing up</router-link></li>
-                        <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }"
+                        <li class="btn_login"> <router-link active-class="active" :to="{ name: 'admin' }"
                                 style=" color: #9c4202 ;">Admin</router-link></li>
                         <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
                                 style=" color: #fff ;">Logout</router-link></li>
