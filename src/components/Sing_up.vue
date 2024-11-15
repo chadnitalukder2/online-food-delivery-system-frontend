@@ -1,4 +1,75 @@
-<script>
+<script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
+const router = useRouter();
+const { notify } = useNotification();
+//==================================
+const form = ref({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+});
+const validation = ref({});
+//---------------------------------------------
+const clearValidationMessage = (field) => {
+    setTimeout(() => {
+        validation.value[field] = '';
+    }, 3000); // Set the timeout duration in milliseconds (e.g., 3000 for 3 seconds)
+}
+//---------------------------------------------------
+const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+//---------------------------------------
+const handleRegister = async () => {
+    if (form.value.name === '') {
+        validation.value.name = "Name is required";
+        clearValidationMessage('name');
+    }
+    if (form.value.email === "" || !validateEmail(form.value.email)) {
+        validation.value.email = "Email is required and must be a valid email address";
+        clearValidationMessage('email');
+    }
+    if (form.value.password === "" || form.value.password.length < 6) {
+        validation.value.password = "Password is required and must be at least 6 characters long";
+        clearValidationMessage('password');
+    }
+    if (form.value.password_confirmation === "") {
+        validation.value.password_confirmation = "Password confirmation is required";
+        clearValidationMessage('password_confirmation');
+    }
+    if (form.value.password_confirmation !== form.value.password) {
+        validation.value.password_confirmation = "The password confirmation does not match.";
+        clearValidationMessage('password_confirmation')
+    }
+    else {
+        await handleApiRequest();
+    }
+    //------------------------------------------
+
+
+};
+//------------------------------------------
+const handleApiRequest = async () => {
+        await axios.post('/register', {
+            name: form.value.name,
+            email: form.value.email,
+            password: form.value.password,
+            password_confirmation: form.value.password_confirmation
+        }).then(() => {
+            notify({
+                title: "Registration Successful ",
+                type: "success",
+            });
+        })
+        router.push("/login");
+    }
+    //-----------------------------------------
 
 </script>
 
@@ -16,30 +87,28 @@
         <div class="login_warper">
             <div class="login_page">
                 <h1 class="form-title"> Register</h1>
-                <form @submit.prevent="handleLogin" method="post">
+                <form @submit.prevent="handleRegister" method="post">
 
                     <div class="form-header">
+
                         <label for="uname"><b>User Name </b></label><br>
-                        <input type="text" placeholder="Enter User Name" name="uname">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+                        <input type="text" v-model="form.name" placeholder="Enter User Name" name="uname">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.name }}</p><br>
 
 
                         <label for="uname"><b>User Email </b></label><br>
-                        <input type="text" placeholder="Enter User Email" name="uname">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
-
-                        <label for="uname"><b>User Phone </b></label><br>
-                        <input type="number" placeholder="Enter User Phone Number" name="uname">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
-
+                        <input type="text" v-model="form.email" placeholder="Enter User Email" name="uname">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.email }}</p><br>
 
                         <label for="psw"><b>Password </b></label>
-                        <input type="password" placeholder="Enter Password" name="psw">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+                        <input type="password" v-model="form.password" placeholder="Enter Password" name="psw">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.password }}</p><br>
 
                         <label for="psw"><b> Password Confirmation</b></label>
-                        <input type="password" placeholder="Enter Password Confirmation" name="psw">
-                        <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
+                        <input type="password" v-model="form.password_confirmation"
+                            placeholder="Enter Password Confirmation" name="psw">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.password_confirmation }}</p>
+                        <br>
 
 
                         <label style="margin: 0px; color: red; font-size: 14px;"></label>
@@ -89,7 +158,8 @@
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-            h1{
+
+            h1 {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;

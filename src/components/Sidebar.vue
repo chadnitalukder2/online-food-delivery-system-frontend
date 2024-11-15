@@ -5,9 +5,9 @@
 <template>
     <div class="side-bar-wrapper">
         <router-link active-class="active" :to="{ name: 'dashboard' }" >Dashboard</router-link>
-        <router-link  >All Category</router-link>
-        <router-link  >All Brand</router-link>
-        <router-link  >All Product</router-link>
+        <router-link  active-class="active" :to="{ name: 'dashboard' }" >All Category</router-link>
+        <router-link  active-class="active" :to="{ name: 'dashboard' }" >All Brand</router-link>
+        <router-link active-class="active" :to="{ name: 'dashboard' }" >All Product</router-link>
     </div>
 </template>
 
