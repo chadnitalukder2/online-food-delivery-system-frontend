@@ -56,7 +56,7 @@ const handleRegister = async () => {
 };
 //------------------------------------------
 const handleApiRequest = async () => {
-        await axios.post('/register', {
+        await axios.post('http://localhost:8000/api/register', {
             name: form.value.name,
             email: form.value.email,
             password: form.value.password,

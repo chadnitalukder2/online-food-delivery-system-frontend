@@ -17,7 +17,7 @@
 .side-bar-wrapper {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     align-items: center;
     gap: 10px;
     border-right: 1px solid #EAECF0;
