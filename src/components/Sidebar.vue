@@ -5,9 +5,17 @@
 <template>
     <div class="side-bar-wrapper">
         <router-link active-class="active" :to="{ name: 'dashboard' }" >Dashboard</router-link>
-        <router-link  active-class="active" :to="{ name: 'dashboard' }" >All Category</router-link>
-        <router-link  active-class="active" :to="{ name: 'dashboard' }" >All Brand</router-link>
-        <router-link active-class="active" :to="{ name: 'dashboard' }" >All Product</router-link>
+        <router-link  active-class="active" :to="{ name: 'restaurants' }" >Restaurants</router-link>
+        <router-link  active-class="active" :to="{ name: 'categories' }" >Categories</router-link>
+        <router-link active-class="active" :to="{ name: 'menus' }" >Menus</router-link>
+        <router-link active-class="active" :to="{ name: 'orders' }" >Orders</router-link>
+        <router-link active-class="active" :to="{ name: 'discounts' }" >Discounts</router-link>
+        <router-link active-class="active" :to="{ name: 'delivery-personnel' }" >Delivery Man</router-link>
+        <router-link active-class="active" :to="{ name: 'deliveries' }" >Deliveries Food</router-link>
+        <router-link active-class="active" :to="{ name: 'payments' }" >Payments</router-link>
+        <router-link active-class="active" :to="{ name: 'order-trackings' }" >Order Tracking</router-link>
+        <router-link active-class="active" :to="{ name: 'reviews' }" >Reviews</router-link>
+        
     </div>
 </template>
 
@@ -21,7 +29,7 @@
     align-items: center;
     gap: 10px;
     border-right: 1px solid #EAECF0;
-    height: 100vh;
+    min-height: 100vh;
     background: #f7e5e5cf;
     padding: 14px;
     padding-top: 30px;

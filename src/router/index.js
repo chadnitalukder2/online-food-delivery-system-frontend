@@ -62,6 +62,56 @@ const router = createRouter({
           name: "dashboard",
           component: () => import("../views/Admin/Dashboard/Dashboard.vue"),
         },
+        {
+          path: "restaurants",
+          name: "restaurants",
+          component: () => import("../views/Admin/Restaurant/all_restaurant.vue"),
+        },
+        {
+          path: "categories",
+          name: "categories",
+          component: () => import("../views/Admin/Categories/all_restaurant.vue"),
+        },
+        {
+          path: "menus",
+          name: "menus",
+          component: () => import("../views/Admin/Menus/all_menu.vue"),
+        },
+        {
+          path: "orders",
+          name: "orders",
+          component: () => import("../views/Admin/Orders/all_order.vue"),
+        },
+        {
+          path: "discounts",
+          name: "discounts",
+          component: () => import("../views/Admin/Discounts/all_discount.vue"),
+        },
+        {
+          path: "delivery-personnel",
+          name: "delivery-personnel",
+          component: () => import("../views/Admin/DeliveryMan/all_delivery_man.vue"),
+        },
+        {
+          path: "deliveries",
+          name: "deliveries",
+          component: () => import("../views/Admin/Deliveries/all_delivery.vue"),
+        },
+        {
+          path: "payments",
+          name: "payments",
+          component: () => import("../views/Admin/Payments/all_payment.vue"),
+        },
+        {
+          path: "order-trackings",
+          name: "order-trackings",
+          component: () => import("../views/Admin/OrderTracking/all_order_tracking.vue"),
+        },
+        {
+          path: "reviews",
+          name: "reviews",
+          component: () => import("../views/Admin/Reviews/all_review.vue"),
+        },
       ]
     },
 

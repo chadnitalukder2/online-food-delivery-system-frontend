@@ -243,7 +243,6 @@ table {
 .delete-icon{
     color: #eb1613;
     cursor: pointer;
-
 }
 th {
     background: #d7d6d624;

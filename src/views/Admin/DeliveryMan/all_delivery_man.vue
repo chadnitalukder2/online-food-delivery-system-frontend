@@ -6,7 +6,7 @@
   <div class="container">
     <div class="table-box">
       <div class="header">
-        <h1>All Category</h1>
+        <h1>All Delivery person</h1>
 
         <div class="btn">
           <button>
