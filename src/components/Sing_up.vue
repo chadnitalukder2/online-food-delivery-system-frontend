@@ -12,7 +12,7 @@ const form = ref({
     email: "",
     password: "",
     password_confirmation: "",
-    role: "",
+    role: "customer",
 });
 const validation = ref({});
 //---------------------------------------------
@@ -58,7 +58,7 @@ const handleRegister = async () => {
 };
 //------------------------------------------
 const handleApiRequest = async () => {
-  
+  console.log(form.value, 'value');
         await axios.post('api/register', {
             name: form.value.name,
             email: form.value.email,
@@ -95,8 +95,8 @@ const handleApiRequest = async () => {
                 <form @submit.prevent="handleRegister" method="post">
 
                     <div class="form-header">
-                        
-                        <input type="hidden" v-model="form.role" value="customer" placeholder="Enter User Name" name="uname">
+
+                      
                         
                         <label for="uname"><b>User Name </b></label><br>
                         <input type="text" v-model="form.name" placeholder="Enter User Name" name="uname">
