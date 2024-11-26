@@ -12,14 +12,16 @@ const form = ref({
     email: "",
     password: "",
     password_confirmation: "",
+    role: "",
 });
 const validation = ref({});
 //---------------------------------------------
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = '';
-    }, 3000); // Set the timeout duration in milliseconds (e.g., 3000 for 3 seconds)
+    }, 5000); // Set the timeout duration in milliseconds (e.g., 3000 for 3 seconds)
 }
+
 //---------------------------------------------------
 const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,24 +52,27 @@ const handleRegister = async () => {
     else {
         await handleApiRequest();
     }
-    //------------------------------------------
+//------------------------------------------
 
 
 };
 //------------------------------------------
 const handleApiRequest = async () => {
-        await axios.post('http://localhost:8000/api/register', {
+  
+        await axios.post('api/register', {
             name: form.value.name,
             email: form.value.email,
+            role:  form.value.role,
             password: form.value.password,
-            password_confirmation: form.value.password_confirmation
+            password_confirmation: form.value.password_confirmation,
+           
         }).then(() => {
             notify({
                 title: "Registration Successful ",
                 type: "success",
             });
         })
-        router.push("/login");
+         router.push("/login");
     }
     //-----------------------------------------
 
@@ -90,14 +95,15 @@ const handleApiRequest = async () => {
                 <form @submit.prevent="handleRegister" method="post">
 
                     <div class="form-header">
-
+                        
+                        <input type="hidden" v-model="form.role" value="customer" placeholder="Enter User Name" name="uname">
+                        
                         <label for="uname"><b>User Name </b></label><br>
                         <input type="text" v-model="form.name" placeholder="Enter User Name" name="uname">
                         <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.name }}</p><br>
 
-
                         <label for="uname"><b>User Email </b></label><br>
-                        <input type="text" v-model="form.email" placeholder="Enter User Email" name="uname">
+                        <input type="email" v-model="form.email" placeholder="Enter User Email" name="uname">
                         <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.email }}</p><br>
 
                         <label for="psw"><b>Password </b></label>

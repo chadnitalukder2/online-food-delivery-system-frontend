@@ -1,25 +1,92 @@
-<script>
+<script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const errors = ref(null);
+//---------------------------------
+const form = ref({
+  email: "",
+  password: "",
+});
 
-//======================
+const validation = ref({});
+//---------------------------------------
+const clearValidationMessage = (field) => {
+  setTimeout(() => {
+    validation.value[field] = '';
+  }, 5000); // Set the timeout duration in milliseconds (e.g., 5000 for 5 seconds)
+}
+//----------------------------------------------
+const getToken = async () => {
+    try {
+        await axios.get("/sanctum/csrf-cookie");
+    } catch (error) {
+        notify({
+            title: "CSRF Error",
+            text: "Unable to fetch CSRF token",
+            type: "error",
+        });
+        throw error; // Prevent further execution
+    }
+};
+//-------------------------------------------------
+const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+//----------------------------------------------
 const handleLogin = async () => {
-    let response = await axios.post("/login", {
+console.log('hello');
+
+  if (form.value.email === "" || !validateEmail(form.value.email)) {
+    validation.value.email = "Email is required and must be a valid email address";
+    clearValidationMessage('email');
+  }
+  if (form.value.password === "" || form.value.password.length < 6) {
+    validation.value.password = "Password is required and must be at least 6 characters long";
+    clearValidationMessage('password');
+  } else {
+    await getToken();
+    await handleApiRequest();
+  }
+ 
+};
+//---------------------------------------------
+const handleApiRequest = async () => {
+    await getToken(); 
+  try {
+    let response = await axios.post("api/login", {
     email: form.value.email,
     password: form.value.password,
   }).then((res) => {
-    console.log(res , 'hello');
+    console.log(res, 'response');
     notify({
       title: "Login Successful ",
       type: "success",
     });
-})
-}
+    localStorage.setItem("password", form.value.password);
+    localStorage.setItem("email", form.value.email);
+    localStorage.setItem("", form.value.email);
 
+   //  router.push('/').then(() => {
+    // Force a full page reload
+     // location.reload();
+   // });
+  })
+  } catch (error) {
+    console.error(error.response.data);
+    // Handle login error
+    errors.value = error.response.data.message || 'An error occurred during login.';
+    // Clear previous validation messages
+    validation.value.email = ''; 
+    validation.value.password = '';
+  }
+};
 
 </script>
 
@@ -41,12 +108,12 @@ const handleLogin = async () => {
                     
                     <div class="form-header">
                         <label for="uname"><b>User Email </b></label><br>
-                        <input type="text" placeholder="Enter User Email" name="uname">
+                        <input type="email"  v-model="form.email" placeholder="Enter User Email" name="uname">
                         <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
 
 
                         <label for="psw"><b>Password </b></label>
-                        <input type="password" placeholder="Enter Password" name="psw">
+                        <input type="password" v-model="form.password" placeholder="Enter Password" name="psw">
                         <p style="margin: 0px; color: red; font-size: 14px;"></p><br>
 
                         <label style="margin: 0px; color: red; font-size: 14px;"></label>

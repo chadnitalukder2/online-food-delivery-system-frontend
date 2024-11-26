@@ -1,4 +1,36 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+
+//import Modal from "../../../components/global/Modal.vue";
+
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+//---------------------------------------------------
+const category = ref([]);
+const deleteVisibleId = ref(null);
+//---------------------------------------------------
+onMounted(async () => {
+  getCategory();
+});
+//---------------------------------------------------
+const getCategory = async () => {
+  let response = await axios.get("/api/categories");
+  // console.log(response, 'hello');
+  category.value = response.data;
+};
+//---------------------------------------------------
+const deletecategory = (id) => {
+  axios.get(`/api/delete_category/${id}`).then(() => {
+    notify({
+      title: "category Item Deleted",
+      type: "success",
+    });
+    getcategory();
+  });
+};
 
 </script>
 
@@ -21,18 +53,18 @@
       <table id="customers">
         <tr>
           <th># ID</th>
-          <th>Image </th>
           <th>Name</th>
+          <th>Image </th>
           <th>Action</th>
         </tr>
-        <tbody>
 
+        <tbody v-for="item in category" :key="item.id">
           <tr>
-            <td>#1</td>
+            <td># {{ item.id }}</td>
+            <td>{{ item.name }}</td>
             <td style="width: 120px; height: 100px">
-              <img src="../../../assets/food-2.png" style="width: 100%; height: 100%" />
+              <img :src="item.image" style="width: 100%; height: 100%" />
             </td>
-            <td>hello</td>
             <td @click="openModalDelete()">
               <i class="fa-solid fa-trash-can delete-icon "></i>
             </td>

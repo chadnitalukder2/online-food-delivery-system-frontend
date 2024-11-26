@@ -63,14 +63,14 @@ const router = createRouter({
           component: () => import("../views/Admin/Dashboard/Dashboard.vue"),
         },
         {
-          path: "restaurants",
-          name: "restaurants",
+          path: "all-restaurants",
+          name: "all-restaurants",
           component: () => import("../views/Admin/Restaurant/all_restaurant.vue"),
         },
         {
           path: "categories",
           name: "categories",
-          component: () => import("../views/Admin/Categories/all_restaurant.vue"),
+          component: () => import("../views/Admin/Categories/all_category.vue"),
         },
         {
           path: "menus",
