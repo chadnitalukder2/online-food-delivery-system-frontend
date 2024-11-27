@@ -1,5 +1,46 @@
-<script>
+<script setup>
+import { computed, onMounted, reactive } from 'vue';
+import axios from 'axios';
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { defineProps } from "vue";
+//-----------------------
+const state = reactive({
+    loggedIn: false,
+    is_admin: false,
+    is_owner: false
+});
+//------------------------------
+const handleLogout = async () => {
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    await axios.post('api/logout');
+    console.log('hello');
+    state.loggedIn = false;
+    router.push({ name: 'Login' });
+    // window.location.reload();
+};
+//------------------------------------
+const getUser = async () => {
+    await axios.get('/api/user').then(response => {
+      if (response.status == 200) {
+        state.loggedIn = true;
+        if (response.data.role == 'admin') {
+          state.is_admin = true;
+          router.push({ name: 'dashboard' });
+        }
+      } else {
+        state.loggedIn = false;
+      }
+    }
+    ).catch(error => {
+        state.loggedIn = false;
+    });
+}
 
+onMounted(async () => {
+    getUser();
+});
 </script>
 
 <template>
@@ -37,14 +78,21 @@
                             </router-link>
                         </li>
 
-                        <li class="btn_login"> <router-link active-class="active" :to="{ name: 'Login' }"
-                                style=" color: #9c4202 ;">Login</router-link></li>
-                        <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
-                                style=" color: #fff ;">Sing up</router-link></li>
-                        <li class="btn_login"> <router-link active-class="active" :to="{ name: 'admin' }"
-                                style=" color: #9c4202 ;">Admin</router-link></li>
-                        <li class="btn_singup"> <router-link active-class="active" :to="{ name: 'register' }"
-                                style=" color: #fff ;">Logout</router-link></li>
+                        <li class="btn_login"> 
+                            <router-link active-class="active" :to="{ name: 'Login' }"
+                                style=" color: #9c4202 ;">Login</router-link>
+                            </li>
+                        <li class="btn_singup">
+                             <router-link active-class="active" :to="{ name: 'register' }"
+                                style=" color: #fff ;">Sing up</router-link>
+                            </li>
+                        <li class="btn_login">
+                            <router-link active-class="active" :to="{ name: 'admin' }"
+                                style=" color: #9c4202 ;">Admin</router-link>
+                        </li>
+                        <li >
+                            <button  @click="handleLogout" class="btn_singup" style="color: #fff; cursor: pointer;">Logout</button>
+                        </li>
                     </ul>
                 </div>
 
@@ -54,7 +102,7 @@
 </template>
 
 <style lang="scss" scoped>
-.nav{
+.nav {
     font-family: Tahoma;
 
     .top_nav {
@@ -92,6 +140,7 @@
 
     .ofd_nav {
         box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
+
         .header-main {
             background: #fff;
             padding: 12px 80px;

@@ -58,7 +58,6 @@ const handleRegister = async () => {
 };
 //------------------------------------------
 const handleApiRequest = async () => {
-  console.log(form.value, 'value');
         await axios.post('api/register', {
             name: form.value.name,
             email: form.value.email,
