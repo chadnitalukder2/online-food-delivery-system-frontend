@@ -73,6 +73,11 @@ const router = createRouter({
           component: () => import("../views/Admin/Categories/all_category.vue"),
         },
         {
+          path: "add-category",
+          name: "add-category",
+          component: () => import("../views/Admin/Categories/add_category.vue"),
+        },
+        {
           path: "menus",
           name: "menus",
           component: () => import("../views/Admin/Menus/all_menu.vue"),

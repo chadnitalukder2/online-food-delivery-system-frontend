@@ -47,7 +47,7 @@ const closeModalDelete = () => {
 
         <div class="btn">
           <button>
-            <router-link>
+            <router-link :to="{ name: 'add-category' }" >
               Add Category
             </router-link>
           </button>
