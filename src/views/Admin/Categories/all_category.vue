@@ -1,8 +1,7 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-
-//import Modal from "../../../components/global/Modal.vue";
+import Modal from "@/components/global/modal.vue";
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -18,20 +17,26 @@ onMounted(async () => {
 //---------------------------------------------------
 const getCategory = async () => {
   let response = await axios.get("/api/categories");
-  // console.log(response, 'hello');
   category.value = response.data;
 };
 //---------------------------------------------------
-const deletecategory = (id) => {
-  axios.get(`/api/delete_category/${id}`).then(() => {
+const deleteCategory = (id) => {
+  axios.delete(`/api/categories/${id}`).then(() => {
     notify({
-      title: "category Item Deleted",
+      title: "Category Item Deleted",
       type: "success",
     });
-    getcategory();
+    getCategory();
   });
 };
-
+//---------------------------------------------------
+const openModalDelete = (id) => {
+  deleteVisibleId.value = id;
+};
+const closeModalDelete = () => {
+  deleteVisibleId.value = null;
+};
+//--------------------------------------------
 </script>
 
 <template>
@@ -55,18 +60,35 @@ const deletecategory = (id) => {
           <th># ID</th>
           <th>Name</th>
           <th>Image </th>
-          <th>Action</th>
+          <th style="text-align: center;">Action</th>
         </tr>
 
         <tbody v-for="item in category" :key="item.id">
+          <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
+            <div id="myModal" style="text-align: center;">
+              <h4 class="delete-title">Are you sure?</h4>
+              <div class="modal-body">
+                <p style="font-size: 14px; color: #999999;">Do you really want to delete these records? This process
+                  cannot be undone.</p>
+              </div>
+              <div class="modal_footer" style="padding: 20px;">
+                <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
+                <button @click="deleteCategory(item.id)" type="button" style="background: #f15e5e;">Delete</button>
+              </div>
+            </div>
+          </Modal>
           <tr>
             <td># {{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <td style="width: 120px; height: 100px">
-              <img :src="item.image" style="width: 100%; height: 100%" />
+            <td >
+              <div style="width: 80px; height: 70px" >
+                <img :src="item.image" style="width: 100%; height: 100%" />
+              </div>
+              
             </td>
-            <td @click="openModalDelete()">
-              <i class="fa-solid fa-trash-can delete-icon "></i>
+            <td style="text-align: center;">
+              <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
+              <button class="edit-btn"> <a href="#">Edit </a> </button>
             </td>
           </tr>
         </tbody>
@@ -77,6 +99,13 @@ const deletecategory = (id) => {
 
 <style lang="scss" scoped>
 #myModal {
+  .delete-title {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 26px;
+    color: #636363;
+    font-weight: 500;
+  }
   .modal_footer {
     button {
 
@@ -169,7 +198,7 @@ table {
 #customers td,
 #customers th {
   border: 1px solid #f3ededad;
-  padding:10px 12px;
+  padding: 10px 12px;
   text-align: left;
 }
 
@@ -185,12 +214,43 @@ table {
   color: #444;
   font-size: 16px;
 }
-#customers td{
+
+#customers td {
   color: #656262;
   font-size: 14px;
 }
-.delete-icon{
-    color: #eb1613;
-    cursor: pointer;
+
+.delete-btn {
+  color: #da0808;
+  background: rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid rgb(237 236 236 / 68%);
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all .3s;
+
+  &:hover {
+    background: #da0808;
+    color: #fff;
+  }
+}
+
+.edit-btn{
+  background: rgb(237 236 236 / 68%);
+  border: 1px solid rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  padding: 5px 17px;
+  transition: all .3s;
+  a{
+    color: rgb(0, 179, 255);
+  }
+  &:hover{
+    background:  rgb(0, 179, 255);
+    a{
+      color: #fff;
+    }
+  }
 }
 </style>
