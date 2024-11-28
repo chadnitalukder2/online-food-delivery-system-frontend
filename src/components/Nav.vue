@@ -21,26 +21,26 @@ const handleLogout = async () => {
     // window.location.reload();
 };
 //------------------------------------
-const getUser = async () => {
-    await axios.get('/api/user').then(response => {
-      if (response.status == 200) {
-        state.loggedIn = true;
-        if (response.data.role == 'admin') {
-          state.is_admin = true;
-          router.push({ name: 'dashboard' });
-        }
-      } else {
-        state.loggedIn = false;
-      }
-    }
-    ).catch(error => {
-        state.loggedIn = false;
-    });
-}
+// const getUser = async () => {
+//     await axios.get('/api/user').then(response => {
+//       if (response.status == 200) {
+//         state.loggedIn = true;
+//         if (response.data.role == 'admin') {
+//           state.is_admin = true;
+//           router.push({ name: 'dashboard' });
+//         }
+//       } else {
+//         state.loggedIn = false;
+//       }
+//     }
+//     ).catch(error => {
+//         state.loggedIn = false;
+//     });
+// }
 
-onMounted(async () => {
-    getUser();
-});
+// onMounted(async () => {
+//     getUser();
+// });
 </script>
 
 <template>
