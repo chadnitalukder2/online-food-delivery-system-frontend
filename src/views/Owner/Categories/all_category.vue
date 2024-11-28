@@ -57,10 +57,10 @@ const closeModalDelete = () => {
 
       <table id="customers">
         <tr>
-          <th># ID</th>
+          <th  style="width: 80px;" ># ID</th>
           <th>Name</th>
           <th>Image </th>
-          <th style="text-align: center;">Action</th>
+          <th style="text-align: center;width: 158px;">Action</th>
         </tr>
 
         <tbody v-for="item in category" :key="item.id">

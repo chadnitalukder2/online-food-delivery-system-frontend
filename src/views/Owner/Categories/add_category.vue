@@ -78,13 +78,13 @@ const addCategory = async () => {
                     <div class="input-box">
                         <p>Category Name <span style="color: #9c4202">*</span></p>
                         <input type="text" v-model="category.name" placeholder="Enter a category name">
-                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.name }}</p>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Category Image <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChange" type="file">
-                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.image }}</p>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
 
