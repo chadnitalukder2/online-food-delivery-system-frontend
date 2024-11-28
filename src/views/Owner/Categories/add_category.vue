@@ -1,33 +1,70 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-const router = useRouter();
-//---------------------------------------------------
-const category = ref([]);
-const image = [];
-//---------------------------------------------------
-const handleFileChange = async () => {
-    image.value = event.target.files[0];
-}
-//----------------
-const addCategory = async () => {
-    const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("description", category.value.description);
-    formData.append("image", image.value);
 
-    console.log(image.value);
-    let response = await axios.post("/api/categories", formData);
-    notify({
-        title: "Category Item Added Successful",
-        type: "success",
-    });
-    router.push("/owner/categories");
+const router = useRouter();
+
+const category = ref({
+    name: "",
+    description: "",
+});
+const image = ref(null);
+const validation = ref({});
+
+const clearValidationMessage = (field) => {
+    setTimeout(() => {
+        validation.value[field] = "";
+    }, 5000);
 };
 
+const handleFileChange = (event) => {
+    image.value = event.target.files[0];
+};
+
+const validateCategory = () => {
+    let errors = {};
+    if (!category.value.name) {
+        errors.name = "Category Name is required.";
+        clearValidationMessage("name");
+    }
+    if (!image.value) {
+        errors.image = "Category Image is required.";
+        clearValidationMessage("image");
+    }
+    return errors;
+};
+
+const addCategory = async () => {
+    validation.value = {};
+    const errors = validateCategory();
+    if (Object.keys(errors).length > 0) {
+        validation.value = errors;
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", category.value.name);
+    formData.append("description", category.value.description || "");
+    formData.append("image", image.value);
+
+    try {
+        await axios.post("/api/categories", formData);
+        notify({
+            title: "Category Item Added Successfully",
+            type: "success",
+        });
+        router.push("/owner/categories");
+    } catch (error) {
+        console.error("Failed to add category:", error);
+        notify({
+            title: "Failed to Add Category",
+            type: "error",
+        });
+    }
+};
 </script>
 
 <template>
@@ -36,23 +73,24 @@ const addCategory = async () => {
             <h1> Add Category</h1>
         </div>
         <div class="content">
-            <form @submit.prevent="addCategory" enctype="multipart/form-data">
+            <form @submit.prevent="addCategory">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Category Name <span style="color: #9c4202">*</span></p>
                         <input type="text" v-model="category.name" placeholder="Enter a category name">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Category Image <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChange" type="file">
+                        <p style="margin: 0px; color: red; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
 
-
                 <div class="input-box">
                     <p>Category Description <span style="color: #9c4202">*</span></p>
-                    <textarea v-model="category.description" rows="5" cols="50"> </textarea>
+                    <textarea v-model="category.description" rows="5" cols="50"></textarea>
                 </div>
 
                 <div class="submit-btn">
