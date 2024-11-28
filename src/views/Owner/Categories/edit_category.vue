@@ -5,38 +5,58 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
+import { useRoute } from "vue-router";
+const route = useRoute();
 //---------------------------------------------------
 const category = ref([]);
 const image = [];
+//---------------------------------------------------
+onMounted(async () => {
+    getCategory();
+});
 //---------------------------------------------------
 const handleFileChange = async () => {
     image.value = event.target.files[0];
 }
 //----------------
-const addCategory = async () => {
+
+//-------------------------------------
+const getCategory = async () => {
+    const id = route.params.id;
+    let response = await axios.get(`/api/categories/${id}`);
+    category.value = response.data.data;
+
+}
+//--------------------------------------------------
+const UpdateCategory = async () => {
+    let id = route.params.id;
+    console.log('hello', id);
     const formData = new FormData();
     formData.append("name", category.value.name);
     formData.append("description", category.value.description);
     formData.append("image", image.value);
 
-    console.log(image.value);
-    let response = await axios.post("/api/categories", formData);
-    notify({
-        title: "Category Item Added Successful",
-        type: "success",
-    });
-    router.push("/owner/categories");
-};
+    let response = await axios
+        .patch(`/api/categories/${id}`, formData)
+        .then(() => {
+            console.log('hello');
+            notify({
+                title: "Category Item Updated Successful",
+                type: "success",
+            });
+            // router.push("/owner/categories");
+        });
 
+};
 </script>
 
 <template>
     <div class="container">
         <div class="title">
-            <h1> Add Category</h1>
+            <h1> Edit Category</h1>
         </div>
         <div class="content">
-            <form @submit.prevent="addCategory" enctype="multipart/form-data">
+            <form @submit.prevent="UpdateCategory" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Category Name <span style="color: #9c4202">*</span></p>
@@ -56,7 +76,7 @@ const addCategory = async () => {
                 </div>
 
                 <div class="submit-btn">
-                    <button type="submit">Save</button>
+                    <button type="submit">Update</button>
                 </div>
             </form>
         </div>

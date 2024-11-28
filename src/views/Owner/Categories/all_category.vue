@@ -1,7 +1,7 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import Modal from "@/components/global/modal.vue";
+import Modal from "@/components/global/Modal.vue";
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -47,7 +47,7 @@ const closeModalDelete = () => {
 
         <div class="btn">
           <button>
-            <router-link :to="{ name: 'add-category' }" >
+            <router-link :to="{ name: 'add-category' }">
               Add Category
             </router-link>
           </button>
@@ -80,15 +80,17 @@ const closeModalDelete = () => {
           <tr>
             <td># {{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <td >
-              <div style="width: 80px; height: 70px" >
+            <td>
+              <div style="width: 80px; height: 70px">
                 <img :src="item.image" style="width: 100%; height: 100%" />
               </div>
-              
+
             </td>
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
-              <button class="edit-btn"> <a href="#">Edit </a> </button>
+              <button class="edit-btn">
+                <router-link :to="{ name: 'edit-category', params: { id: item.id } }">Edit</router-link>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -106,6 +108,7 @@ const closeModalDelete = () => {
     color: #636363;
     font-weight: 500;
   }
+
   .modal_footer {
     button {
 
@@ -237,18 +240,21 @@ table {
   }
 }
 
-.edit-btn{
+.edit-btn {
   background: rgb(237 236 236 / 68%);
   border: 1px solid rgb(237 236 236 / 68%);
   border-radius: 6px;
   padding: 5px 17px;
   transition: all .3s;
-  a{
+
+  a {
     color: rgb(0, 179, 255);
   }
-  &:hover{
-    background:  rgb(0, 179, 255);
-    a{
+
+  &:hover {
+    background: rgb(0, 179, 255);
+
+    a {
       color: #fff;
     }
   }

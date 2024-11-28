@@ -74,6 +74,11 @@ const router = createRouter({
           component: () => import("../views/Owner/Categories/add_category.vue"),
         },
         {
+          path: "edit-category/:id",
+          name: "edit-category",
+          component: () => import("../views/Owner/Categories/edit_category.vue"),
+        },
+        {
           path: "menus",
           name: "menus",
           component: () => import("../views/Owner/Menus/all_menu.vue"),
