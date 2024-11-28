@@ -25,7 +25,7 @@ console.log(image.value);
       title: "Category Item Added Successful",
       type: "success",
     });
-   router.push("/admin/categories");
+   router.push("/owner/categories");
 };
 
 </script>

@@ -6,15 +6,8 @@
     <div class="side-bar-wrapper">
         <router-link active-class="active" :to="{ name: 'dashboard' }" >Dashboard</router-link>
         <router-link  active-class="active" :to="{ name: 'all-restaurants' }" >Restaurants</router-link>
-        <router-link  active-class="active" :to="{ name: 'categories' }" >Categories</router-link>
-        <router-link active-class="active" :to="{ name: 'menus' }" >Menus</router-link>
-        <router-link active-class="active" :to="{ name: 'orders' }" >Orders</router-link>
-        <router-link active-class="active" :to="{ name: 'discounts' }" >Discounts</router-link>
-        <router-link active-class="active" :to="{ name: 'delivery-personnel' }" >Delivery Man</router-link>
-        <router-link active-class="active" :to="{ name: 'deliveries' }" >Deliveries Food</router-link>
-        <router-link active-class="active" :to="{ name: 'payments' }" >Payments</router-link>
-        <router-link active-class="active" :to="{ name: 'order-trackings' }" >Order Tracking</router-link>
-        <router-link active-class="active" :to="{ name: 'reviews' }" >Reviews</router-link>
+        <router-link  active-class="active" :to="{ name: 'categories' }" >User</router-link>
+        
         
     </div>
 </template>

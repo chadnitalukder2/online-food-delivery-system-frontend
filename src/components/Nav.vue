@@ -90,6 +90,10 @@ const handleLogout = async () => {
                             <router-link active-class="active" :to="{ name: 'admin' }"
                                 style=" color: #9c4202 ;">Admin</router-link>
                         </li>
+                        <li class="btn_login">
+                            <router-link active-class="active" :to="{ name: 'owner' }"
+                                style=" color: #9c4202 ;">Owner</router-link>
+                        </li>
                         <li >
                             <button  @click="handleLogout" class="btn_singup" style="color: #fff; cursor: pointer;">Logout</button>
                         </li>
