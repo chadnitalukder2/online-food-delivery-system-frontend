@@ -12,15 +12,11 @@ const category = ref({});
 const menus = ref({});
 const image = ref(null);
 const validation = ref({});
-//---------------------------------------------------
-onMounted(async () => {
-  getCategory();
-  getMenus();
-});
+
 //---------------------------------------------------
 const getCategory = async () => {
-  let response = await axios.get("/api/categories");
-  category.value = response.data;
+    let response = await axios.get("/api/categories");
+    category.value = response.data;
 };
 //---------------------------------------------------
 const clearValidationMessage = (field) => {
@@ -61,7 +57,41 @@ const validateMenus = () => {
     }
     return errors;
 };
+//---------------------------------------
+const updateMenu = async () => {
+    validation.value = {};
+    const errors = validateMenus();
+    if (Object.keys(errors).length > 0) {
+        validation.value = errors;
+        return;
+    }
+    
+    let id = route.params.id;
+    const formData = new FormData();
+    formData.append("name", menus.value.name);
+    formData.append("restaurant_id", menus.value.restaurant_id);
+    formData.append("category_id", menus.value.category_id);
+    formData.append("price", menus.value.price);
+    formData.append("availability", menus.value.availability);
+    formData.append("description", menus.value.description || "");
+    formData.append("image", image.value);
 
+    try {
+        let response = await axios.patch(`api/menus/${id}`, formData);
+        notify({
+            title: "Menu Item Updated Successfully",
+            type: "success",
+        });
+        console.log("API Response:", response);
+        // router.push("/owner/menus");
+    } catch (error) {
+        console.error("Failed to update menu:", error);
+        notify({
+            title: "Failed to Update Menu",
+            type: "error",
+        });
+    }
+};
 //-------------------------------------
 const getMenus = async () => {
     const id = route.params.id;
@@ -71,26 +101,11 @@ const getMenus = async () => {
 
 }
 //--------------------------------------------------
-const UpdateCategory = async () => {
-    let id = route.params.id;
-    console.log('hello', id);
-    const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("description", category.value.description);
-    formData.append("image", image.value);
-
-    let response = await axios
-        .patch(`/api/categories/${id}`, formData)
-        .then(() => {
-            console.log('hello');
-            notify({
-                title: "Category Item Updated Successful",
-                type: "success",
-            });
-            // router.push("/owner/categories");
-        });
-
-};
+onMounted(async () => {
+    getCategory();
+    getMenus();
+});
+//---------------------------------------------------
 </script>
 
 <template>
@@ -107,7 +122,7 @@ const UpdateCategory = async () => {
         </div>
 
         <div class="content">
-            <form @submit.prevent="updateMenu">
+            <form @submit.prevent="updateMenu" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Menu Item Name <span style="color: #9c4202">*</span></p>
@@ -133,7 +148,7 @@ const UpdateCategory = async () => {
                         <select v-model="menus.availability">
                             <option disabled>Select one</option>
                             <option value="out of stock">Out of stock</option>
-                            <option value="in stock" >In stock</option>
+                            <option value="in stock">In stock</option>
                         </select>
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.availability }}</p>
                     </div>
@@ -143,8 +158,8 @@ const UpdateCategory = async () => {
                         <p>Category Name <span style="color: #9c4202">*</span></p>
                         <select v-model="menus.category_id">
                             <option disabled>Select a Category</option>
-                            <option v-for="item in category" :key="item.id" :value="item.id" >
-                                {{ item.name }} 
+                            <option v-for="item in category" :key="item.id" :value="item.id">
+                                {{ item.name }}
                             </option>
                         </select>
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.category_id }}</p>
