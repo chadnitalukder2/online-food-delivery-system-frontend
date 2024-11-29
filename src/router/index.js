@@ -109,6 +109,11 @@ const router = createRouter({
           component: () => import("../views/Owner/Discounts/add_discount.vue"),
         },
         {
+          path: "edit-discounts/:id",
+          name: "edit-discounts",
+          component: () => import("../views/Owner/Discounts/edit_discount.vue"),
+        },
+        {
           path: "delivery-personnel",
           name: "delivery-personnel",
           component: () => import("../views/Owner/DeliveryMan/all_delivery_man.vue"),
