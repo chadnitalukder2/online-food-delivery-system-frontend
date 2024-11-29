@@ -104,6 +104,11 @@ const router = createRouter({
           component: () => import("../views/Owner/Discounts/all_discount.vue"),
         },
         {
+          path: "add-discounts",
+          name: "add-discounts",
+          component: () => import("../views/Owner/Discounts/add_discount.vue"),
+        },
+        {
           path: "delivery-personnel",
           name: "delivery-personnel",
           component: () => import("../views/Owner/DeliveryMan/all_delivery_man.vue"),

@@ -47,7 +47,7 @@ const closeModalDelete = () => {
 
         <div class="btn">
           <button>
-            <router-link :to="{ name: 'add-category' }">
+            <router-link :to="{ name: 'add-discounts' }">
               Add Discount
             </router-link>
           </button>
@@ -77,7 +77,6 @@ const closeModalDelete = () => {
                   cannot be undone.</p>
               </div>
               <div class="modal_footer" style="padding: 20px;">
-                <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
                 <button @click="deleteDiscount(item.id)" type="button" style="background: #f15e5e;">Delete</button>
               </div>
             </div>
