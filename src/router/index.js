@@ -89,6 +89,11 @@ const router = createRouter({
           component: () => import("../views/Owner/Menus/add_menu.vue"),
         },
         {
+          path: "edit-menu/:id",
+          name: "edit-menu",
+          component: () => import("../views/Owner/Menus/edit_menu.vue"),
+        },
+        {
           path: "orders",
           name: "orders",
           component: () => import("../views/Owner/Orders/all_order.vue"),

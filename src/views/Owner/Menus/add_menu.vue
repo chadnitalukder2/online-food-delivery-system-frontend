@@ -1,19 +1,26 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const category = ref({
-    name: "",
-    description: "",
-});
+const category = ref({});
+const menus = ref({});
 const image = ref(null);
 const validation = ref({});
-
+//---------------------------------------------------
+onMounted(async () => {
+  getCategory();
+});
+//---------------------------------------------------
+const getCategory = async () => {
+  let response = await axios.get("/api/categories");
+  category.value = response.data;
+};
+//---------------------------------------------------
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = "";
@@ -24,43 +31,64 @@ const handleFileChange = (event) => {
     image.value = event.target.files[0];
 };
 
-const validateCategory = () => {
+const validateMenus = () => {
     let errors = {};
-    if (!category.value.name) {
-        errors.name = "Category Name is required.";
+    if (!menus.value.name) {
+        errors.name = "Menu item name is required.";
         clearValidationMessage("name");
     }
     if (!image.value) {
-        errors.image = "Category Image is required.";
+        errors.image = "Menu Image is required.";
         clearValidationMessage("image");
+    }
+    if (!menus.value.category_id) {
+        errors.category_id = "Category name is required.";
+        clearValidationMessage("category_id");
+    }
+    if (!menus.value.price) {
+        errors.price = "Price is required.";
+        clearValidationMessage("price");
+    }
+    if (!menus.value.restaurant_id) {
+        errors.restaurant_id = "Restaurant name is required.";
+        clearValidationMessage("restaurant_id");
+    }
+    if (!menus.value.availability) {
+        errors.availability = "Availability  is required.";
+        clearValidationMessage("availability");
     }
     return errors;
 };
 
-const addCategory = async () => {
+const addMenus = async () => {
     validation.value = {};
-    const errors = validateCategory();
+    const errors = validateMenus();
     if (Object.keys(errors).length > 0) {
         validation.value = errors;
         return;
     }
 
     const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("description", category.value.description || "");
+    formData.append("name", menus.value.name);
+    formData.append("restaurant_id", menus.value.restaurant_id );
+    formData.append("category_id", menus.value.category_id );
+    formData.append("price", menus.value.price );
+    formData.append("availability", menus.value.availability  );
+    formData.append("description", menus.value.description || "");
     formData.append("image", image.value);
-
+console.log(menus.value);
     try {
-        await axios.post("/api/categories", formData);
+       let response = await axios.post("/api/menus", formData);
+       console.log('response', response);
         notify({
-            title: "Category Item Added Successfully",
+            title: "Menu Item Added Successfully",
             type: "success",
         });
-        router.push("/owner/categories");
+        router.push("/owner/menus");
     } catch (error) {
-        console.error("Failed to add category:", error);
+        console.error("Failed to add menu:", error);
         notify({
-            title: "Failed to Add Category",
+            title: "Failed to Add menu",
             type: "error",
         });
     }
@@ -79,13 +107,13 @@ const addCategory = async () => {
             </div>
             <h1>Add Menu</h1>
         </div>
-        
+
         <div class="content">
-            <form @submit.prevent="addCategory">
+            <form @submit.prevent="addMenus">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Menu Item Name <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="category.name" placeholder="Enter a item name">
+                        <input type="text" v-model="menus.name" placeholder="Enter a item name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
@@ -98,41 +126,40 @@ const addCategory = async () => {
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Menu Item price <span style="color: #9c4202">*</span></p>
-                        <input type="number" v-model="category.name" placeholder="Enter a item price">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
+                        <input type="number" v-model="menus.price" placeholder="Enter a item price">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.price }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Menu Item Availability <span style="color: #9c4202">*</span></p>
-                        <select>
+                        <select v-model="menus.availability ">
                             <option disabled>Select one</option>
-                            <option>Out of stock </option>
-                            <option>In stock</option>
+                            <option value="out of stock">Out of stock </option>
+                            <option value="in stock" >In stock</option>
                         </select>
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.availability }}</p>
                     </div>
                 </div>
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Category Name <span style="color: #9c4202">*</span></p>
-                        <select>
+                        <select v-model="menus.category_id ">
                             <option disabled>Select a Category</option>
-                            <option>out of stock </option>
-                            <option>in stock</option>
+                            <option v-for="item in category" :key="item.id" :value="item.id" >{{ item.name }} </option>
                         </select>
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.category_id }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Restaurant Name<span style="color: #9c4202">*</span></p>
-                        <input placeholder="enter a restaurant name" type="text">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
+                        <input v-model="menus.restaurant_id" placeholder="enter a restaurant name" type="number">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.restaurant_id }}</p>
                     </div>
                 </div>
 
                 <div class="input-box">
                     <p>Menu Item Description <span style="color: #9c4202">*</span></p>
-                    <textarea v-model="category.description" rows="5" cols="50"></textarea>
+                    <textarea v-model="menus.description" rows="5" cols="50"></textarea>
                 </div>
 
                 <div class="submit-btn">

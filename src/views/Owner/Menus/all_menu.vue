@@ -22,7 +22,7 @@ const getMenu = async () => {
 };
 //---------------------------------------------------
 const deleteMenu = (id) => {
-  axios.delete(`/api/categories/${id}`).then(() => {
+  axios.delete(`/api/menus/${id}`).then(() => {
     notify({
       title: "Menu Item Deleted",
       type: "success",
@@ -77,13 +77,12 @@ const closeModalDelete = () => {
                   cannot be undone.</p>
               </div>
               <div class="modal_footer" style="padding: 20px;">
-                <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
                 <button @click="deleteMenu(item.id)" type="button" style="background: #f15e5e;">Delete</button>
               </div>
             </div>
           </Modal>
           <tr>
-            <td># {{ item.id }}333</td>
+            <td># {{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.restaurant_id }}</td>
@@ -98,7 +97,7 @@ const closeModalDelete = () => {
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
               <button class="edit-btn">
-                <router-link :to="{ name: 'edit-category', params: { id: item.id } }">Edit</router-link>
+                <router-link :to="{ name: 'edit-menu', params: { id: item.id } }">Edit</router-link>
               </button>
             </td>
           </tr>
