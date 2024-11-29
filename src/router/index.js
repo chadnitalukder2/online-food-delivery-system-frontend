@@ -58,8 +58,8 @@ const router = createRouter({
       component: Owner,
       children: [
         {
-          path: "dashboard",
-          name: "dashboard",
+          path: "owner-dashboard",
+          name: "owner-dashboard",
           component: () => import("../views/Owner/Dashboard/Dashboard.vue"),
         },
        

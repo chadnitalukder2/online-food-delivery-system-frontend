@@ -1,5 +1,42 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+import Modal from "@/components/global/Modal.vue";
 
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+//---------------------------------------------------
+const orderTrackings = ref([]);
+const deleteVisibleId = ref(null);
+//---------------------------------------------------
+onMounted(async () => {
+  getOrderTrackings();
+});
+//---------------------------------------------------
+const getOrderTrackings = async () => {
+  let response = await axios.get("/api/orderTrackings");
+  orderTrackings.value = response.data;
+};
+//---------------------------------------------------
+const deleteOrderTrackings = (id) => {
+  axios.delete(`/api/orderTrackings/${id}`).then(() => {
+    notify({
+      title: "Order Trackings Item Deleted",
+      type: "success",
+    });
+    getOrderTrackings();
+  });
+};
+//---------------------------------------------------
+const openModalDelete = (id) => {
+  deleteVisibleId.value = id;
+};
+const closeModalDelete = () => {
+  deleteVisibleId.value = null;
+};
+//--------------------------------------------
 </script>
 
 <template>
@@ -8,33 +45,44 @@
       <div class="header">
         <h1>All Order Tracking</h1>
 
-        <div class="btn">
-          <button>
-            <router-link>
-              Add Category
-            </router-link>
-          </button>
-        </div>
       </div>
 
 
       <table id="customers">
         <tr>
-          <th># ID</th>
-          <th>Image </th>
-          <th>Name</th>
-          <th>Action</th>
+          <th  style="width: 80px;" ># ID</th>
+          <th>Order Id</th>
+          <th>Current Status</th>
+          <th>Status Update Time</th>
+          <th>Estimated Delivery Time</th>
+          <th style="text-align: center;width: 158px;">Action</th>
         </tr>
-        <tbody>
 
+        <tbody v-for="item in orderTrackings" :key="item.id">
+          <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
+            <div id="myModal" style="text-align: center;">
+              <h4 class="delete-title">Are you sure?</h4>
+              <div class="modal-body">
+                <p style="font-size: 14px; color: #999999;">Do you really want to delete these records? This process
+                  cannot be undone.</p>
+              </div>
+              <div class="modal_footer" style="padding: 20px;">
+                <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
+                <button @click="deleteOrderTrackings(item.id)" type="button" style="background: #f15e5e;">Delete</button>
+              </div>
+            </div>
+          </Modal>
           <tr>
-            <td>#1</td>
-            <td style="width: 120px; height: 100px">
-              <img src="../../../assets/food-2.png" style="width: 100%; height: 100%" />
-            </td>
-            <td>hello</td>
-            <td @click="openModalDelete()">
-              <i class="fa-solid fa-trash-can delete-icon "></i>
+            <td># {{ item.id }}</td>
+            <td>{{ item.order_id  }}</td>
+            <td>{{ item.current_status  }}</td>
+            <td>{{ item.status_update_time }}</td>
+            <td>{{ item.estimated_delivery_time  }}</td>
+            <td style="text-align: center;">
+              <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
+              <button class="edit-btn">
+                <router-link :to="{ name: 'edit-category', params: { id: item.id } }">Edit</router-link>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -45,6 +93,14 @@
 
 <style lang="scss" scoped>
 #myModal {
+  .delete-title {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 26px;
+    color: #636363;
+    font-weight: 500;
+  }
+
   .modal_footer {
     button {
 
@@ -137,7 +193,7 @@ table {
 #customers td,
 #customers th {
   border: 1px solid #f3ededad;
-  padding:10px 12px;
+  padding: 10px 12px;
   text-align: left;
 }
 
@@ -153,12 +209,46 @@ table {
   color: #444;
   font-size: 16px;
 }
-#customers td{
+
+#customers td {
   color: #656262;
   font-size: 14px;
 }
-.delete-icon{
-    color: #eb1613;
-    cursor: pointer;
+
+.delete-btn {
+  color: #da0808;
+  background: rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid rgb(237 236 236 / 68%);
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all .3s;
+
+  &:hover {
+    background: #da0808;
+    color: #fff;
+  }
+}
+
+.edit-btn {
+  background: rgb(237 236 236 / 68%);
+  border: 1px solid rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  padding: 5px 17px;
+  transition: all .3s;
+
+  a {
+    color: rgb(0, 179, 255);
+  }
+
+  &:hover {
+    background: rgb(0, 179, 255);
+
+    a {
+      color: #fff;
+    }
+  }
 }
 </style>
