@@ -124,6 +124,11 @@ const router = createRouter({
           component: () => import("../views/Owner/DeliveryMan/add_delivery_man.vue"),
         },
         {
+          path: "edit-delivery-personnel/:id",
+          name: "edit-delivery-personnel",
+          component: () => import("../views/Owner/DeliveryMan/edit-delivery-man.vue"),
+        },
+        {
           path: "deliveries",
           name: "deliveries",
           component: () => import("../views/Owner/Deliveries/all_delivery.vue"),

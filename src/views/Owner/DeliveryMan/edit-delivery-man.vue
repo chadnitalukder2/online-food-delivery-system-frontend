@@ -1,15 +1,28 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
-
-const deliveryPersonnel = ref({});
+import { useRoute } from "vue-router";
+const route = useRoute();
+//---------------------------------------------------
+const deliveryPersonnel = ref([]);
 const validation = ref({});
+//---------------------------------------------------
+onMounted(async () => {
+    getDeliveryPersonnel();
+});
+//---------------------------------------------------
 
+const getDeliveryPersonnel = async () => {
+    const id = route.params.id;
+    let response = await axios.get(`/api/deliveryPersonnel/${id}`);
+    deliveryPersonnel.value = response.data.data;
+
+}
+//--------------------------------------------------
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = "";
@@ -34,15 +47,16 @@ const validateDeliveryPersonnel = () => {
         errors.vehicle_type = "Vehicle Type is required.";
         clearValidationMessage("vehicle_type");
     }
-    if (!deliveryPersonnel.value.availability ) {
-        errors.availability  = "Availability is required.";
+    if (!deliveryPersonnel.value.availability) {
+        errors.availability = "Availability is required.";
         clearValidationMessage("availability ");
     }
-    
+
     return errors;
 };
+//--------------------------------------------------
+const UpdateDeliveryPersonnel = async () => {
 
-const addDeliveryPersonnel = async () => {
     validation.value = {};
     const errors = validateDeliveryPersonnel();
     if (Object.keys(errors).length > 0) {
@@ -50,27 +64,24 @@ const addDeliveryPersonnel = async () => {
         return;
     }
 
+    let id = route.params.id;
     const formData = new FormData();
-    formData.append("name", deliveryPersonnel.value.name );
+    formData.append("name", deliveryPersonnel.value.name);
     formData.append("phone", deliveryPersonnel.value.phone);
-    formData.append("email", deliveryPersonnel.value.email );
+    formData.append("email", deliveryPersonnel.value.email);
     formData.append("vehicle_type", deliveryPersonnel.value.vehicle_type);
     formData.append("availability", deliveryPersonnel.value.availability);
 
-    try {
-        await axios.post("/api/deliveryPersonnel", formData);
-        notify({
-            title: "Delivery Personnel Item Added Successfully",
-            type: "success",
+    let response = await axios
+        .patch(`/api/deliveryPersonnel/${id}`, formData)
+        .then(() => {
+            notify({
+                title: "Delivery Personnel Item Updated Successful",
+                type: "success",
+            });
+            // router.push("/owner/categories");
         });
-        router.push("/owner/delivery-personnel");
-    } catch (error) {
-        console.error("Failed to add delivery personnel:", error);
-        notify({
-            title: "Failed to Add delivery personnel",
-            type: "error",
-        });
-    }
+
 };
 </script>
 
@@ -80,57 +91,61 @@ const addDeliveryPersonnel = async () => {
             <div class="btn">
                 <button>
                     <router-link :to="{ name: 'delivery-personnel' }">
-                        All Delivery Personnel
+                        All delivery-personnel
                     </router-link>
                 </button>
             </div>
-            <h1>Add Delivery Personnel</h1>
+            <h1>Edit Delivery Personnel</h1>
         </div>
-
         <div class="content">
-            <form @submit.prevent="addDeliveryPersonnel">
+            <form @submit.prevent="UpdateDeliveryPersonnel" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Delivery Personnel Name <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="deliveryPersonnel.name" placeholder="Enter a delivery personnel name">
+                        <input type="text" v-model="deliveryPersonnel.name"
+                            placeholder="Enter a delivery personnel name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Delivery Personnel Number <span style="color: #9c4202">*</span></p>
-                        <input type="number" v-model="deliveryPersonnel.phone" placeholder="Enter a delivery personnel number">
+                        <input type="text" v-model="deliveryPersonnel.phone"
+                            placeholder="Enter a delivery personnel number">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.phone }}</p>
                     </div>
                 </div>
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Delivery Personnel Email  <span style="color: #9c4202">*</span></p>
-                        <input type="email" v-model="deliveryPersonnel.email" placeholder="Enter a delivery personnel email.">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email  }}</p>
+                        <p>Delivery Personnel Email <span style="color: #9c4202">*</span></p>
+                        <input type="email" v-model="deliveryPersonnel.email"
+                            placeholder="Enter a delivery personnel email.">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Delivery Personnel Vehicle Type <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="deliveryPersonnel.vehicle_type" placeholder="Enter a delivery personnel vehicle type.">
+                        <input type="text" v-model="deliveryPersonnel.vehicle_type"
+                            placeholder="Enter a delivery personnel vehicle type.">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.vehicle_type }}</p>
                     </div>
                 </div>
-                
+
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Availability <span style="color: #9c4202">*</span></p>
                         <select v-model="deliveryPersonnel.availability">
                             <option disabled>Select one</option>
-                            <option value="unavailable" >Unavailable </option>
-                            <option value="available" >Available</option>
+                            <option value="unavailable">Unavailable </option>
+                            <option value="available">Available</option>
                         </select>
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.availability }}</p>
                     </div>
                 </div>
-              
+
+
                 <div class="submit-btn">
-                    <button type="submit">Save</button>
+                    <button type="submit">Update</button>
                 </div>
             </form>
         </div>
