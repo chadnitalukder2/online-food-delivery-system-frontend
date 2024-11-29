@@ -84,6 +84,11 @@ const router = createRouter({
           component: () => import("../views/Owner/Menus/all_menu.vue"),
         },
         {
+          path: "add-menu",
+          name: "add-menu",
+          component: () => import("../views/Owner/Menus/add_menu.vue"),
+        },
+        {
           path: "orders",
           name: "orders",
           component: () => import("../views/Owner/Orders/all_order.vue"),

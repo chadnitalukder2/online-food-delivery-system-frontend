@@ -52,8 +52,15 @@ const UpdateCategory = async () => {
 
 <template>
     <div class="container">
-        <div class="title">
-            <h1> Edit Category</h1>
+        <div class="header">
+            <div class="btn">
+                <button>
+                    <router-link :to="{ name: 'categories' }">
+                        All Category
+                    </router-link>
+                </button>
+            </div>
+            <h1>Edit Category</h1>
         </div>
         <div class="content">
             <form @submit.prevent="UpdateCategory" enctype="multipart/form-data">
@@ -89,7 +96,37 @@ const UpdateCategory = async () => {
     width: 100%;
     padding: 50px 30px;
 
-    .title {
+    .header {
+        .btn {
+            text-align: right;
+            padding-bottom: 20px;
+
+            button {
+                padding: 10px 20px;
+                border: 1px solid #9c4202;
+                background: #9c4202;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all ease-in .3s;
+
+                a {
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #fff;
+                }
+
+                &:hover {
+                    transform: scale(1.05);
+                    background-color: #fff;
+
+                    a {
+                        color: #9c4202;
+                    }
+                }
+            }
+        }
+
         h1 {
             margin-top: 0px;
             font-size: 22px;

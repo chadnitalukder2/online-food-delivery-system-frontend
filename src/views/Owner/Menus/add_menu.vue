@@ -72,32 +72,66 @@ const addCategory = async () => {
         <div class="header">
             <div class="btn">
                 <button>
-                    <router-link :to="{ name: 'categories' }">
-                        All Category
+                    <router-link :to="{ name: 'menus' }">
+                        All Menu
                     </router-link>
                 </button>
             </div>
-            <h1>Add Category</h1>
+            <h1>Add Menu</h1>
         </div>
-
+        
         <div class="content">
             <form @submit.prevent="addCategory">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Category Name <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="category.name" placeholder="Enter a category name">
+                        <p>Menu Item Name <span style="color: #9c4202">*</span></p>
+                        <input type="text" v-model="category.name" placeholder="Enter a item name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Category Image <span style="color: #9c4202">*</span></p>
+                        <p>Menu Item Image <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChange" type="file">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Menu Item price <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="category.name" placeholder="Enter a item price">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Menu Item Availability <span style="color: #9c4202">*</span></p>
+                        <select>
+                            <option disabled>Select one</option>
+                            <option>Out of stock </option>
+                            <option>In stock</option>
+                        </select>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Category Name <span style="color: #9c4202">*</span></p>
+                        <select>
+                            <option disabled>Select a Category</option>
+                            <option>out of stock </option>
+                            <option>in stock</option>
+                        </select>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Restaurant Name<span style="color: #9c4202">*</span></p>
+                        <input placeholder="enter a restaurant name" type="text">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
 
                 <div class="input-box">
-                    <p>Category Description <span style="color: #9c4202">*</span></p>
+                    <p>Menu Item Description <span style="color: #9c4202">*</span></p>
                     <textarea v-model="category.description" rows="5" cols="50"></textarea>
                 </div>
 
@@ -185,6 +219,7 @@ const addCategory = async () => {
             }
 
             textarea,
+            select,
             input {
                 width: 100%;
                 padding: 15px;
