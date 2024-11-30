@@ -71,6 +71,7 @@ const handleLogout = async () => {
                             <router-link active-class="active" :to="{ name: 'cart-page' }">
                                 <i class="far fa-calendar-plus"></i>
                             </router-link>
+                            <span>3</span>
                         </li>
                         <li class="profile">
                             <router-link active-class="active" :to="{ name: 'profile-page' }">
@@ -78,14 +79,14 @@ const handleLogout = async () => {
                             </router-link>
                         </li>
 
-                        <li class="btn_login"> 
+                        <li class="btn_login">
                             <router-link active-class="active" :to="{ name: 'Login' }"
                                 style=" color: #9c4202 ;">Login</router-link>
-                            </li>
+                        </li>
                         <li class="btn_singup">
-                             <router-link active-class="active" :to="{ name: 'register' }"
-                                style=" color: #fff ;">Sing up</router-link>
-                            </li>
+                            <router-link active-class="active" :to="{ name: 'register' }" style=" color: #fff ;">Sing
+                                up</router-link>
+                        </li>
                         <li class="btn_login">
                             <router-link active-class="active" :to="{ name: 'admin' }"
                                 style=" color: #9c4202 ;">Admin</router-link>
@@ -94,8 +95,9 @@ const handleLogout = async () => {
                             <router-link active-class="active" :to="{ name: 'owner' }"
                                 style=" color: #9c4202 ;">Owner</router-link>
                         </li>
-                        <li >
-                            <button  @click="handleLogout" class="btn_singup" style="color: #fff; cursor: pointer;">Logout</button>
+                        <li>
+                            <button @click="handleLogout" class="btn_singup"
+                                style="color: #fff; cursor: pointer;">Logout</button>
                         </li>
                     </ul>
                 </div>
@@ -238,6 +240,22 @@ const handleLogout = async () => {
                     }
                 }
 
+                .cart {
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        background: red;
+                        color: #fff;
+                        font-size: 10px;
+                        font-weight: bold;
+                        text-align: center;
+                        padding: 1px 4px;
+                        margin: -3px -5px 0px 0px;
+                        right: 0;
+                        border-radius: 50%;
+                    }
+                }
             }
         }
     }

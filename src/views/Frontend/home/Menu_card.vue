@@ -1,3 +1,44 @@
+<script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const category = ref({});
+
+const addCategory = async () => {
+    validation.value = {};
+    const errors = validateCategory();
+    if (Object.keys(errors).length > 0) {
+        validation.value = errors;
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", category.value.name);
+    formData.append("description", category.value.description || "");
+    formData.append("image", image.value);
+
+    try {
+        await axios.post("/api/categories", formData);
+        notify({
+            title: "Category Item Added Successfully",
+            type: "success",
+        });
+        router.push("/owner/categories");
+    } catch (error) {
+        console.error("Failed to add category:", error);
+        notify({
+            title: "Failed to Add Category",
+            type: "error",
+        });
+    }
+};
+</script>
+
 <template>
     <div class="food_item">
         <div class="food__item-thumb">
@@ -14,7 +55,7 @@
             <div class="food-name">
                 <h1> <a href="#">Chicken Tehari</a> </h1>
             </div>
-            <div class="price">
+            <div class="price" >
                 From Tk 300
             </div>
             <div class="description">
@@ -27,6 +68,7 @@
             </a>
         </div>
     </div>
+
     <div class="food_item">
         <div class="food__item-thumb">
             <a href="#">
@@ -113,10 +155,6 @@
     </div>
 
 </template>
-
-<script>
-
-</script>
 
 <style lang="scss" scoped>
 .food_item {
