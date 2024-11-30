@@ -53,6 +53,9 @@ const closeModalDelete = () => {
           <th>Name</th>
           <th>Phone</th>
           <th>Email</th>
+          <th>Status</th>
+          <th>Delivery Fee</th>
+          <th>Delivery Time</th>
           <th>Address</th>
           <th>Image </th>
           <th style="text-align: center;width: 158px;">Action</th>
@@ -77,6 +80,9 @@ const closeModalDelete = () => {
             <td>{{ item.name }}</td>
             <td>{{ item.phone }}</td>
             <td>{{ item.email }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.delivery_fee }}</td>
+            <td>{{ item.delivery_time }}</td>
             <td>{{ item.address }}</td>
             <td>
               <div style="width: 80px; height: 70px">

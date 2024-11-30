@@ -1,10 +1,26 @@
-<script>
+<script setup>
 import MenuCard from '../Home/Menu_card.vue';
-export default {
-  components: {
-    MenuCard,
-  },
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useRoute } from "vue-router";
+const route = useRoute();
+//---------------------------------------------------
+const restaurant = ref({});
+//---------------------------------------------------
+onMounted(async () => {
+    getRestaurant();
+});
+//---------------------------------------------------
+
+const getRestaurant = async () => {
+    const id = route.params.id;
+    let response = await axios.get(`/api/restaurants/${id}`);
+    restaurant.value = response.data.data;
+
 }
+
 </script>
 
 <template>
@@ -14,7 +30,7 @@ export default {
                 <img src="../../../assets/menu-cover.png">
             </div>
             <div class="banner_title">
-                <h1> Restaurants Name</h1>
+                <h1>{{ restaurant.name }}</h1>
             </div>
         </div>
 
@@ -22,16 +38,16 @@ export default {
             <div class="restaurant-info">
                 <div class="restaurant-info-box__thumb">
                     <div class="image">
-                        <img src="../../../assets/res-logo-1.png">
+                        <img :src="restaurant.image">
                     </div>
                 </div>
                 <div class="restaurant-info-box__meta">
                     <h4 class="restaurant-name">
-                        Urban Eats
+                        {{ restaurant.name }}
                     </h4>
                     <div class="restaurant-location">
                         <i class="fa-regular fa-compass"></i>
-                        San Francisco,California
+                        {{ restaurant.address }}
                     </div>
                     <div class="restaurant-rating">
                         <div class="rating-review">
@@ -43,17 +59,17 @@ export default {
                         </div>
 
                         <div class="status">
-                            <span class="badge badge--base badge--sm">OPEN</span>
+                            <span class="badge badge--base badge--sm">{{ restaurant.status }}</span>
                         </div>
                     </div>
                     <div class="restaurant-info_meta-time">
                         <div class="delivery-fee">
                             <i class="fa-solid fa-calendar-minus"></i>
-                            Delivery Fee 20TK
+                            Delivery Fee {{ restaurant.delivery_fee }}TK
                         </div>
                         <div class="delivery-time delivery-fee">
                             <i class="fa-regular fa-clock"></i>
-                            Delivery 45 min
+                            Delivery {{ restaurant.delivery_time }} min
                         </div>
                     </div>
                 </div>
@@ -195,6 +211,7 @@ export default {
                         background: #9c4202;
                         color: #fff;
                         padding: 5px 10px;
+                        text-transform: uppercase;
                         border-radius: 50px;
                         display: flex;
                         align-items: center;
