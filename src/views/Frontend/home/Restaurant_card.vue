@@ -18,7 +18,7 @@ const props = defineProps(["restaurant"]);
         <div class="restaurant__thumb">
             <div class="image">
                 <router-link :to="{ name: 'restaurant', params: { id: restaurant.id, name: restaurant.name } }">
-                    <img src="../../../assets/restaurant-1.png">
+                    <img :src="restaurant.bg_image">
                 </router-link>
             </div>
             <div class="wishlist">
@@ -51,7 +51,10 @@ const props = defineProps(["restaurant"]);
 </template>
 
 <style lang="scss" scoped>
+
 .restaurant_item {
+    background-color: #fff;
+    border-radius: 8px;
     .restaurant__thumb {
         position: relative;
         transition: all ease 0.3s;
@@ -139,7 +142,7 @@ const props = defineProps(["restaurant"]);
             }
 
             .restaurant__info-content-review {
-                margin-top: 6px;
+                margin-top: 10px;
                 font-size: 13px;
                 font-weight: 500;
                 color: #8f8787;

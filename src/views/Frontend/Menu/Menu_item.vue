@@ -27,7 +27,7 @@ const getRestaurant = async () => {
     <div class="container">
         <div class="title_section">
             <div class="inner-banner">
-                <img src="../../../assets/menu-cover.png">
+                <img :src="restaurant.bg_image">
             </div>
             <div class="banner_title">
                 <h1>{{ restaurant.name }}</h1>
@@ -179,11 +179,11 @@ const getRestaurant = async () => {
                     font-size: 24px;
                     line-height: 1.2;
                     color: #212121;
-                    margin-bottom: 5px;
+                    margin-bottom: 10px;
                 }
 
                 .restaurant-location {
-                    margin-bottom: 10px;
+                    margin-bottom: 13px;
                     font-size: 18px;
                     color: #919191;
 
@@ -196,7 +196,7 @@ const getRestaurant = async () => {
                 .restaurant-rating {
                     display: flex;
                     align-items: center;
-                    padding-bottom: 10px;
+                    padding-bottom: 13px;
 
                     .rating-review {
                         margin-right: 20px;
