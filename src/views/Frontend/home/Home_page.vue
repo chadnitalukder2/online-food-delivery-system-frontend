@@ -4,6 +4,19 @@ import MenuCard from './Menu_card.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
+import {ref,onMounted, watch} from "vue";
+import axios from "axios";
+
+const restaurants = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+  getRestaurants();
+});
+//---------------------------------------------------
+const getRestaurants = async () => {
+  let response = await axios.get("/api/restaurants");
+  restaurants.value = response.data;
+};
 
 
 </script>
@@ -164,7 +177,7 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
                 </div>
             </div>
             <div class="nearby-restaurant">
-              <RestaurantCard></RestaurantCard>
+              <RestaurantCard v-for="restaurant in restaurants.slice(0, 8)" :key="restaurant.id" :restaurant="restaurant"  />
             </div>
         </div>
     </section>
