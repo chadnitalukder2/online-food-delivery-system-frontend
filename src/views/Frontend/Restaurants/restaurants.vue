@@ -1,10 +1,21 @@
-<script>
+<script setup>
 import RestaurantCard from '../Home/Restaurant_card.vue';
-export default {
-  components: {
-    RestaurantCard,
-  },
-}
+
+import {ref,onMounted, watch} from "vue";
+import axios from "axios";
+import { useRouter} from "vue-router";
+const router = useRouter()
+
+const restaurants = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+  getRestaurants();
+});
+//---------------------------------------------------
+const getRestaurants = async () => {
+  let response = await axios.get("/api/restaurants");
+  restaurants.value = response.data;
+};
 </script>
 
 <template>
@@ -21,7 +32,7 @@ export default {
         <div class="restaurant-content">
             <div class="header-section">
                 <div class="total-section">
-                    <p>Result: 25 items Found</p>
+                    <p>Result: {{ restaurants.length }} items Found</p>
                 </div>
                 <div class="search-section">
                     <input type="text" placeholder="Search any keyword...">
@@ -29,7 +40,7 @@ export default {
                 </div>
             </div>
             <div class="body-section">
-                <RestaurantCard/>
+                <RestaurantCard  v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant"  />
                
             </div>
 
@@ -128,7 +139,7 @@ export default {
         .body-section {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 25px;
             padding-top: 30px;
         }
     }

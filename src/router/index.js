@@ -17,8 +17,8 @@ const router = createRouter({
       component: () => import("../views/Frontend/Restaurants/Restaurants.vue"),
     },
     {
-      path: "/menu-item",
-      name: "menu-item",
+      path: "/restaurant/:id/:name",
+      name: "restaurant",
       component: () => import("../views/Frontend/Menu/Menu_item.vue"),
     },
     {
