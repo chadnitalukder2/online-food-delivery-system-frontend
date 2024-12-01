@@ -82,12 +82,11 @@ const getRestaurant = async () => {
                 <input type="text" placeholder="Search in menu name">
                 <button type="submit" class="search-btn">Search</button>
             </div>
-            <div class="category">
+            <div class="category" >
                 <div class="category-item active"> <a href="#">All </a></div>
-                <div class="category-item"><a href="#">Appetizers </a></div>
-                <div class="category-item"><a href="#">BBQ </a></div>
-                <div class="category-item"><a href="#">Burger </a></div>
-                <div class="category-item"><a href="#">Desserts </a></div>
+                <div class="category-item" v-for="(item, index) in restaurant.category" :key="index" ><a href="#">
+                    {{ item.name }}
+                 </a></div>
             </div>
         </section>
 
