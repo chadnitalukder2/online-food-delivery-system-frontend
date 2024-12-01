@@ -8,17 +8,29 @@ import {ref,onMounted, watch} from "vue";
 import axios from "axios";
 
 const restaurants = ref([]);
+const menus = ref([]);
+const categories = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
   getRestaurants();
+  getMenus();
+  getCategories();
 });
 //---------------------------------------------------
 const getRestaurants = async () => {
   let response = await axios.get("/api/restaurants");
   restaurants.value = response.data;
 };
-
-
+//======================================
+const getMenus = async () => {
+  let response = await axios.get("/api/menus");
+  menus.value = response.data;
+};
+//===================================
+const getCategories = async () => {
+  let response = await axios.get("/api/categories");
+  categories.value = response.data;
+};
 </script>
 
 <template>
@@ -57,105 +69,21 @@ const getRestaurants = async () => {
             <!-- <div class="food-category"> -->
 
             <Carousel :items-to-show="6" iconArrowRight iconArrowLeft>
-                <Slide key="0">
+                <Slide v-for="(category, index) in categories" :key="index">
                     <div class="food-item">
                         <div class="food-item-box">
                             <div class="food-item-box__thumb">
                                 <a href="#">
-                                    <img src="../../../assets/food-1.png">
+                                    <img :src="category.image">
                                 </a>
                             </div>
                         </div>
                         <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
+                            <h1><a href="#">{{ category.name }}</a></h1>
                         </div>
                     </div>
                 </Slide>
-                <Slide key="1">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-2.png">
-                                </a>
-                            </div>
-
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </Slide>
-                <slide key="2">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-3.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </slide>
-                <slide key="3">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-4.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </slide>
-                <slide key="4">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-5.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </slide>
-                <slide key="5">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-6.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </slide>
-                <slide key="6">
-                    <div class="food-item">
-                        <div class="food-item-box">
-                            <div class="food-item-box__thumb">
-                                <a href="#">
-                                    <img src="../../../assets/food-7.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="food-item__title">
-                            <h1><a href="#">Grilled Dishes</a></h1>
-                        </div>
-                    </div>
-                </slide>
+              
                 <template #addons>
                     <navigation />
                 </template>
@@ -190,7 +118,7 @@ const getRestaurants = async () => {
                 </div>
             </div>
             <div class="popular-foods-wrapper">
-               <MenuCard></MenuCard>
+               <MenuCard v-for="menu in menus.slice(0, 9)" :key="menu.id" :menuItem="menu"/>
             </div>
         </div>
     </section>
@@ -389,6 +317,7 @@ a {
             }
 
             .food-item__title {
+                text-transform: capitalize;
                 font-size: 16px;
                 font-weight: 500;
                 text-align: center;
