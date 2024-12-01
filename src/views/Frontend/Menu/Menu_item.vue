@@ -7,7 +7,13 @@ const router = useRouter();
 import { useRoute } from "vue-router";
 const route = useRoute();
 //---------------------------------------------------
-const restaurant = ref({});
+const restaurant = ref({
+    categories: [],
+    menus: [],
+});
+function filteredMenus(categoryId) {
+    return restaurant.value.menus.filter(menu => menu.category_id === categoryId);
+}
 //---------------------------------------------------
 onMounted(async () => {
     getRestaurant();
@@ -82,28 +88,33 @@ const getRestaurant = async () => {
                 <input type="text" placeholder="Search in menu name">
                 <button type="submit" class="search-btn">Search</button>
             </div>
-            <div class="category" >
+            <div class="category">
                 <div class="category-item active"> <a href="#">All </a></div>
-                <div class="category-item" v-for="(item, index) in restaurant.category" :key="index" ><a href="#">
-                    {{ item.name }}
-                 </a></div>
+                <div class="category-item" v-for="(item, index) in restaurant.categories" :key="index"><a href="#">
+                        {{ item.name }}
+                    </a></div>
             </div>
         </section>
 
         <section class="menu-card">
-            <div class="menu-item">
+
+            <div class="menu-item" v-for="(item, index) in restaurant.categories" :key="index">
                 <div class="section-title">
-                    <h1>Appetizers</h1>
+                    <h1>{{ item.name }}</h1>
                 </div>
+                <div v-if="filteredMenus(item.id).length === 0">
+                    <h1 class="no-data">No items available in this category.</h1>
+              
+                </div>
+                <div class="menu-card-details" v-else>
+                    <MenuCard v-for="menuItem in filteredMenus(item.id)" :key="menuItem.id" :menuItem="menuItem" />
 
-                <div class="menu-card-details">
-                    <MenuCard></MenuCard>
+
                 </div>
             </div>
 
-            <div class="delivery-product">
 
-            </div>
+
 
         </section>
 
@@ -302,6 +313,7 @@ const getRestaurant = async () => {
 
             .category-item {
                 a {
+                    text-transform: capitalize;
                     text-decoration: none;
                     color: #524d4d;
                     font-size: 14px;
@@ -318,15 +330,16 @@ const getRestaurant = async () => {
     }
 
     .menu-card {
-        padding: 40px 80px;
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
+        padding: 0px 80px 40px;
 
         .menu-item {
+            padding-top: 40px;
+
             .section-title {
                 padding-bottom: 22px;
+
                 h1 {
+                    text-transform: capitalize;
                     font-size: 24px;
                     line-height: 1.2;
                     font-weight: 600;
@@ -349,6 +362,15 @@ const getRestaurant = async () => {
 
 
     }
-
+.no-data{
+    font-size: 18px;
+    color: #bc0d0d;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 }
 </style>

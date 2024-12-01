@@ -1,49 +1,21 @@
 <script setup>
-import { useNotification } from "@kyvg/vue3-notification";
-const { notify } = useNotification();
-import { ref } from "vue";
-import axios from "axios";
+import axios from 'axios';
+import { defineProps } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
 
-const category = ref({});
 
-const addCategory = async () => {
-    validation.value = {};
-    const errors = validateCategory();
-    if (Object.keys(errors).length > 0) {
-        validation.value = errors;
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("description", category.value.description || "");
-    formData.append("image", image.value);
-
-    try {
-        await axios.post("/api/categories", formData);
-        notify({
-            title: "Category Item Added Successfully",
-            type: "success",
-        });
-        router.push("/owner/categories");
-    } catch (error) {
-        console.error("Failed to add category:", error);
-        notify({
-            title: "Failed to Add Category",
-            type: "error",
-        });
-    }
-};
+const props = defineProps(["menuItem"]);
 </script>
 
 <template>
-    <div class="food_item">
+  
+    <div class="food_item" >
         <div class="food__item-thumb">
+         
             <a href="#">
-                <img src="../../../assets/menu-1.png">
+                <img :src="menuItem.image">
             </a>
         </div>
         <div class="add-btn">
@@ -53,13 +25,13 @@ const addCategory = async () => {
         </div>
         <div class="popular-food__item-info">
             <div class="food-name">
-                <h1> <a href="#">Chicken Tehari</a> </h1>
+                <h1> <a href="#">{{ menuItem.name }}</a> </h1>
             </div>
             <div class="price" >
-                From Tk 300
+                From Tk {{ menuItem.price }}
             </div>
             <div class="description">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+                <p>{{ menuItem.description }}</p>
             </div>
         </div>
         <div class="heart">
@@ -69,91 +41,7 @@ const addCategory = async () => {
         </div>
     </div>
 
-    <div class="food_item">
-        <div class="food__item-thumb">
-            <a href="#">
-                <img src="../../../assets/menu-2.png">
-            </a>
-        </div>
-        <div class="add-btn">
-            <a href="#">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-        </div>
-        <div class="popular-food__item-info">
-            <div class="food-name">
-                <h1> <a href="#">Chicken Tehari</a> </h1>
-            </div>
-            <div class="price">
-                From Tk 300
-            </div>
-            <div class="description">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-            </div>
-        </div>
-        <div class="heart">
-            <a href="#">
-                <i class="fa-regular fa-heart"></i>
-            </a>
-        </div>
-    </div>
-    <div class="food_item">
-        <div class="food__item-thumb">
-            <a href="#">
-                <img src="../../../assets/menu-3.png">
-            </a>
-        </div>
-        <div class="add-btn">
-            <a href="#">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-        </div>
-        <div class="popular-food__item-info">
-            <div class="food-name">
-                <h1> <a href="#">Chicken Tehari</a> </h1>
-            </div>
-            <div class="price">
-                From Tk 300
-            </div>
-            <div class="description">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-            </div>
-        </div>
-        <div class="heart">
-            <a href="#">
-                <i class="fa-regular fa-heart"></i>
-            </a>
-        </div>
-    </div>
-    <div class="food_item">
-        <div class="food__item-thumb">
-            <a href="#">
-                <img src="../../../assets/menu-4.png">
-            </a>
-        </div>
-        <div class="add-btn">
-            <a href="#">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-        </div>
-        <div class="popular-food__item-info">
-            <div class="food-name">
-                <h1> <a href="#">Chicken Tehari</a> </h1>
-            </div>
-            <div class="price">
-                From Tk 300
-            </div>
-            <div class="description">
-                <p>Lorem, ipsum vjjdj ndjj ns nd dolor sit amet consectetur adipisicing.</p>
-            </div>
-        </div>
-        <div class="heart">
-            <a href="#">
-                <i class="fa-regular fa-heart"></i>
-            </a>
-        </div>
-    </div>
-
+    
 </template>
 
 <style lang="scss" scoped>
