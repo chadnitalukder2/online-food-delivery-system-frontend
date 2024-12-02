@@ -1,21 +1,25 @@
 <script setup>
 import MenuCard from './category_menu.vue';
 
-import {ref,onMounted, watch} from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useRouter} from "vue-router";
-const router = useRouter()
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useRoute } from "vue-router";
+const route = useRoute();
 
-const restaurants = ref([]);
+const categories = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
-  getRestaurants();
+    getCategories();
 });
 //---------------------------------------------------
-const getRestaurants = async () => {
-  let response = await axios.get("/api/restaurants");
-  restaurants.value = response.data;
-};
+const getCategories = async () => {
+    const id = route.params.id;
+    let response = await axios.get(`/api/categories/${id}`);
+    categories.value = response.data.data;
+    console.log(response.data.data);
+}
 </script>
 
 <template>
@@ -23,16 +27,16 @@ const getRestaurants = async () => {
 
         <div class="title_section">
             <div class="inner-banner">
-                <img src="../../../assets/baner-img.jpg">
+                <img :src="categories.image">
             </div>
             <div class="banner_title">
-                <h1> Category Name</h1>
+                <h1> {{ categories.name }}</h1>
             </div>
         </div>
         <div class="restaurant-content">
          
             <div class="body-section">
-                <MenuCard    />
+                <MenuCard v-for=" menuItem in categories.menus" :key="menuItem.id" :menuItem="menuItem"    />
                
             </div>
 

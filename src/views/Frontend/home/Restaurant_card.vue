@@ -27,13 +27,13 @@ const props = defineProps(["restaurant"]);
         </div>
         <div class="restaurant__info">
             <div class="restaurant__info-thumb">
-                <router-link :to="{ name: 'restaurant', params: { id: restaurant.id, name: restaurant.name } }">
+                <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }">
                     <img :src="restaurant.image ">
                 </router-link>
             </div>
             <div class="restaurant__info-content">
                 <h1 class="restaurant__info-content-title">
-                    <router-link :to="{ name: 'restaurant', params: { id: restaurant.id, name: restaurant.name } }">
+                    <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }">
                         {{ restaurant.name }}
                     </router-link>
                 </h1>

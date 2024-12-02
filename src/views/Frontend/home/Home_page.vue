@@ -4,7 +4,7 @@ import MenuCard from '../Category/category_menu.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
-import {ref,onMounted, watch} from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 
 const restaurants = ref([]);
@@ -12,19 +12,25 @@ const menus = ref([]);
 const categories = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
-  getRestaurants();
-  getCategories();
+    getRestaurants();
+    getCategories();
+    getMenus();
 });
 //---------------------------------------------------
 const getRestaurants = async () => {
-  let response = await axios.get("/api/restaurants");
-  restaurants.value = response.data;
+    let response = await axios.get("/api/restaurants");
+    restaurants.value = response.data;
 };
 
 //===================================
 const getCategories = async () => {
-  let response = await axios.get("/api/categories");
-  categories.value = response.data;
+    let response = await axios.get("/api/categories");
+    categories.value = response.data;
+};
+//========================================
+const getMenus = async () => {
+    let response = await axios.get("/api/menus");
+    menus.value = response.data
 };
 </script>
 
@@ -68,17 +74,23 @@ const getCategories = async () => {
                     <div class="food-item">
                         <div class="food-item-box">
                             <div class="food-item-box__thumb">
-                                <a href="#">
+                                <router-link
+                                    :to="{ name: 'category', params: { id: category.id } }">
                                     <img :src="category.image">
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                         <div class="food-item__title">
-                            <h1><a href="#">{{ category.name }}</a></h1>
+                            <h1>
+                                <router-link
+                                    :to="{ name: 'category', params: { id: category.id } }">
+                                    {{ category.name }}
+                                </router-link>
+                            </h1>
                         </div>
                     </div>
                 </Slide>
-              
+
                 <template #addons>
                     <navigation />
                 </template>
@@ -96,11 +108,13 @@ const getCategories = async () => {
                     <h1>Popular Restaurant</h1>
                 </div>
                 <div class="all_restaurant">
-                    <router-link  :to="{ name: 'restaurants' }">View All <i class="fa-regular fa-circle-right"></i></router-link>
+                    <router-link :to="{ name: 'restaurants' }">View All <i
+                            class="fa-regular fa-circle-right"></i></router-link>
                 </div>
             </div>
             <div class="nearby-restaurant">
-              <RestaurantCard v-for="restaurant in restaurants.slice(0, 8)" :key="restaurant.id" :restaurant="restaurant"  />
+                <RestaurantCard v-for="restaurant in restaurants.slice(0, 8)" :key="restaurant.id"
+                    :restaurant="restaurant" />
             </div>
         </div>
     </section>
@@ -113,7 +127,8 @@ const getCategories = async () => {
                 </div>
             </div>
             <div class="popular-foods-wrapper">
-               <MenuCard />
+                <MenuCard v-for="menuItem in menus.slice(0, 9)" :key="menuItem.id"
+                :menuItem="menuItem" />
             </div>
         </div>
     </section>
@@ -403,6 +418,6 @@ a {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-   
+
 }
 </style>

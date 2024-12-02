@@ -6,28 +6,36 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 
+// const props = defineProps(["restaurant"]);
+const props = defineProps(["menuItem"]);
+//--------------------------------------------------
+
 
 </script>
 
 <template>
-  
-    <div class="food_item" >
+
+    <div class="food_item">
         <div class="food__item-thumb">
-         
-            <a href="#">
-                <img>
-            </a>
+            <router-link >
+                <img :src="menuItem.image">
+            </router-link>
+
         </div>
-      
+
         <div class="popular-food__item-info">
             <div class="food-name">
-                <h1> <a href="#">Name</a> </h1>
+                <h1>
+                    <router-link :to="{ name: 'restaurant', params: { id: menuItem.restaurant_id} }"  >
+                       {{menuItem.name}}
+                    </router-link>
+                </h1>
             </div>
-            <div class="price" >
-                From Tk price
+            <div class="price">
+                From Tk {{ menuItem.price }}
             </div>
             <div class="description">
-                <p>description</p>
+                <p>{{ menuItem.description }}</p>
             </div>
         </div>
         <div class="heart">
@@ -37,7 +45,7 @@ const router = useRouter();
         </div>
     </div>
 
-    
+
 </template>
 
 <style lang="scss" scoped>
@@ -70,6 +78,7 @@ const router = useRouter();
 
     .popular-food__item-info {
         flex-basis: 65%;
+
         .food-name {
             padding-bottom: 10px;
 

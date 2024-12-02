@@ -17,7 +17,7 @@ const router = createRouter({
       component: () => import("../views/Frontend/Restaurants/restaurants.vue"),
     },
     {
-      path: "/restaurant/:id/:name",
+      path: "/restaurant/:id",
       name: "restaurant",
       component: () => import("../views/Frontend/Menu/Menu_item.vue"),
     },
@@ -27,7 +27,7 @@ const router = createRouter({
       component: () => import("../views/Frontend/Cart/cart_page.vue"),
     },
     {
-      path: "/category",
+      path: "/category/:id",
       name: "category",
       component: () => import("../views/Frontend/Category/category_page.vue"),
     },
