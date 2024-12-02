@@ -1,6 +1,6 @@
 <script setup>
 import RestaurantCard from './Restaurant_card.vue';
-import MenuCard from './Menu_card.vue';
+import MenuCard from '../Category/category_menu.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
@@ -13,7 +13,6 @@ const categories = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
   getRestaurants();
-  getMenus();
   getCategories();
 });
 //---------------------------------------------------
@@ -21,11 +20,7 @@ const getRestaurants = async () => {
   let response = await axios.get("/api/restaurants");
   restaurants.value = response.data;
 };
-//======================================
-const getMenus = async () => {
-  let response = await axios.get("/api/menus");
-  menus.value = response.data;
-};
+
 //===================================
 const getCategories = async () => {
   let response = await axios.get("/api/categories");
@@ -118,7 +113,7 @@ const getCategories = async () => {
                 </div>
             </div>
             <div class="popular-foods-wrapper">
-               <MenuCard v-for="menu in menus.slice(0, 9)" :key="menu.id" :menuItem="menu"/>
+               <MenuCard />
             </div>
         </div>
     </section>

@@ -1,0 +1,124 @@
+<script setup>
+import axios from 'axios';
+import { defineProps } from "vue";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+
+
+</script>
+
+<template>
+  
+    <div class="food_item" >
+        <div class="food__item-thumb">
+         
+            <a href="#">
+                <img>
+            </a>
+        </div>
+      
+        <div class="popular-food__item-info">
+            <div class="food-name">
+                <h1> <a href="#">Name</a> </h1>
+            </div>
+            <div class="price" >
+                From Tk price
+            </div>
+            <div class="description">
+                <p>description</p>
+            </div>
+        </div>
+        <div class="heart">
+            <a href="#">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+        </div>
+    </div>
+
+    
+</template>
+
+<style lang="scss" scoped>
+.food_item {
+    padding: 15px;
+    height: 100%;
+    border: 0.5px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    background-color: #fff;
+    transition: all ease 0.3s;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+
+    .food__item-thumb {
+        flex-basis: 25%;
+        position: relative;
+        margin-right: 15px;
+        height: 90px;
+        width: 125px;
+        border-radius: 6px;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover
+        }
+    }
+
+    .popular-food__item-info {
+        flex-basis: 65%;
+        .food-name {
+            padding-bottom: 10px;
+
+            h1 {
+                font-size: 18px;
+
+                a {
+                    font-weight: 600;
+                    color: #212121;
+
+                    &:hover {
+                        color: #9c4202;
+                    }
+                }
+            }
+        }
+
+        .price {
+            color: #787878;
+            font-size: 15px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+
+        .description {
+            color: #999999;
+            font-size: 15px;
+            font-weight: bold
+        }
+    }
+
+    .heart {
+        flex-basis: 15%;
+        font-size: 18px;
+        margin: -70px -30px 0px 0px;
+
+        a {
+            color: #999999;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+
+        .food-name h1 a {
+            color: #9c4202;
+        }
+
+    }
+
+}
+</style>
