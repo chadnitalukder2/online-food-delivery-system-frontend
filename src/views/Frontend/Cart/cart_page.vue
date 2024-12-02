@@ -1,5 +1,19 @@
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useRouter } from "vue-router";
+const router = useRouter();
+//------------------------------
+const carts = ref([]);
+//-----------------------------
+onMounted(async () => {
+    getCarts();
+});
+//------------------------------
+const getCarts = async () => {
+  let response = await axios.get("/api/carts");
+  carts.value = response.data;
+};
 </script>
 
 <template>
@@ -8,6 +22,7 @@
             <table>
                 <tr>
                     <th></th>
+                    <th>ID</th>
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
@@ -16,21 +31,22 @@
                     <th>Action</th>
                 </tr>
 
-                <tr>
-
+                <tr v-for="item in carts" :key="item.id">
+                  
                     <td>
                         <input @change="subTotal()" type="checkbox">
                     </td>
+                    <td>{{ item.id }}</td>
                     <td style="width: 120px; height: 100px">
-                        <img src="../../../assets/menu-1.png" style="width: 100%; height: 100%">
+                        <img :src="item.menu.image" style="width: 100%; height: 100%">
                     </td>
-                    <td>Hello</td>
-                    <td>Hello</td>
+                    <td>{{ item.menu.name }}</td>
+                    <td>${{ item.menu.price }}</td>
                     <td>
-                        <input type="number" @change="updateLineTotal()">
+                        <input type="number" @change="updateLineTotal()" v-model="item.quantity">
 
                     </td>
-                    <td>$444</td>
+                    <td>${{ item.line_total }}</td>
                     <td @click="openModalDelete()">
                         <i class="fa-solid fa-trash-can delete-icon "></i>
                     </td>
