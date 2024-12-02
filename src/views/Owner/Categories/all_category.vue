@@ -58,6 +58,7 @@ const closeModalDelete = () => {
       <table id="customers">
         <tr>
           <th  style="width: 80px;" ># ID</th>
+          <th>Restaurant Id</th>
           <th>Name</th>
           <th>Image </th>
           <th style="text-align: center;width: 158px;">Action</th>
@@ -79,6 +80,7 @@ const closeModalDelete = () => {
           </Modal>
           <tr>
             <td># {{ item.id }}</td>
+            <td>{{ item.restaurant_id }}</td>
             <td>{{ item.name }}</td>
             <td>
               <div style="width: 80px; height: 70px">

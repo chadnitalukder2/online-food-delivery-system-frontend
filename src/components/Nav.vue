@@ -1,10 +1,11 @@
 <script setup>
-import { computed, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
 const router = useRouter();
 import { defineProps } from "vue";
 //-----------------------
+const carts = ref();
 const state = reactive({
     loggedIn: false,
     is_admin: false,
@@ -38,9 +39,15 @@ const handleLogout = async () => {
 //     });
 // }
 
-// onMounted(async () => {
-//     getUser();
-// });
+onMounted(async () => {
+    getCarts();
+});
+//------------------------------------------
+const getCarts = async () => {
+  let response = await axios.get("/api/carts");
+  carts.value = response.data.length;
+};
+
 </script>
 
 <template>
@@ -71,7 +78,7 @@ const handleLogout = async () => {
                             <router-link active-class="active" :to="{ name: 'cart-page' }">
                                 <i class="far fa-calendar-plus"></i>
                             </router-link>
-                            <span>3</span>
+                            <p>{{ carts }}</p>
                         </li>
                         <li class="profile">
                             <router-link active-class="active" :to="{ name: 'profile-page' }">
@@ -243,7 +250,7 @@ const handleLogout = async () => {
                 .cart {
                     position: relative;
 
-                    span {
+                    p {
                         position: absolute;
                         background: red;
                         color: #fff;
@@ -253,6 +260,7 @@ const handleLogout = async () => {
                         padding: 1px 4px;
                         margin: -3px -5px 0px 0px;
                         right: 0;
+                        top: 0;
                         border-radius: 50%;
                     }
                 }

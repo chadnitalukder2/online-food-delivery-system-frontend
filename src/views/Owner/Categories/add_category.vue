@@ -9,6 +9,7 @@ const router = useRouter();
 
 const category = ref({
     name: "",
+    restaurant_id: "",
     description: "",
 });
 const image = ref(null);
@@ -30,6 +31,10 @@ const validateCategory = () => {
         errors.name = "Category Name is required.";
         clearValidationMessage("name");
     }
+    if (!category.value.restaurant_id) {
+        errors.restaurant_id = "Restaurant id is required.";
+        clearValidationMessage("restaurant_id");
+    }
     if (!image.value) {
         errors.image = "Category Image is required.";
         clearValidationMessage("image");
@@ -47,9 +52,10 @@ const addCategory = async () => {
 
     const formData = new FormData();
     formData.append("name", category.value.name);
+    formData.append("restaurant_id", category.value.restaurant_id);
     formData.append("description", category.value.description || "");
     formData.append("image", image.value);
-
+console.log(category.value, 'hello');
     try {
         await axios.post("/api/categories", formData);
         notify({
@@ -95,7 +101,13 @@ const addCategory = async () => {
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
-
+                <div class="form-wrapper">
+                <div class="input-box">
+                        <p>Restaurant Id <span style="color: #9c4202">*</span></p>
+                        <input v-model="category.restaurant_id" type="number">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.restaurant_id }}</p>
+                    </div>
+                    </div>
                 <div class="input-box">
                     <p>Category Description <span style="color: #9c4202">*</span></p>
                     <textarea v-model="category.description" rows="5" cols="50"></textarea>
