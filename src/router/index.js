@@ -172,6 +172,11 @@ const router = createRouter({
           name: "all-restaurants",
           component: () => import("../views/Admin/Restaurant/all_restaurant.vue"),
         },
+        {
+          path: "add-restaurant",
+          name: "add-restaurant",
+          component: () => import("../views/Admin/Restaurant/add_restaurant.vue"),
+        },
       
       ]
     },

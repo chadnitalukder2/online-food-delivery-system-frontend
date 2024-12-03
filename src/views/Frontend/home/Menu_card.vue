@@ -9,13 +9,23 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const menuItem = defineProps(["menuItem"]);
+const user_id = localStorage.getItem('user_id');
 //==========================================
 
 
 const addToCart = async () => {
-   console.log('menuItem', menuItem.menuItem);
+    if(!user_id){
+        notify({
+            title: "Please Login ",
+            type: "success",
+        });
+        router.push('/Login').then(() => {
+                location.reload();
+            });
+    }
+    else{
     const formData = new FormData();
-    formData.append("user_id", 1 );
+    formData.append("user_id", user_id );
     formData.append("restaurant_id", menuItem.menuItem.restaurant_id );
     formData.append("menu_id", menuItem.menuItem.id);
     formData.append("quantity", '1');
@@ -35,6 +45,8 @@ const addToCart = async () => {
             type: "error",
         });
     }
+    }
+  
 };
 </script>
 

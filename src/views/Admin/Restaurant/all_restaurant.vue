@@ -45,6 +45,14 @@ const closeModalDelete = () => {
 
       <div class="header">
         <h1>All Restaurants</h1>
+
+        <div class="btn">
+          <button>
+            <router-link :to="{ name: 'add-restaurant' }">
+              Add Restaurant
+            </router-link>
+          </button>
+        </div>
       </div>
 
       <table id="customers">

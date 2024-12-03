@@ -17,7 +17,7 @@ const props = defineProps(["restaurant"]);
     <div class="restaurant_item">
         <div class="restaurant__thumb">
             <div class="image">
-                <router-link :to="{ name: 'restaurant', params: { id: restaurant.id, name: restaurant.name } }">
+                <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }">
                     <img :src="restaurant.bg_image">
                 </router-link>
             </div>

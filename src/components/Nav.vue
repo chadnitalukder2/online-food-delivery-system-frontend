@@ -30,8 +30,8 @@ onMounted(async () => {
 });
 //------------------------------------------
 const getCarts = async () => {
-  let response = await axios.get("/api/carts");
-  carts.value = response.data.length;
+    let response = await axios.get("/api/carts");
+    carts.value = response.data.length;
 };
 
 </script>
@@ -88,7 +88,7 @@ const getCarts = async () => {
                             <router-link active-class="active" :to="{ name: 'owner' }"
                                 style=" color: #9c4202 ;">Owner</router-link>
                         </li>
-                        <li v-if="state.loggedIn"> 
+                        <li v-if="state.loggedIn">
                             <button @click="handleLogout" class="btn_singup"
                                 style="color: #fff; cursor: pointer;">Logout</button>
                         </li>
