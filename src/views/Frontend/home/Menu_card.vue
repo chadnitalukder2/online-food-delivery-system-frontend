@@ -1,24 +1,53 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+
 import axios from 'axios';
 import { defineProps } from "vue";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
+const menuItem = defineProps(["menuItem"]);
+//==========================================
 
-const props = defineProps(["menuItem"]);
+
+const addToCart = async () => {
+   console.log('menuItem', menuItem.menuItem);
+    const formData = new FormData();
+    formData.append("user_id", 1 );
+    formData.append("restaurant_id", menuItem.menuItem.restaurant_id );
+    formData.append("menu_id", menuItem.menuItem.id);
+    formData.append("quantity", '1');
+    formData.append("line_total", menuItem.menuItem.price);
+    formData.append("status", 'cart');
+    try {
+        await axios.post("/api/carts", formData);
+        notify({
+            title: "Carts Item Added Successfully",
+            type: "success",
+        });
+    
+    } catch (error) {
+        console.error("Failed to add Cart:", error);
+        notify({
+            title: "Failed to Add Cart",
+            type: "error",
+        });
+    }
+};
 </script>
 
 <template>
   
     <div class="food_item" >
         <div class="food__item-thumb">
-         
+   
             <a href="#">
                 <img :src="menuItem.image">
             </a>
         </div>
-        <div class="add-btn">
+        <div class="add-btn" @click="addToCart">
             <a href="#">
                 <i class="fa-solid fa-plus"></i>
             </a>

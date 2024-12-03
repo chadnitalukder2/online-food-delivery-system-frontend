@@ -24,8 +24,9 @@ const getRestaurant = async () => {
     const id = route.params.id;
     let response = await axios.get(`/api/restaurants/${id}`);
     restaurant.value = response.data.data;
-
 }
+//----------------------------------------------------
+
 
 </script>
 
@@ -95,9 +96,8 @@ const getRestaurant = async () => {
                     </a></div>
             </div>
         </section>
-
+        
         <section class="menu-card">
-
             <div class="menu-item" v-for="(item, index) in restaurant.categories" :key="index">
                 <div class="section-title">
                     <h1>{{ item.name }}</h1>
@@ -112,9 +112,6 @@ const getRestaurant = async () => {
 
                 </div>
             </div>
-
-
-
 
         </section>
 

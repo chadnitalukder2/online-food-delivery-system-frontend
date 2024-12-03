@@ -1,6 +1,6 @@
 <script setup>
 import RestaurantCard from './Restaurant_card.vue';
-import MenuCard from '../Category/category_menu.vue';
+import CategoryMenuCard from '../Category/category_menu.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
@@ -127,7 +127,7 @@ const getMenus = async () => {
                 </div>
             </div>
             <div class="popular-foods-wrapper">
-                <MenuCard v-for="menuItem in menus.slice(0, 9)" :key="menuItem.id"
+                <CategoryMenuCard v-for="menuItem in menus.slice(0, 9)" :key="menuItem.id"
                 :menuItem="menuItem" />
             </div>
         </div>

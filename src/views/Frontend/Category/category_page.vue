@@ -1,5 +1,5 @@
 <script setup>
-import MenuCard from './category_menu.vue';
+import CategoryMenuCard from './category_menu.vue';
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -34,9 +34,8 @@ const getCategories = async () => {
             </div>
         </div>
         <div class="restaurant-content">
-         
             <div class="body-section">
-                <MenuCard v-for=" menuItem in categories.menus" :key="menuItem.id" :menuItem="menuItem"    />
+                <CategoryMenuCard v-for=" menuItem in categories.menus" :key="menuItem.id" :menuItem="menuItem"    />
                
             </div>
 
