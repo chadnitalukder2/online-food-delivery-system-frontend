@@ -13,8 +13,6 @@ const state = reactive({
 });
 //------------------------------
 const handleLogout = async () => {
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
     await axios.post('api/logout');
     console.log('hello');
     state.loggedIn = false;
@@ -22,25 +20,13 @@ const handleLogout = async () => {
     // window.location.reload();
 };
 //------------------------------------
-// const getUser = async () => {
-//     await axios.get('/api/user').then(response => {
-//       if (response.status == 200) {
-//         state.loggedIn = true;
-//         if (response.data.role == 'admin') {
-//           state.is_admin = true;
-//           router.push({ name: 'dashboard' });
-//         }
-//       } else {
-//         state.loggedIn = false;
-//       }
-//     }
-//     ).catch(error => {
-//         state.loggedIn = false;
-//     });
-// }
+
 
 onMounted(async () => {
     getCarts();
+    state.loggedIn = localStorage.getItem('user_email') ? true : false;
+    state.is_admin = localStorage.getItem('user_role') === 'admin' ? true : false;
+    state.is_owner = localStorage.getItem('user_role') === 'owner' ? true : false;
 });
 //------------------------------------------
 const getCarts = async () => {
@@ -80,29 +66,29 @@ const getCarts = async () => {
                             </router-link>
                             <p>{{ carts }}</p>
                         </li>
-                        <li class="profile">
+                        <li class="profile" v-if="state.loggedIn">
                             <router-link active-class="active" :to="{ name: 'profile-page' }">
                                 <i class="fa-solid fa-circle-user"></i>
                             </router-link>
                         </li>
 
-                        <li class="btn_login">
+                        <li class="btn_login" v-if="!state.loggedIn">
                             <router-link active-class="active" :to="{ name: 'Login' }"
                                 style=" color: #9c4202 ;">Login</router-link>
                         </li>
-                        <li class="btn_singup">
+                        <li class="btn_singup" v-if="!state.loggedIn">
                             <router-link active-class="active" :to="{ name: 'register' }" style=" color: #fff ;">Sing
                                 up</router-link>
                         </li>
-                        <li class="btn_login">
+                        <li class="btn_login" v-if="state.is_admin">
                             <router-link active-class="active" :to="{ name: 'admin' }"
                                 style=" color: #9c4202 ;">Admin</router-link>
                         </li>
-                        <li class="btn_login">
+                        <li class="btn_login" v-if="state.is_owner">
                             <router-link active-class="active" :to="{ name: 'owner' }"
                                 style=" color: #9c4202 ;">Owner</router-link>
                         </li>
-                        <li>
+                        <li v-if="state.loggedIn"> 
                             <button @click="handleLogout" class="btn_singup"
                                 style="color: #fff; cursor: pointer;">Logout</button>
                         </li>

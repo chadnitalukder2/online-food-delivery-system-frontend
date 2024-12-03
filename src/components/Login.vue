@@ -53,8 +53,9 @@ const handleApiRequest = async () => {
                 title: "Login Successful ",
                 type: "success",
             });
-            localStorage.setItem("password", form.value.password);
-            localStorage.setItem("email", form.value.email);
+            localStorage.setItem("user_email", res?.data?.user?.email);
+            localStorage.setItem("user_role", res?.data?.user?.role);
+            localStorage.setItem("user_id", res?.data?.user?.id);
 
             router.push('/').then(() => {
                 location.reload();
