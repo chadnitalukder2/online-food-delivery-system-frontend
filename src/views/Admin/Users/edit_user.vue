@@ -24,21 +24,19 @@ const getUser = async () => {
 //--------------------------------------------------
 const UpdateUser = async () => {
     let id = route.params.id;
-    console.log('hello', id);
-    const formData = new FormData();
-    formData.append("name", user.value.name);
-    formData.append("email", user.value.email);
-    formData.append("role", image.role);
-
+    
     let response = await axios
-        .patch(`/api/users/${id}`, formData)
+        .patch(`/api/users/${id}`, {
+            name: user.value.name,
+            email: user.value.email,
+            role: user.value.role,
+        })
         .then(() => {
-            console.log('hello');
             notify({
                 title: "User Item Updated Successful",
                 type: "success",
             });
-            // router.push("/owner/categories");
+            router.push("/admin/users");
         });
 
 };
@@ -66,7 +64,7 @@ const UpdateUser = async () => {
 
                     <div class="input-box">
                         <p>User Email <span style="color: #9c4202">*</span></p>
-                        <input type="email" placeholder=" Enter your email" v-model="user.name">
+                        <input type="email" placeholder=" Enter your email" v-model="user.email">
                     </div>
                 </div>
 
