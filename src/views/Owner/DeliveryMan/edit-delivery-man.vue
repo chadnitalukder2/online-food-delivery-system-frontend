@@ -73,13 +73,19 @@ const UpdateDeliveryPersonnel = async () => {
     formData.append("availability", deliveryPersonnel.value.availability);
 
     let response = await axios
-        .patch(`/api/deliveryPersonnel/${id}`, formData)
+        .patch(`/api/deliveryPersonnel/${id}`, {
+            name: deliveryPersonnel.value.name,
+            phone: deliveryPersonnel.value.phone,
+            email: deliveryPersonnel.value.email,
+            vehicle_type: deliveryPersonnel.value.vehicle_type,
+            availability: deliveryPersonnel.value.availability,
+        })
         .then(() => {
             notify({
                 title: "Delivery Personnel Item Updated Successful",
                 type: "success",
             });
-            // router.push("/owner/categories");
+            router.push("/owner/delivery-personnel");
         });
 
 };

@@ -64,26 +64,24 @@ const UpdateDiscount = async () => {
         validation.value = errors;
         return;
     }
-
     let id = route.params.id;
 
-    const formData = new FormData();
-    formData.append("restaurant_id", discount.value.restaurant_id );
-    formData.append("code", discount.value.code);
-    formData.append("discount_percentage", discount.value.discount_percentage);
-    formData.append("start_date", discount.value.start_date);
-    formData.append("end_date", discount.value.end_date);
-    formData.append("usage_limit", discount.value.usage_limit);
-    formData.append("min_order_amount", discount.value.min_order_amount);
-
     let response = await axios
-        .patch(`/api/discounts/${id}`, formData)
+        .patch(`/api/discounts/${id}`, {
+            restaurant_id : discount.value.restaurant_id,
+            code : discount.value.code,
+            discount_percentage : discount.value.discount_percentage,
+            start_date : discount.value.start_date,
+            end_date : discount.value.end_date,
+            usage_limit : discount.value.usage_limit,
+            min_order_amount : discount.value.min_order_amount,
+        })
         .then(() => {
             notify({
                 title: "Discount Item Updated Successful",
                 type: "success",
             });
-            // router.push("/owner/discounts");
+            router.push("/owner/discounts");
         });
 
 };
