@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
 const router = useRouter();
+const form = ref({});
 //------------------------------
 const carts = ref([]);
 //-----------------------------
@@ -14,6 +15,7 @@ const getCarts = async () => {
   let response = await axios.get("/api/carts");
   carts.value = response.data;
 };
+//----------------------------------------------
 </script>
 
 <template>

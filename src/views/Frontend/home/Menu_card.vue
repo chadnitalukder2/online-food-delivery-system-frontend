@@ -14,15 +14,12 @@ const user_id = localStorage.getItem('user_id');
 
 
 const addToCart = async () => {
-    console.log('user_id', user_id);
-    if(!user_id){
+    if (!user_id) {
         notify({
-            title: "Please Login ",
+            title: "Please Login",
             type: "success",
         });
-        router.push('/Login').then(() => {
-                location.reload();
-            });
+        router.push({ name: 'Login' });
     }
     else{
     const formData = new FormData();

@@ -1,5 +1,7 @@
-<script>
-
+<script setup>
+const name = localStorage.getItem('user_name')
+const email = localStorage.getItem('user_email')
+const role = localStorage.getItem('user_role')
 </script>
 <template>
     <div class="container" style="display: flex; justify-content: space-between; gap: 40px;">
@@ -11,9 +13,9 @@
                     </div>
                 </div>
                 <div class="profile_info">
-                    <h4>puja</h4>
-                    <p style="margin: 0px;">puja@gmail.com</p>
-                    <p style=" margin-top: 10px;"> Role : user</p>
+                    <h4>{{ name }}</h4>
+                    <p style="margin: 0px;">{{ email }}</p>
+                    <p style=" margin-top: 10px;"> Role : {{ role }}</p>
                 </div>
                 <button @click="handleLogout">
                     Logout

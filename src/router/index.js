@@ -24,6 +24,7 @@ const router = createRouter({
     {
       path: "/cart-page",
       name: "cart-page",
+      meta: { requiresAuth: true },
       component: () => import("../views/Frontend/Cart/cart_page.vue"),
     },
     {
@@ -34,6 +35,7 @@ const router = createRouter({
     {
       path: "/profile-page",
       name: "profile-page",
+      meta: { requiresAuth: true },
       component: () => import("../views/Frontend/Profile/profile_page.vue"),
     },
     {
@@ -221,12 +223,24 @@ const router = createRouter({
 //=============================================
 router.beforeEach((to, from, next) => {
   const userRole = localStorage.getItem('user_role'); 
+  const userEmail = localStorage.getItem('user_email'); 
 
+  if (to.meta.requiresAuth) {
+    if(userEmail){
+      next(); 
+    }else{
+      next('/Login')
+    }}
+   else {
+    next(); 
+  }
+//=======================================================
   if (to.meta.requiresAdmin && userRole !== 'admin') {
     next('/Login'); 
   } else if (to.meta.requiresOwner && userRole !== 'owner') {
     next('/Login'); 
-  } else {
+  } 
+   else {
     next(); 
   }
 });
