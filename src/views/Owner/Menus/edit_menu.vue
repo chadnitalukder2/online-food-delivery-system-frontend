@@ -10,7 +10,6 @@ const route = useRoute();
 
 const category = ref({});
 const menus = ref({});
-const image = ref(null);
 const validation = ref({});
 
 //---------------------------------------------------
@@ -25,19 +24,12 @@ const clearValidationMessage = (field) => {
     }, 5000);
 };
 
-const handleFileChange = (event) => {
-    image.value = event.target.files[0];
-};
 
 const validateMenus = () => {
     let errors = {};
     if (!menus.value.name) {
         errors.name = "Menu item name is required.";
         clearValidationMessage("name");
-    }
-    if (!image.value) {
-        errors.image = "Menu Image is required.";
-        clearValidationMessage("image");
     }
     if (!menus.value.category_id) {
         errors.category_id = "Category name is required.";
@@ -65,25 +57,25 @@ const updateMenu = async () => {
         validation.value = errors;
         return;
     }
-    
+
     let id = route.params.id;
     const formData = new FormData();
-    formData.append("name", menus.value.name);
-    formData.append("restaurant_id", menus.value.restaurant_id);
-    formData.append("category_id", menus.value.category_id);
-    formData.append("price", menus.value.price);
-    formData.append("availability", menus.value.availability);
-    formData.append("description", menus.value.description || "");
-    formData.append("image", image.value);
+
 
     try {
-        let response = await axios.patch(`api/menus/${id}`, formData);
+        let response = await axios.patch(`api/menus/${id}`, {
+            name : menus.value.name,
+            restaurant_id : menus.value.restaurant_id,
+            category_id : menus.value.category_id,
+            price : menus.value.price,
+            availability : menus.value.availability,
+            description : menus.value.description,
+        });
         notify({
             title: "Menu Item Updated Successfully",
             type: "success",
         });
-        console.log("API Response:", response);
-        // router.push("/owner/menus");
+        router.push("/owner/menus");
     } catch (error) {
         console.error("Failed to update menu:", error);
         notify({
@@ -128,12 +120,6 @@ onMounted(async () => {
                         <p>Menu Item Name <span style="color: #9c4202">*</span></p>
                         <input type="text" v-model="menus.name" placeholder="Enter a item name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
-                    </div>
-
-                    <div class="input-box">
-                        <p>Menu Item Image <span style="color: #9c4202">*</span></p>
-                        <input @change="handleFileChange" type="file">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
                 <div class="form-wrapper">

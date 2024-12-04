@@ -9,16 +9,12 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 //---------------------------------------------------
 const category = ref([]);
-const image = [];
 //---------------------------------------------------
 onMounted(async () => {
     getCategory();
 });
-//---------------------------------------------------
-const handleFileChange = async () => {
-    image.value = event.target.files[0];
-}
-//----------------
+
+//---------------------------
 
 //-------------------------------------
 const getCategory = async () => {
@@ -30,21 +26,19 @@ const getCategory = async () => {
 //--------------------------------------------------
 const UpdateCategory = async () => {
     let id = route.params.id;
-    console.log('hello', id);
-    const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("description", category.value.description);
-    formData.append("image", image.value);
 
     let response = await axios
-        .patch(`/api/categories/${id}`, formData)
+        .patch(`/api/categories/${id}`, {
+            name: category.value.name,
+            description: category.value.description,
+        })
         .then(() => {
             console.log('hello');
             notify({
                 title: "Category Item Updated Successful",
                 type: "success",
             });
-            // router.push("/owner/categories");
+            router.push("/owner/categories");
         });
 
 };
@@ -70,10 +64,6 @@ const UpdateCategory = async () => {
                         <input type="text" v-model="category.name" placeholder="Enter a category name">
                     </div>
 
-                    <div class="input-box">
-                        <p>Category Image <span style="color: #9c4202">*</span></p>
-                        <input @change="handleFileChange" type="file">
-                    </div>
                 </div>
 
 
