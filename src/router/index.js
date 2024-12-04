@@ -200,6 +200,18 @@ const router = createRouter({
           meta: { requiresAdmin: true },
           component: () => import("../views/Admin/Restaurant/add_restaurant.vue"),
         },
+        {
+          path: "users",
+          name: "users",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Admin/Users/all_users.vue"),
+        },
+        {
+          path: "edit-user/:id",
+          name: "edit-user",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Admin/Users/edit_user.vue"),
+        },
       
       ]
     },

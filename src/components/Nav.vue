@@ -14,10 +14,11 @@ const state = reactive({
 //------------------------------
 const handleLogout = async () => {
     await axios.post('api/logout');
-    console.log('hello');
-    state.loggedIn = false;
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_role');
     router.push({ name: 'Login' });
-    // window.location.reload();
+    window.location.reload();
 };
 //------------------------------------
 

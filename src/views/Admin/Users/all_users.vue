@@ -8,25 +8,25 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
 //---------------------------------------------------
-const restaurants = ref([]);
+const user = ref([]);
 const deleteVisibleId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
-  getRestaurants();
+  getUsers();
 });
 //---------------------------------------------------
-const getRestaurants = async () => {
-  let response = await axios.get("/api/restaurants");
-  restaurants.value = response.data;
+const getUsers = async () => {
+  let response = await axios.get("/api/users");
+  user.value = response.data;
 };
 //---------------------------------------------------
-const deleteRestaurants = (id) => {
-  axios.delete(`/api/restaurants/${id}`).then(() => {
+const deleteUser = (id) => {
+  axios.delete(`/api/users/${id}`).then(() => {
     notify({
-      title: "Restaurants Item Deleted",
+      title: "User Item Deleted",
       type: "success",
     });
-    getRestaurants();
+    getUsers();
   });
 };
 //---------------------------------------------------
@@ -42,35 +42,21 @@ const closeModalDelete = () => {
 <template>
   <div class="container">
     <div class="table-box">
-
       <div class="header">
-        <h1>All Restaurants</h1>
-
-        <div class="btn">
-          <button>
-            <router-link :to="{ name: 'add-restaurant' }">
-              Add Restaurant
-            </router-link>
-          </button>
-        </div>
+        <h1>All Users</h1>
       </div>
+
 
       <table id="customers">
         <tr>
           <th  style="width: 80px;" ># ID</th>
-          <th>Owner Id</th>
           <th>Name</th>
-          <th>Phone</th>
           <th>Email</th>
-          <th>Status</th>
-          <th>Delivery Fee</th>
-          <th>Delivery Time</th>
-          <th>Address</th>
-          <th>Image </th>
+          <th>Role </th>
           <th style="text-align: center;width: 158px;">Action</th>
         </tr>
 
-        <tbody v-for="item in restaurants" :key="item.id">
+        <tbody v-for="item in user" :key="item.id">
           <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
             <div id="myModal" style="text-align: center;">
               <h4 class="delete-title">Are you sure?</h4>
@@ -80,28 +66,20 @@ const closeModalDelete = () => {
               </div>
               <div class="modal_footer" style="padding: 20px;">
                 <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
-                <button @click="deleteRestaurants(item.id)" type="button" style="background: #f15e5e;">Delete</button>
+                <button @click="deleteUser(item.id)" type="button" style="background: #f15e5e;">Delete</button>
               </div>
             </div>
           </Modal>
           <tr>
             <td># {{ item.id }}</td>
-            <td>{{ item.owner_id }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.phone }}</td>
             <td>{{ item.email }}</td>
-            <td>{{ item.status }}</td>
-            <td>{{ item.delivery_fee }}</td>
-            <td>{{ item.delivery_time }}</td>
-            <td>{{ item.address }}</td>
-            <td>
-              <div style="width: 80px; height: 70px">
-                <img :src="item.image" style="width: 100%; height: 100%" />
-              </div>
-
-            </td>
+            <td>{{ item.role }}</td>
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
+              <button class="edit-btn">
+                <router-link :to="{ name: 'edit-user', params: { id: item.id } }">Edit</router-link>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -251,4 +229,23 @@ table {
   }
 }
 
+.edit-btn {
+  background: rgb(237 236 236 / 68%);
+  border: 1px solid rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  padding: 5px 17px;
+  transition: all .3s;
+
+  a {
+    color: rgb(0, 179, 255);
+  }
+
+  &:hover {
+    background: rgb(0, 179, 255);
+
+    a {
+      color: #fff;
+    }
+  }
+}
 </style>

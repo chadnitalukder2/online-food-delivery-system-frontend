@@ -14,6 +14,7 @@ const user_id = localStorage.getItem('user_id');
 
 
 const addToCart = async () => {
+    console.log('user_id', user_id);
     if(!user_id){
         notify({
             title: "Please Login ",

@@ -1,17 +1,26 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
-
+//===========================================
 const restaurants = ref({});
 const image = ref(null);
 const bg_image = ref(null);
 const validation = ref({});
-
+const users = ref([]);
+//==================================================
+onMounted(async () => {
+  getUsers();
+});
+//---------------------------------------------------
+const getUsers = async () => {
+  let response = await axios.get("/api/users");
+  users.value = response.data;
+};
+//=====================================================
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = "";
@@ -26,6 +35,10 @@ const handleFileChangeBgImage = (event) => {
 };
 const validateCategory = () => {
     let errors = {};
+    if (!restaurants.value.owner_id) {
+        errors.owner_id = "User Name is required.";
+        clearValidationMessage("owner_id");
+    }
     if (!restaurants.value.name) {
         errors.name = "Restaurant Name is required.";
         clearValidationMessage("name");
@@ -45,7 +58,7 @@ const validateCategory = () => {
     
     return errors;
 };
-
+//==========================================
 const addRestaurant = async () => {
     validation.value = {};
     const errors = validateCategory();
@@ -55,6 +68,7 @@ const addRestaurant = async () => {
     }
 
     const formData = new FormData();
+    formData.append("owner_id", restaurants.value.owner_id)
     formData.append("name", restaurants.value.name);
     formData.append("phone", restaurants.value.phone);
     formData.append("email", restaurants.value.email);
@@ -158,6 +172,16 @@ const addRestaurant = async () => {
                         <p>Restaurant background image  <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChangeBgImage" type="file">
                     </div>
+
+                    <div class="input-box">
+                        <p>User Name  <span style="color: #9c4202">*</span></p>
+                        <select v-model="restaurants.owner_id" >
+                            <option disabled>Select one</option>
+                            <option v-for="item in users " :key="item.id" :value="item.id">{{ item.name }} </option>
+                        </select>
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.owner_id }}</p>
+                    </div>
+
                 </div>
              
                 <div class="input-box">

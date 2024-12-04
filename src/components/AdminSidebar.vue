@@ -6,7 +6,7 @@
     <div class="side-bar-wrapper">
         <router-link active-class="active" :to="{ name: 'dashboard' }" >Dashboard</router-link>
         <router-link  active-class="active" :to="{ name: 'all-restaurants' }" >Restaurants</router-link>
-        <router-link  active-class="active" :to="{ name: 'categories' }" >User</router-link>
+        <router-link  active-class="active" :to="{ name: 'users' }" >User</router-link>
         
         
     </div>
