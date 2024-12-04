@@ -12,7 +12,8 @@ onMounted(async () => {
 });
 //------------------------------
 const getCarts = async () => {
-  let response = await axios.get("/api/carts");
+    const id = localStorage.getItem('user_id')
+  let response = await axios.get(`/api/getCarts/${id}`);
   carts.value = response.data;
 };
 //----------------------------------------------
