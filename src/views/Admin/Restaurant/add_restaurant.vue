@@ -7,12 +7,9 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const category = ref({
-    name: "",
-    restaurant_id: "",
-    description: "",
-});
+const restaurants = ref({});
 const image = ref(null);
+const bg_image = ref(null);
 const validation = ref({});
 
 const clearValidationMessage = (field) => {
@@ -24,25 +21,32 @@ const clearValidationMessage = (field) => {
 const handleFileChange = (event) => {
     image.value = event.target.files[0];
 };
-
+const handleFileChangeBgImage = (event) => {
+    bg_image.value = event.target.files[0];
+};
 const validateCategory = () => {
     let errors = {};
-    if (!category.value.name) {
-        errors.name = "Category Name is required.";
+    if (!restaurants.value.name) {
+        errors.name = "Restaurant Name is required.";
         clearValidationMessage("name");
     }
-    if (!category.value.restaurant_id) {
-        errors.restaurant_id = "Restaurant id is required.";
-        clearValidationMessage("restaurant_id");
+    if (!restaurants.value.email) {
+        errors.email = "Restaurant email is required.";
+        clearValidationMessage("email");
     }
-    if (!image.value) {
-        errors.image = "Category Image is required.";
-        clearValidationMessage("image");
+    if (!restaurants.value.phone) {
+        errors.phone = "Restaurant phone number is required.";
+        clearValidationMessage("phone");
     }
+    if (!restaurants.value.address) {
+        errors.address  = "Restaurant address is required.";
+        clearValidationMessage("address");
+    }
+    
     return errors;
 };
 
-const addCategory = async () => {
+const addRestaurant = async () => {
     validation.value = {};
     const errors = validateCategory();
     if (Object.keys(errors).length > 0) {
@@ -51,22 +55,27 @@ const addCategory = async () => {
     }
 
     const formData = new FormData();
-    formData.append("name", category.value.name);
-    formData.append("restaurant_id", category.value.restaurant_id);
-    formData.append("description", category.value.description || "");
-    formData.append("image", image.value);
-console.log(category.value, 'hello');
+    formData.append("name", restaurants.value.name);
+    formData.append("phone", restaurants.value.phone);
+    formData.append("email", restaurants.value.email);
+    formData.append("address", restaurants.value.address);
+    formData.append("status", restaurants.value.status || '');
+    formData.append("delivery_fee", restaurants.value.delivery_fee || '');
+    formData.append("delivery_time", restaurants.value.delivery_time || '');
+    formData.append("description", restaurants.value.description || "");
+    formData.append("image", image.value || '') ;
+    formData.append("bg_image", bg_image.value || '');
     try {
-        await axios.post("/api/categories", formData);
+        await axios.post("/api/restaurants", formData);
         notify({
-            title: "Category Item Added Successfully",
+            title: "Restaurant Item Added Successfully",
             type: "success",
         });
-        router.push("/owner/categories");
+        router.push("/admin/all-restaurants");
     } catch (error) {
-        console.error("Failed to add category:", error);
+        console.error("Failed to add restaurants:", error);
         notify({
-            title: "Failed to Add Category",
+            title: "Failed to Add restaurants",
             type: "error",
         });
     }
@@ -87,24 +96,73 @@ console.log(category.value, 'hello');
         </div>
 
         <div class="content">
-            <form @submit.prevent="addCategory">
+            <form @submit.prevent="addRestaurant">
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Restaurant Name <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="category.name" placeholder="Enter a restaurant name">
+                        <input type="text" v-model="restaurants.name" placeholder="Enter a restaurant name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
                         <p>Restaurant Image <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChange" type="file">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
+                    </div>
+                </div>
+
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Restaurant Phone <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.phone" placeholder="Enter a restaurant phone">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.phone }}</p>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Restaurant Email  <span style="color: #9c4202">*</span></p>
+                        <input type="email" v-model="restaurants.email" placeholder="Enter a restaurant email">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email }}</p>
+                    </div>
+                </div>
+
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Restaurant Address  <span style="color: #9c4202">*</span></p>
+                        <input type="text" v-model="restaurants.address" placeholder="Enter a restaurant address ">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.address }}</p>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Restaurant status  <span style="color: #9c4202">*</span></p>
+                        <select v-model="restaurants.status" >
+                            <option disabled>Select one</option>
+                            <option value="open">Open </option>
+                            <option value="close" >Close</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Delivery Fee  <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_fee" placeholder="Enter a restaurant delivery fee ">
+                    </div>
+
+                    <div class="input-box">
+                        <p>Delivery Time  <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_time" placeholder="Enter a restaurant delivery time as a min ">
+                    </div>
+                </div>
+
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Restaurant background image  <span style="color: #9c4202">*</span></p>
+                        <input @change="handleFileChangeBgImage" type="file">
                     </div>
                 </div>
              
                 <div class="input-box">
                     <p>Restaurant Description <span style="color: #9c4202">*</span></p>
-                    <textarea v-model="category.description" rows="5" cols="50"></textarea>
+                    <textarea v-model="restaurants.description" rows="5" cols="50"></textarea>
                 </div>
 
                 <div class="submit-btn">
@@ -190,7 +248,7 @@ console.log(category.value, 'hello');
                 font-weight: 500;
             }
 
-            textarea,
+            textarea,select,
             input {
                 width: 100%;
                 padding: 15px;
