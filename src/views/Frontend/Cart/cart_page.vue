@@ -1,22 +1,76 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+import Modal from '@/components/global/Modal.vue';
+import { ref, onMounted,computed  } from 'vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
 const router = useRouter();
-const form = ref({});
 //------------------------------
 const carts = ref([]);
+const order = ref({
+    selectedItems: [],
+    sub_total: 0,
+    total: 0
+});
+const deleteVisibleId = ref(null);
 //-----------------------------
 onMounted(async () => {
-    getCarts();
+    getCarts()
 });
 //------------------------------
 const getCarts = async () => {
     const id = localStorage.getItem('user_id')
-  let response = await axios.get(`/api/getCarts/${id}`);
-  carts.value = response.data;
+    let response = await axios.get(`/api/getCarts/${id}`);
+    carts.value = response.data;
+};
+//=======================================================
+const totalDeliveryFee = computed(() => {
+    const uniqueRestaurants = new Set(carts.value.map((item) => item.restaurant.id));
+    return Array.from(uniqueRestaurants)
+        .map((restaurantId) => {
+            const restaurant = carts.value.find((item) => item.restaurant.id === restaurantId).restaurant;
+            return restaurant.delivery_fee;
+        })
+        .reduce((total, fee) => total + fee, '');
+});
+//=======================================================
+const updateLineTotal = (item) => {
+    item.line_total = item.quantity * item.menu.price;
+    subTotal();
+}
+const subTotal = () => {
+    let result = 0;
+    for (let i = 0; i < carts.value.length; i++) {
+        if (order.value.selectedItems.includes(carts.value[i].id)) {
+            result += carts.value[i].line_total;
+        }
+    }
+   
+    order.value.sub_total = result;
+    let totalValue = order.value.sub_total + Number(totalDeliveryFee.value) - 5;
+
+    order.value.total = totalValue;
+}
+//---------------------------------------------------
+const openModalDelete = (id) => {
+    deleteVisibleId.value = id;
+};
+const closeModalDelete = () => {
+    deleteVisibleId.value = null;
+};
+const deleteCart = (id) => {
+    axios.delete(`/api/carts/${id}`).then(() => {
+        notify({
+            title: "Cart Item Deleted",
+            type: "success",
+        });
+        getCarts();
+    });
 };
 //----------------------------------------------
+
+
 </script>
 
 <template>
@@ -35,10 +89,27 @@ const getCarts = async () => {
                 </tr>
 
                 <tr v-for="item in carts" :key="item.id">
-                  
+
+                    <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
+                        <div id="myModal" style="text-align: center;">
+                            <h4 class="delete-title">Are you sure?</h4>
+                            <div class="modal-body">
+                                <p style="font-size: 14px; color: #999999;">Do you really want to delete these records?
+                                    This process
+                                    cannot be undone.</p>
+                            </div>
+                            <div class="modal_footer" style="padding: 20px;">
+                                <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
+                                <button @click="deleteCart(item.id)" type="button"
+                                    style="background: #f15e5e;">Delete</button>
+                            </div>
+                        </div>
+                    </Modal>
                     <td>
-                        <input @change="subTotal()" type="checkbox">
+                        <input @change="subTotal()" type="checkbox" :name="`order-item-${item.id}`" :id="item.id"
+                            v-model="order.selectedItems" :value="item.id">
                     </td>
+
                     <td>{{ item.id }}</td>
                     <td style="width: 120px; height: 100px">
                         <img :src="item.menu.image" style="width: 100%; height: 100%">
@@ -46,11 +117,11 @@ const getCarts = async () => {
                     <td>{{ item.menu.name }}</td>
                     <td>${{ item.menu.price }}</td>
                     <td>
-                        <input type="number" @change="updateLineTotal()" v-model="item.quantity">
+                        <input type="number" @change="updateLineTotal(item)" v-model="item.quantity">
 
                     </td>
                     <td>${{ item.line_total }}</td>
-                    <td @click="openModalDelete()">
+                    <td @click="openModalDelete(item.id)">
                         <i class="fa-solid fa-trash-can delete-icon "></i>
                     </td>
                 </tr>
@@ -65,11 +136,11 @@ const getCarts = async () => {
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$44</span>
+                        <span>$ {{ order.sub_total }}</span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>$50.00</span>
+                        <span>$ {{ totalDeliveryFee }}</span>
                     </p>
                     <p>
                         <span>Discount</span>
@@ -78,7 +149,7 @@ const getCarts = async () => {
                     <hr style="background: rgba(255, 255, 255, 0.1)" />
                     <p>
                         <span>TOTAL</span>
-                        <span style="color: #484646; font-weight: 600">$444</span>
+                        <span style="color: #484646; font-weight: 600">${{ order.total }}</span>
                     </p>
                 </div>
             </div>
@@ -259,10 +330,12 @@ table {
     border-radius: 8px;
     overflow: hidden;
 }
-.delete-icon{
+
+.delete-icon {
     color: #eb1613;
     cursor: pointer;
 }
+
 th {
     background: #d7d6d624;
     padding: 20px 10px !important;
