@@ -70,6 +70,45 @@ const deleteCart = (id) => {
 };
 //----------------------------------------------
 
+const addOrders = async () => {
+  let data = {
+    user_id: localStorage.getItem('user_id'),
+    order_items_id : order.value.selectedItems,
+    total_amount : order.value.total,
+    delivery_address : order.value.address, 
+    name: order.value.name,
+    email: order.value.email,
+    phone: order.value.phone
+  }
+  console.log(data, 'data');
+  await axios.post("/api/orders", data).then( (res) => {
+    if(res.status == 201){
+      notify({
+        title: "Order Placed Successfully",
+        type: "success",
+      });
+
+      let parse_url = JSON.parse(res.data.payment_redirect_url);
+      if (parse_url.status == "success") {
+        window.location.replace(parse_url.data);
+      }
+
+    } else {
+      notify({
+        title: "Order Placed Failed",
+        text: res.data.message,
+        type: "error",
+      });
+    }
+  }).catch( (err) => {
+    notify({
+      title: "Order Placed Failed",
+      text: err.response.data.message,
+      type: "error",
+    });
+  })
+  order.value = [];
+}
 
 </script>
 
@@ -117,7 +156,7 @@ const deleteCart = (id) => {
                     <td>{{ item.menu.name }}</td>
                     <td>${{ item.menu.price }}</td>
                     <td>
-                        <input type="number" @change="updateLineTotal(item)" v-model="item.quantity">
+                        <input type="number" @change="updateLineTotal(item)"  v-model="item.quantity">
 
                     </td>
                     <td>${{ item.line_total }}</td>
@@ -158,22 +197,22 @@ const deleteCart = (id) => {
                 <form @submit.prevent="addOrders">
                     <div class="input_box">
                         <label><b> Name : </b></label><br>
-                        <input type="text" name="name" placeholder="name">
+                        <input type="text" v-model="order.name" name="name" placeholder="name">
                     </div>
 
                     <div class="input_box">
                         <label><b>Email : </b></label><br>
-                        <input type="email" name="message" placeholder="email">
+                        <input type="email" v-model="order.email" name="message" placeholder="email">
                     </div>
 
                     <div class="input_box">
                         <label for="message"><b>Number : </b></label><br>
-                        <input type="number" name="phone" placeholder="number">
+                        <input type="number" v-model="order.phone" name="phone" placeholder="number">
                     </div>
 
                     <div class="input_box">
                         <label><b>Pick-up Address : </b></label><br>
-                        <input type="text" name="message" placeholder="address">
+                        <input type="text" v-model="order.address" name="message" placeholder="address">
                     </div>
 
                     <input type="submit" class="check_out" value="Place pick-up order">

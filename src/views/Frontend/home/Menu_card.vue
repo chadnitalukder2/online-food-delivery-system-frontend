@@ -27,6 +27,7 @@ const addToCart = async () => {
     formData.append("restaurant_id", props.menuItem.restaurant_id );
     formData.append("menu_id", props.menuItem.id);
     formData.append("quantity", '1');
+    formData.append("order_id", '');
     formData.append("line_total", props.menuItem.price);
     formData.append("status", 'cart');
     try {
