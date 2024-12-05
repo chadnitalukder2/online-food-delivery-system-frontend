@@ -25,7 +25,8 @@ const getRestaurant = async () => {
 }
 //---------------------------------------------------
 const getCategory = async () => {
-  let response = await axios.get("/api/categories");
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getCategoryByOwner/${id}`);
   category.value = response.data;
 };
 //---------------------------------------------------

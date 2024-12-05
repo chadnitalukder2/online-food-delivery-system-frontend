@@ -62,6 +62,7 @@ const addCategory = async () => {
     }
 
     const formData = new FormData();
+    formData.append("user_id", localStorage.getItem('user_id'));
     formData.append("name", category.value.name);
     formData.append("restaurant_id", category.value.restaurant_id);
     formData.append("description", category.value.description || "");

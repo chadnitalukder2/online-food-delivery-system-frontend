@@ -16,7 +16,8 @@ onMounted(async () => {
 });
 //---------------------------------------------------
 const getCategory = async () => {
-  let response = await axios.get("/api/categories");
+  const id = localStorage.getItem('user_id');
+  let response = await axios.get(`/api/getCategoryByOwner/${id}`);
   category.value = response.data;
 };
 //---------------------------------------------------
@@ -58,6 +59,7 @@ const closeModalDelete = () => {
       <table id="customers">
         <tr>
           <th  style="width: 80px;" ># ID</th>
+          <th>User Id</th>
           <th>Restaurant Id</th>
           <th>Name</th>
           <th>Image </th>
@@ -80,6 +82,7 @@ const closeModalDelete = () => {
           </Modal>
           <tr>
             <td># {{ item.id }}</td>
+            <td>{{ item.user_id }}</td>
             <td>{{ item.restaurant_id }}</td>
             <td>{{ item.name }}</td>
             <td>

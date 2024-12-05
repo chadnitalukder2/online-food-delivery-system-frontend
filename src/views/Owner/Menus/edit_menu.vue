@@ -14,7 +14,8 @@ const validation = ref({});
 
 //---------------------------------------------------
 const getCategory = async () => {
-    let response = await axios.get("/api/categories");
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getCategoryByOwner/${id}`);
     category.value = response.data;
 };
 //---------------------------------------------------
@@ -64,12 +65,12 @@ const updateMenu = async () => {
 
     try {
         let response = await axios.patch(`api/menus/${id}`, {
-            name : menus.value.name,
-            restaurant_id : menus.value.restaurant_id,
-            category_id : menus.value.category_id,
-            price : menus.value.price,
-            availability : menus.value.availability,
-            description : menus.value.description,
+            name: menus.value.name,
+            restaurant_id: menus.value.restaurant_id,
+            category_id: menus.value.category_id,
+            price: menus.value.price,
+            availability: menus.value.availability,
+            description: menus.value.description,
         });
         notify({
             title: "Menu Item Updated Successfully",
