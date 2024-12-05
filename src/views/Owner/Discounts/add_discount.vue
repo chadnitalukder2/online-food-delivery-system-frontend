@@ -1,7 +1,7 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
@@ -12,7 +12,17 @@ const discount = ref({
     description: "",
 });
 const validation = ref({});
-
+const restaurant = ref([]);
+//---------------------------------------------
+onMounted(async () => {
+    getRestaurant();
+});
+//-------------------------------------------
+const getRestaurant = async () => {
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
+    restaurant.value = response.data;
+}
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = "";
@@ -145,7 +155,10 @@ const addDiscount = async () => {
                 <div class="form-wrapper">
                     <div class="input-box">
                         <p>Restaurant name  <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="discount.restaurant_id " placeholder="Enter a restaurant id ">
+                        <select v-model="discount.restaurant_id" >
+                            <option disabled>Select one</option>
+                            <option v-for="item in restaurant " :key="item.id" :value="item.id">{{ item.name }} </option>
+                        </select>
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.restaurant_id  }}</p>
                     </div>
 
@@ -236,7 +249,7 @@ const addDiscount = async () => {
                 font-weight: 500;
             }
 
-            textarea,
+            textarea,select,
             input {
                 width: 100%;
                 padding: 15px;

@@ -1,34 +1,16 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref, onMounted } from "vue";
+import { ref,onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
-
-const category = ref({});
-const menus = ref({});
+//===========================================
+const restaurants = ref({});
 const image = ref(null);
+const bg_image = ref(null);
 const validation = ref({});
-const restaurant = ref([]);
-//---------------------------------------------------
-onMounted(async () => {
-  getCategory();
-  getRestaurant();
-});
-//-------------------------------------------
-const getRestaurant = async () => {
-    const id = localStorage.getItem('user_id');
-    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
-    restaurant.value = response.data;
-}
-//---------------------------------------------------
-const getCategory = async () => {
-  let response = await axios.get("/api/categories");
-  category.value = response.data;
-};
-//---------------------------------------------------
+//=====================================================
 const clearValidationMessage = (field) => {
     setTimeout(() => {
         validation.value[field] = "";
@@ -38,65 +20,62 @@ const clearValidationMessage = (field) => {
 const handleFileChange = (event) => {
     image.value = event.target.files[0];
 };
-
-const validateMenus = () => {
+const handleFileChangeBgImage = (event) => {
+    bg_image.value = event.target.files[0];
+};
+const validateCategory = () => {
     let errors = {};
-    if (!menus.value.name) {
-        errors.name = "Menu item name is required.";
+    if (!restaurants.value.name) {
+        errors.name = "Restaurant Name is required.";
         clearValidationMessage("name");
     }
-    if (!image.value) {
-        errors.image = "Menu Image is required.";
-        clearValidationMessage("image");
+    if (!restaurants.value.email) {
+        errors.email = "Restaurant email is required.";
+        clearValidationMessage("email");
     }
-    if (!menus.value.category_id) {
-        errors.category_id = "Category name is required.";
-        clearValidationMessage("category_id");
+    if (!restaurants.value.phone) {
+        errors.phone = "Restaurant phone number is required.";
+        clearValidationMessage("phone");
     }
-    if (!menus.value.price) {
-        errors.price = "Price is required.";
-        clearValidationMessage("price");
+    if (!restaurants.value.address) {
+        errors.address  = "Restaurant address is required.";
+        clearValidationMessage("address");
     }
-    if (!menus.value.restaurant_id) {
-        errors.restaurant_id = "Restaurant name is required.";
-        clearValidationMessage("restaurant_id");
-    }
-    if (!menus.value.availability) {
-        errors.availability = "Availability  is required.";
-        clearValidationMessage("availability");
-    }
+    
     return errors;
 };
-
-const addMenus = async () => {
+//==========================================
+const addRestaurant = async () => {
     validation.value = {};
-    const errors = validateMenus();
+    const errors = validateCategory();
     if (Object.keys(errors).length > 0) {
         validation.value = errors;
         return;
     }
-
+console.log('hello');
     const formData = new FormData();
-    formData.append("name", menus.value.name);
-    formData.append("restaurant_id", menus.value.restaurant_id );
-    formData.append("category_id", menus.value.category_id );
-    formData.append("price", menus.value.price );
-    formData.append("availability", menus.value.availability  );
-    formData.append("description", menus.value.description || "");
-    formData.append("image", image.value);
-console.log(menus.value);
+    formData.append("owner_id", localStorage.getItem('user_id'))
+    formData.append("name", restaurants.value.name);
+    formData.append("phone", restaurants.value.phone);
+    formData.append("email", restaurants.value.email);
+    formData.append("address", restaurants.value.address);
+    formData.append("status", restaurants.value.status || '');
+    formData.append("delivery_fee", restaurants.value.delivery_fee || '');
+    formData.append("delivery_time", restaurants.value.delivery_time || '');
+    formData.append("description", restaurants.value.description || "");
+    formData.append("image", image.value || '') ;
+    formData.append("bg_image", bg_image.value || '');
     try {
-       let response = await axios.post("/api/menus", formData);
-       console.log('response', response);
+        await axios.post("/api/restaurants", formData);
         notify({
-            title: "Menu Item Added Successfully",
+            title: "Restaurant Item Added Successfully",
             type: "success",
         });
-        router.push("/owner/menus");
+        router.push("/owner/owner-all-restaurants");
     } catch (error) {
-        console.error("Failed to add menu:", error);
+        console.error("Failed to add restaurants:", error);
         notify({
-            title: "Failed to Add menu",
+            title: "Failed to Add restaurants",
             type: "error",
         });
     }
@@ -108,69 +87,83 @@ console.log(menus.value);
         <div class="header">
             <div class="btn">
                 <button>
-                    <router-link :to="{ name: 'menus' }">
-                        All Menu
+                    <router-link :to="{ name: 'owner-all-restaurants' }">
+                        All Restaurant
                     </router-link>
                 </button>
             </div>
-            <h1>Add Menu</h1>
+            <h1>Add Restaurant</h1>
         </div>
 
         <div class="content">
-            <form @submit.prevent="addMenus">
+            <form @submit.prevent="addRestaurant" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Menu Item Name <span style="color: #9c4202">*</span></p>
-                        <input type="text" v-model="menus.name" placeholder="Enter a item name">
+                        <p>Restaurant Name <span style="color: #9c4202">*</span></p>
+                        <input type="text" v-model="restaurants.name" placeholder="Enter a restaurant name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Menu Item Image <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Image <span style="color: #9c4202">*</span></p>
                         <input @change="handleFileChange" type="file">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
+
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Menu Item price <span style="color: #9c4202">*</span></p>
-                        <input type="number" v-model="menus.price" placeholder="Enter a item price">
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.price }}</p>
+                        <p>Restaurant Phone <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.phone" placeholder="Enter a restaurant phone">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.phone }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Menu Item Availability <span style="color: #9c4202">*</span></p>
-                        <select v-model="menus.availability ">
-                            <option disabled>Select one</option>
-                            <option value="out of stock">Out of stock </option>
-                            <option value="in stock" >In stock</option>
-                        </select>
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.availability }}</p>
+                        <p>Restaurant Email  <span style="color: #9c4202">*</span></p>
+                        <input type="email" v-model="restaurants.email" placeholder="Enter a restaurant email">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email }}</p>
                     </div>
                 </div>
+
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Category Name <span style="color: #9c4202">*</span></p>
-                        <select v-model="menus.category_id ">
-                            <option disabled>Select a Category</option>
-                            <option v-for="item in category" :key="item.id" :value="item.id" >{{ item.name }} </option>
-                        </select>
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.category_id }}</p>
+                        <p>Restaurant Address  <span style="color: #9c4202">*</span></p>
+                        <input type="text" v-model="restaurants.address" placeholder="Enter a restaurant address ">
+                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.address }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant Name<span style="color: #9c4202">*</span></p>
-                        <select v-model="menus.restaurant_id" >
+                        <p>Restaurant status  <span style="color: #9c4202">*</span></p>
+                        <select v-model="restaurants.status" >
                             <option disabled>Select one</option>
-                            <option v-for="item in restaurant " :key="item.id" :value="item.id">{{ item.name }} </option>
+                            <option value="open">Open </option>
+                            <option value="close" >Close</option>
                         </select>
-                        <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.restaurant_id }}</p>
                     </div>
                 </div>
 
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Delivery Fee  <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_fee" placeholder="Enter a restaurant delivery fee ">
+                    </div>
+
+                    <div class="input-box">
+                        <p>Delivery Time  <span style="color: #9c4202">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_time" placeholder="Enter a restaurant delivery time as a min ">
+                    </div>
+                </div>
+
+                <div class="form-wrapper">
+                    <div class="input-box">
+                        <p>Restaurant background image  <span style="color: #9c4202">*</span></p>
+                        <input @change="handleFileChangeBgImage" type="file">
+                    </div>
+
+                </div>
+             
                 <div class="input-box">
-                    <p>Menu Item Description <span style="color: #9c4202">*</span></p>
-                    <textarea v-model="menus.description" rows="5" cols="50"></textarea>
+                    <p>Restaurant Description <span style="color: #9c4202">*</span></p>
+                    <textarea v-model="restaurants.description" rows="5" cols="50"></textarea>
                 </div>
 
                 <div class="submit-btn">
@@ -256,8 +249,7 @@ console.log(menus.value);
                 font-weight: 500;
             }
 
-            textarea,
-            select,
+            textarea,select,
             input {
                 width: 100%;
                 padding: 15px;

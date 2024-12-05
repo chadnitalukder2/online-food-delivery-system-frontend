@@ -5,6 +5,7 @@
 <template>
     <div class="side-bar-wrapper">
         <router-link active-class="active" :to="{ name: 'owner-dashboard' }" >Dashboard</router-link>
+        <router-link  active-class="active" :to="{ name: 'owner-all-restaurants' }" >Restaurants</router-link>
         <router-link  active-class="active" :to="{ name: 'categories' }" >Categories</router-link>
         <router-link active-class="active" :to="{ name: 'menus' }" >Menus</router-link>
         <router-link active-class="active" :to="{ name: 'orders' }" >Orders</router-link>

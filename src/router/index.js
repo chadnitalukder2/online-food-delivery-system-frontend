@@ -70,6 +70,23 @@ const router = createRouter({
           name: "owner-dashboard",
           meta: { requiresOwner: true },
           component: () => import("../views/Owner/Dashboard/Dashboard.vue"),
+        }, {
+          path: "owner-all-restaurants",
+          name: "owner-all-restaurants",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Owner/Restaurant/all_restaurant.vue"),
+        },
+        {
+          path: "owner-add-restaurant",
+          name: "owner-add-restaurant",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Owner/Restaurant/add_restaurant.vue"),
+        },
+        {
+          path: "owner-edit-restaurants/:id",
+          name: "owner-edit-restaurants",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Owner/Restaurant/edit_restaurant.vue"),
         },
        
         {

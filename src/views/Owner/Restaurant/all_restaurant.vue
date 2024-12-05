@@ -8,26 +8,26 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
 //---------------------------------------------------
-const orders = ref([]);
+const restaurants = ref([]);
 const deleteVisibleId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
-  getOrder();
+  getRestaurant();
 });
 //---------------------------------------------------
-const getOrder = async () => {
-  let response = await axios.get("/api/orders");
-  orders.value = response.data;
-  console.log(orders.value);
-};
+const getRestaurant = async () => {
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
+    restaurants.value = response.data;
+}
 //---------------------------------------------------
-const deleteOrder = (id) => {
-  axios.delete(`/api/orders/${id}`).then(() => {
+const deleteRestaurants = (id) => {
+  axios.delete(`/api/restaurants/${id}`).then(() => {
     notify({
-      title: "Order Item Deleted",
+      title: "Restaurants Item Deleted",
       type: "success",
     });
-    getOrder();
+    getRestaurants();
   });
 };
 //---------------------------------------------------
@@ -43,27 +43,35 @@ const closeModalDelete = () => {
 <template>
   <div class="container">
     <div class="table-box">
+
       <div class="header">
-        <h1>All Order</h1>
+        <h1>All Restaurants</h1>
 
+        <div class="btn">
+          <button>
+            <router-link :to="{ name: 'owner-add-restaurant' }">
+              Add Restaurant
+            </router-link>
+          </button>
+        </div>
       </div>
-
 
       <table id="customers">
         <tr>
-          <th  style="width: 80px;" ># ID</th>
-          <th>User Id</th>
+          <th style="width: 80px;"># ID</th>
+          <th>Owner Id</th>
           <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
           <th>Phone</th>
-          <th>Total Amount</th>
-          <th>Payment Method</th>
+          <th>Email</th>
           <th>Status</th>
+          <th>Delivery Fee</th>
+          <th>Delivery Time</th>
+          <th>Address</th>
+          <th>Image </th>
           <th style="text-align: center;width: 158px;">Action</th>
         </tr>
 
-        <tbody v-for="item in orders" :key="item.id">
+        <tbody v-for="item in restaurants" :key="item.id">
           <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
             <div id="myModal" style="text-align: center;">
               <h4 class="delete-title">Are you sure?</h4>
@@ -73,24 +81,30 @@ const closeModalDelete = () => {
               </div>
               <div class="modal_footer" style="padding: 20px;">
                 <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
-                <button @click="deleteOrder(item.id)" type="button" style="background: #f15e5e;">Delete</button>
+                <button @click="deleteRestaurants(item.id)" type="button" style="background: #f15e5e;">Delete</button>
               </div>
             </div>
           </Modal>
           <tr>
             <td># {{ item.id }}</td>
-            <td>{{ item.user_id  }}</td>
-            <td>{{ item.name  }}</td>
-            <td>{{ item.email  }}</td>
-            <td>{{ item.delivery_address  }}</td>
-            <td>{{ item.phone  }}</td>
-            <td>{{ item.total_amount  }}</td>
-            <td>{{ item.payment_status  }}</td>
-            <td>{{ item.status  }}</td>
+            <td>{{ item.owner_id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.delivery_fee }}</td>
+            <td>{{ item.delivery_time }}</td>
+            <td>{{ item.address }}</td>
+            <td>
+              <div style="width: 80px; height: 70px">
+                <img :src="item.image" style="width: 100%; height: 100%" />
+              </div>
+
+            </td>
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
               <button class="edit-btn">
-                <router-link :to="{ name: 'edit-category', params: { id: item.id } }">Edit</router-link>
+                <router-link :to="{ name: 'owner-edit-restaurants', params: { id: item.id } }">Edit</router-link>
               </button>
             </td>
           </tr>
@@ -155,7 +169,7 @@ table {
 
     .btn {
       text-align: right;
-      padding-bottom: 10px;
+      padding-bottom: 20px;
 
       button {
         padding: 10px 20px;
@@ -240,7 +254,6 @@ table {
     color: #fff;
   }
 }
-
 .edit-btn {
   background: rgb(237 236 236 / 68%);
   border: 1px solid rgb(237 236 236 / 68%);
