@@ -57,7 +57,7 @@ const closeModalDelete = () => {
 
       <table id="customers">
         <tr>
-          <th  style="width: 80px;" ># ID</th>
+          <th style="width: 80px;"># ID</th>
           <th>Owner Id</th>
           <th>Name</th>
           <th>Phone</th>
@@ -102,6 +102,9 @@ const closeModalDelete = () => {
             </td>
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
+              <button class="edit-btn">
+                <router-link :to="{ name: 'edit-restaurants', params: { id: item.id } }">Edit</router-link>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -165,7 +168,7 @@ table {
 
     .btn {
       text-align: right;
-      padding-bottom: 10px;
+      padding-bottom: 20px;
 
       button {
         padding: 10px 20px;
@@ -250,5 +253,23 @@ table {
     color: #fff;
   }
 }
+.edit-btn {
+  background: rgb(237 236 236 / 68%);
+  border: 1px solid rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  padding: 5px 17px;
+  transition: all .3s;
 
+  a {
+    color: rgb(0, 179, 255);
+  }
+
+  &:hover {
+    background: rgb(0, 179, 255);
+
+    a {
+      color: #fff;
+    }
+  }
+}
 </style>

@@ -203,6 +203,12 @@ const router = createRouter({
           component: () => import("../views/Admin/Restaurant/add_restaurant.vue"),
         },
         {
+          path: "edit-restaurants/:id",
+          name: "edit-restaurants",
+          meta: { requiresAdmin: true },
+          component: () => import("../views/Admin/Restaurant/edit_restaurant.vue"),
+        },
+        {
           path: "users",
           name: "users",
           meta: { requiresAdmin: true },
