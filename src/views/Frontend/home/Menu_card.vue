@@ -8,7 +8,7 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const menuItem = defineProps(["menuItem"]);
+const props = defineProps(["menuItem"]);
 const user_id = localStorage.getItem('user_id');
 //==========================================
 
@@ -24,10 +24,10 @@ const addToCart = async () => {
     else{
     const formData = new FormData();
     formData.append("user_id", user_id );
-    formData.append("restaurant_id", menuItem.menuItem.restaurant_id );
-    formData.append("menu_id", menuItem.menuItem.id);
+    formData.append("restaurant_id", props.menuItem.restaurant_id );
+    formData.append("menu_id", props.menuItem.id);
     formData.append("quantity", '1');
-    formData.append("line_total", menuItem.menuItem.price);
+    formData.append("line_total", props.menuItem.price);
     formData.append("status", 'cart');
     try {
         await axios.post("/api/carts", formData);
@@ -35,7 +35,7 @@ const addToCart = async () => {
             title: "Carts Item Added Successfully",
             type: "success",
         });
-    
+        location.reload();
     } catch (error) {
         console.error("Failed to add Cart:", error);
         notify({
