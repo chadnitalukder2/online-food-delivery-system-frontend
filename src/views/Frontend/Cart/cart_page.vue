@@ -72,6 +72,7 @@ const deleteCart = (id) => {
 
 const addOrders = async () => {
   let data = {
+    restaurant_id: carts.value?.[0]?.restaurant_id,
     user_id: localStorage.getItem('user_id'),
     order_items_id : order.value.selectedItems,
     total_amount : order.value.total,
@@ -80,8 +81,8 @@ const addOrders = async () => {
     email: order.value.email,
     phone: order.value.phone
   }
-  console.log(data, 'data');
-  await axios.post("/api/orders", data).then( (res) => {
+  console.log(carts.value?.[0]?.restaurant_id, 'data');
+   await axios.post("/api/orders", data).then( (res) => {
     if(res.status == 201){
       notify({
         title: "Order Placed Successfully",
