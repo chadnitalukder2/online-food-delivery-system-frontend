@@ -1,7 +1,52 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+import Modal from "@/components/global/Modal.vue";
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useRoute } from "vue-router";
+const route = useRoute();
+//---------------------------------------------------
+const orders = ref([]);
+const deleteVisibleId = ref(null)
+//---------------------------------------------------
+onMounted(async () => {
+    getOrdersById();
+});
+//------------------------------------------------------
+const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
+//=======================================================
 const name = localStorage.getItem('user_name')
 const email = localStorage.getItem('user_email')
 const role = localStorage.getItem('user_role')
+//========================================================
+const getOrdersById = async () => {
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getOrdersByUserId/${id}`);
+    orders.value = response.data;
+}
+//---------------------------------------------------
+const deleteOrder = (id) => {
+    axios.delete(`/api/orders/${id}`).then(() => {
+        notify({
+            title: "Order Item Deleted",
+            type: "success",
+        });
+        getOrdersById();
+    });
+};
+//---------------------------------------------------
+const openModalDelete = (id) => {
+    deleteVisibleId.value = id;
+};
+const closeModalDelete = () => {
+    deleteVisibleId.value = null;
+};
 </script>
 <template>
     <div class="container" style="display: flex; justify-content: space-between; gap: 40px;">
@@ -39,18 +84,33 @@ const role = localStorage.getItem('user_role')
                         <th></th>
                         <th></th>
                     </tr>
-                    <tbody>
-
+                    <tbody v-for="(item, index) in orders" :key="item.id">
+                        <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
+                            <div id="myModal" style="text-align: center;">
+                                <h4 class="delete-title">Are you sure?</h4>
+                                <div class="modal-body">
+                                    <p style="font-size: 14px; color: #999999;">Do you really want to delete these
+                                        records? This process
+                                        cannot be undone.</p>
+                                </div>
+                                <div class="modal_footer" style="padding: 20px;">
+                                    <button @close="closeModalDelete" type="button" class="secondary">Cancel</button>
+                                    <button @click="deleteOrder(item.id)" type="button"
+                                        style="background: #f15e5e;">Delete</button>
+                                </div>
+                            </div>
+                        </Modal>
                         <tr>
-                            <td style="color: blue"># 3</td>
-                            <td>3333</td>
-                            <td>hello</td>
-                            <td>hello</td>
-                            <td>hello</td>
+                            <td style="color: blue"># {{ item.id }}</td>
+                            <td>{{ item.total_amount }}</td>
+                            <td>{{ item.status }}</td>
+                            <td>{{ item.payment_status }}</td>
+                            <td>{{ formatDate(item.created_at) }}</td>
                             <td>
-                                <p @click="openModalDelete(item.id)" style="color: rgb(191 42 42);cursor: pointer;">
+                                <p v-if="item.status === 'padding'"
+                                @click="openModalDelete(item.id)" style="color: rgb(191 42 42);cursor: pointer;">
                                     Cancel</p>
-                                <p> Delivered</p>
+                                <p v-else> Delivered</p>
                             </td>
                             <td>
                                 <button @click="openModalView()" class="view"> View</button>
