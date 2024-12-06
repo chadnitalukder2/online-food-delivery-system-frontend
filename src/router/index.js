@@ -132,6 +132,12 @@ const router = createRouter({
           component: () => import("../views/Owner/Orders/all_order.vue"),
         },
         {
+          path: "edit-order/:id",
+          name: "edit-order",
+          meta: { requiresOwner: true },
+          component: () => import("../views/Owner/Orders/edit_order.vue"),
+        },
+        {
           path: "discounts",
           name: "discounts",
           meta: { requiresOwner: true },

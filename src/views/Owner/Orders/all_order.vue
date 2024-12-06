@@ -91,7 +91,7 @@ const closeModalDelete = () => {
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
               <button class="edit-btn">
-                <router-link :to="{ name: 'edit-category', params: { id: item.id } }">Edit</router-link>
+                <router-link :to="{ name: 'edit-order', params: { id: item.id } }">Edit</router-link>
               </button>
             </td>
           </tr>
