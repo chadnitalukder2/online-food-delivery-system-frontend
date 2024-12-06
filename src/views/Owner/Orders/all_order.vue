@@ -10,15 +10,17 @@ const router = useRouter();
 //---------------------------------------------------
 const orders = ref([]);
 const deleteVisibleId = ref(null);
+const restaurant = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
   getOrder();
+  getRestaurant();
+
 });
 //---------------------------------------------------
 const getOrder = async () => {
   let response = await axios.get("/api/orders");
   orders.value = response.data;
-  console.log(orders.value);
 };
 //---------------------------------------------------
 const deleteOrder = (id) => {
@@ -45,13 +47,12 @@ const closeModalDelete = () => {
     <div class="table-box">
       <div class="header">
         <h1>All Order</h1>
-
       </div>
 
 
       <table id="customers">
         <tr>
-          <th  style="width: 80px;" ># ID</th>
+          <th style="width: 80px;"># ID</th>
           <th>User Id</th>
           <th>Name</th>
           <th>Email</th>
@@ -79,14 +80,14 @@ const closeModalDelete = () => {
           </Modal>
           <tr>
             <td># {{ item.id }}</td>
-            <td>{{ item.user_id  }}</td>
-            <td>{{ item.name  }}</td>
-            <td>{{ item.email  }}</td>
-            <td>{{ item.delivery_address  }}</td>
-            <td>{{ item.phone  }}</td>
-            <td>{{ item.total_amount  }}</td>
-            <td>{{ item.payment_status  }}</td>
-            <td>{{ item.status  }}</td>
+            <td>{{ item.user_id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.delivery_address }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.total_amount }}</td>
+            <td>{{ item.payment_status }}</td>
+            <td>{{ item.status }}</td>
             <td style="text-align: center;">
               <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
               <button class="edit-btn">

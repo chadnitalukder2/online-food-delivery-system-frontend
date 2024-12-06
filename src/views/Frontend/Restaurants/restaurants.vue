@@ -1,21 +1,40 @@
 <script setup>
 import RestaurantCard from '../Home/Restaurant_card.vue';
 
-import {ref,onMounted, watch} from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useRouter} from "vue-router";
-const router = useRouter()
 
 const restaurants = ref([]);
-//---------------------------------------------------
-onMounted(async () => {
+const searchQuery = ref('');
+const results = ref([]);
+
+const performSearch = async () => {
+  if (searchQuery.value.length > 2) {
+    axios
+      .get('/api/search', { params: { searchValue: searchQuery.value } })
+      .then((response) => {
+        results.value = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    results.value = [];
+  }
+};
+
+const getRestaurants = async () => {
+  try {
+    const response = await axios.get("/api/restaurants");
+    restaurants.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+onMounted(() => {
   getRestaurants();
 });
-//---------------------------------------------------
-const getRestaurants = async () => {
-  let response = await axios.get("/api/restaurants");
-  restaurants.value = response.data;
-};
 </script>
 
 <template>
@@ -35,14 +54,16 @@ const getRestaurants = async () => {
                     <p>Result: {{ restaurants.length }} items Found</p>
                 </div>
                 <div class="search-section">
-                    <input type="text" placeholder="Search any keyword...">
-                    <button type="submit" class="search-btn">Search</button>
+                    <input type="text" v-model="searchQuery"  placeholder="Search any keyword...">
+                    <button type="submit" class="search-btn" @click="performSearch">Search</button>
                 </div>
             </div>
             <div class="body-section">
-                <RestaurantCard  v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant"  />
-               
+                <RestaurantCard   v-for="restaurant in (results.length ? results : restaurants)" 
+                 :key="restaurant.id" :restaurant="restaurant" />
+
             </div>
+            <p v-if="results.length === 0 && searchQuery.value">No results found.</p>
 
         </div>
 
@@ -77,6 +98,7 @@ const getRestaurants = async () => {
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
+
             h1 {
                 font-size: 42px;
                 font-weight: 700;
@@ -87,6 +109,7 @@ const getRestaurants = async () => {
 
     .restaurant-content {
         padding: 64px 80px;
+
         .header-section {
             background: #fff;
             box-shadow: 1px solid gray;

@@ -197,22 +197,22 @@ const addOrders = async () => {
                 <form @submit.prevent="addOrders">
                     <div class="input_box">
                         <label><b> Name : </b></label><br>
-                        <input type="text" v-model="order.name" name="name" placeholder="name">
+                        <input type="text" v-model="order.name" name="name" placeholder="name" required>
                     </div>
 
                     <div class="input_box">
                         <label><b>Email : </b></label><br>
-                        <input type="email" v-model="order.email" name="message" placeholder="email">
+                        <input type="email" v-model="order.email" name="message" placeholder="email" required>
                     </div>
 
                     <div class="input_box">
                         <label for="message"><b>Number : </b></label><br>
-                        <input type="number" v-model="order.phone" name="phone" placeholder="number">
+                        <input type="number" v-model="order.phone" name="phone" placeholder="number" required>
                     </div>
 
                     <div class="input_box">
                         <label><b>Pick-up Address : </b></label><br>
-                        <input type="text" v-model="order.address" name="message" placeholder="address">
+                        <input type="text" v-model="order.address" name="message" placeholder="address" required>
                     </div>
 
                     <input type="submit" class="check_out" value="Place pick-up order">
