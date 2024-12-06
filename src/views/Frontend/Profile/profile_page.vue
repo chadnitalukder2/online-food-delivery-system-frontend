@@ -2,6 +2,7 @@
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
 import Modal from "@/components/global/Modal.vue";
+import ModalView from "@/components/global/ModalView.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -10,7 +11,8 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 //---------------------------------------------------
 const orders = ref([]);
-const deleteVisibleId = ref(null)
+const deleteVisibleId = ref(null);
+const VisibleId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
     getOrdersById();
@@ -46,6 +48,13 @@ const openModalDelete = (id) => {
 };
 const closeModalDelete = () => {
     deleteVisibleId.value = null;
+};
+//-----------------------------------------
+const openModalView = (id) => {
+    VisibleId.value = id;
+};
+const closeModalView = () => {
+    VisibleId.value = null;
 };
 </script>
 <template>
@@ -107,15 +116,59 @@ const closeModalDelete = () => {
                             <td>{{ item.payment_status }}</td>
                             <td>{{ formatDate(item.created_at) }}</td>
                             <td>
-                                <p v-if="item.status === 'padding'"
-                                @click="openModalDelete(item.id)" style="color: rgb(191 42 42);cursor: pointer;">
+                                <p v-if="item.status === 'padding'" @click="openModalDelete(item.id)"
+                                    style="color: rgb(191 42 42);cursor: pointer;">
                                     Cancel</p>
                                 <p v-else> Delivered</p>
                             </td>
                             <td>
-                                <button @click="openModalView()" class="view"> View</button>
+                                <button @click="openModalView(item.id)" class="view"> View</button>
                             </td>
                         </tr>
+                        <ModalView :show="VisibleId === item.id" @close="closeModalView">
+                            <div>
+                                <h1 style="text-align: left; font-size: 22px; margin-top: 10px;">Order Details</h1>
+                            </div>
+                            <div class="container"
+                                style="padding: 5px; background: transparent; display: flex; gap: 10px;">
+
+
+                                <table id="customers" style="flex-basis: 80%;">
+                                    <tr>
+                                        <th style="font-size: 18px;padding: 15px 0px"></th>
+                                        <th style="font-size: 18px; padding: 15px 0px">Image</th>
+                                        <th style="font-size: 18px; padding: 15px 0px">Name</th>
+                                        <th style="font-size: 18px; padding: 15px 0px">Quantity</th>
+                                        <th style="font-size: 18px; padding: 15px 0px">Price</th>
+                                    </tr>
+                                    <tbody v-for="cartItem in item.cart_item" :key="cartItem.id">
+
+                                        <tr>
+                                            <td style="color: blue; padding: 5px"># {{ cartItem.id }}</td>
+                                            <!-- <td style="width: 90px; height: 70px;padding: 5px">
+                                                <img :src="cartItem.product.product_img"
+                                                    style="width: 100%; height: 100%" />
+                                            </td>
+                                            
+                                            <td style="padding: 5px">{{ cartItem.product.product_name }}</td> -->
+                                            <td style="padding: 5px">{{ cartItem.quantity }}</td>{{ cartItem }}
+                                            <!-- <td style="padding: 5px">{{ cartItem.product.product_price }}</td> -->
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="info" style="flex-basis: 20%;">
+                                    <h1>Shipping Address</h1>
+
+                                    <p> <span style="font-weight: 600;">Name </span> : {{ item.name }}</p>
+                                    <p> <span style="font-weight: 600;">Email </span> : {{ item.email }}</p>
+                                    <p> <span style="font-weight: 600;">Address </span> : {{ item.delivery_address  }} </p>
+                                    <p> <span style="font-weight: 600;">Phone </span> : {{ item.phone }} </p>
+                                </div>
+
+                            </div>
+                        </ModalView>
 
                     </tbody>
                 </table>
