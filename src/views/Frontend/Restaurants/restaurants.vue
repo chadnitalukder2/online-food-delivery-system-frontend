@@ -5,13 +5,13 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const restaurants = ref([]);
-const searchQuery = ref('');
+const searchRestaurant = ref('');
 const results = ref([]);
 
-const performSearch = async () => {
-  if (searchQuery.value.length > 2) {
+const restaurantSearch = async () => {
+  if (searchRestaurant.value.length > 2) {
     axios
-      .get('/api/search', { params: { searchValue: searchQuery.value } })
+      .get('/api/searchRestaurant', { params: { searchValue: searchRestaurant.value } })
       .then((response) => {
         results.value = response.data;
       })
@@ -54,8 +54,8 @@ onMounted(() => {
                     <p>Result: {{ restaurants.length }} items Found</p>
                 </div>
                 <div class="search-section">
-                    <input type="text" v-model="searchQuery"  placeholder="Search any keyword...">
-                    <button type="submit" class="search-btn" @click="performSearch">Search</button>
+                    <input type="text" v-model="searchRestaurant" @input="restaurantSearch"  placeholder="Search any keyword...">
+                    <!-- <button type="submit" class="search-btn" >Search</button> -->
                 </div>
             </div>
             <div class="body-section">
@@ -63,7 +63,7 @@ onMounted(() => {
                  :key="restaurant.id" :restaurant="restaurant" />
 
             </div>
-            <p v-if="results.length === 0 && searchQuery.value">No results found.</p>
+            <p v-if="results.length === 0 && searchRestaurant.value">No results found.</p>
 
         </div>
 

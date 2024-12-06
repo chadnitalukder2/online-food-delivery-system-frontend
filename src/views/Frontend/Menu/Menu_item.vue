@@ -11,8 +11,27 @@ const restaurant = ref({
     categories: [],
     menus: [],
 });
+const searchMenu = ref();
+const results = ref([]);
+//--------------------------------------------
+const menuSearch = async () => {
+  if (searchMenu.value.length > 2) {
+    axios
+      .get('/api/searchMenu', { params: { searchValue: searchMenu.value } })
+      .then((response) => {
+        results.value = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    results.value = [];
+  }
+};
+//--------------------------------------
 function filteredMenus(categoryId) {
-    return restaurant.value.menus.filter(menu => menu.category_id === categoryId);
+  const sourceMenus = results.value.length ? results.value : restaurant.value.menus;
+  return sourceMenus.filter(menu => menu.category_id === categoryId);
 }
 //---------------------------------------------------
 onMounted(async () => {
@@ -86,8 +105,8 @@ const getRestaurant = async () => {
 
         <section class="menu-category">
             <div class="search-bar">
-                <input type="text" placeholder="Search in menu name">
-                <button type="submit" class="search-btn">Search</button>
+                <input type="text" v-model="searchMenu" @input="menuSearch" placeholder="Search in menu name">
+                <!-- <button type="submit"  class="search-btn">Search</button> -->
             </div>
             <div class="category">
                 <div class="category-item active"> <a href="#">All </a></div>
@@ -275,7 +294,7 @@ const getRestaurant = async () => {
             input {
                 width: 100%;
                 padding: 6px;
-                border-radius: 6px 0px 0px 6px;
+                border-radius: 6px;
                 font-size: 12px;
                 color: #787878;
                 border: 1px solid #ced4da;
