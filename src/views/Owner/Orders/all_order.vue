@@ -10,17 +10,48 @@ const router = useRouter();
 //---------------------------------------------------
 const orders = ref([]);
 const deleteVisibleId = ref(null);
-const restaurant = ref([]);
+const restaurants = ref([]);
+const restaurantId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
-  getOrder();
-
+  //getOrder();
+  fetchRestaurants();
+  getOrderById();
 });
 //---------------------------------------------------
-const getOrder = async () => {
-  let response = await axios.get("/api/orders");
-  orders.value = response.data;
+const fetchRestaurants = async () => {
+  try {
+    const response = await axios.get("/api/restaurants");
+    restaurants.value = response.data;
+    restaurantId.value = restaurants.value[0]?.id || null; 
+    if (restaurantId.value) {
+      getOrderById();
+      console.log(restaurantId.value, 'hello')
+    }
+  } catch (error) {
+    console.error("Error fetching restaurants:", error);
+  }
+}
+//--------------------------------------------------
+const getOrderById = async () => {
+  
+  if (!restaurantId.value) {
+    console.error("Restaurant ID not set");
+    return;
+  }
+  console.log(restaurantId.value, 'hello')
+  try {
+    const response = await axios.get(`api/getOrdersByRestaurantIds/${restaurantId.value}`);
+    orders.value = response.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
 };
+//---------------------------------------------------
+// const getOrder = async () => {
+//   let response = await axios.get("/api/orders");
+//   orders.value = response.data;
+// };
 //---------------------------------------------------
 const deleteOrder = (id) => {
   axios.delete(`/api/orders/${id}`).then(() => {
