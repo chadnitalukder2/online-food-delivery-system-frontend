@@ -3,162 +3,81 @@
 </script>
 
 <template>
-  <div class="container">
-    <div class="table-box">
-      <div class="header">
-        <h1>All Category</h1>
-
-        <div class="btn">
-          <button>
-            <router-link>
-              Add Category
-            </router-link>
-          </button>
-        </div>
+ <div class="dashboard-container">
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <h3>Sum Items</h3>
+        <p class="stat-value" id="sum-items">0</p>
       </div>
-
-
-      <table id="customers">
-        <tr>
-          <th># ID</th>
-          <th>Image </th>
-          <th>Name</th>
-          <th>Action</th>
-        </tr>
-        <tbody>
-
-          <tr>
-            <td>#1</td>
-            <td style="width: 120px; height: 100px">
-              <img src="../../../assets/food-2.png" style="width: 100%; height: 100%" />
-            </td>
-            <td>hello</td>
-            <td @click="openModalDelete()">
-              <i class="fa-solid fa-trash-can delete-icon "></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="stat-card">
+        <h3>Total Orders</h3>
+        <p class="stat-value" id="total-orders">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total Categories</h3>
+        <p class="stat-value" id="total-categories">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total Menus</h3>
+        <p class="stat-value" id="total-menus">0</p>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-#myModal {
-  .modal_footer {
-    button {
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-      cursor: pointer;
-      background: #c1c1c1;
-      color: #fff;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: all 0.4s;
-      line-height: normal;
-      min-width: 120px;
-      border: none;
-      min-height: 40px;
-      border-radius: 3px;
-      margin: 0 5px;
-    }
 
+
+/* Stats Section */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Stat Card */
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+.stat-card h3 {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #27ae60;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stat-card h3 {
+    font-size: 16px;
   }
 
-}
-
-
-
-table {
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.container {
-  width: 100%;
-}
-
-.table-box {
-  padding: 50px 30px;
-  border-radius: 8px;
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    text-align: center;
-    align-items: center;
-
-    .btn {
-      text-align: right;
-      padding-bottom: 10px;
-
-      button {
-        padding: 10px 20px;
-        border: 1px solid #9c4202;
-        background: #9c4202;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all ease-in .3s;
-
-        a {
-          text-decoration: none;
-          font-size: 16px;
-          font-weight: 500;
-          color: #fff;
-        }
-
-        &:hover {
-          transform: scale(1.05);
-          background-color: #fff;
-
-          a {
-            color: #9c4202;
-          }
-        }
-      }
-    }
-
-    h1 {
-      margin-top: 0px;
-      font-size: 22px;
-      color: #444;
-      font-weight: 600;
-    }
+  .stat-value {
+    font-size: 28px;
   }
-
 }
 
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-#customers td,
-#customers th {
-  border: 1px solid #f3ededad;
-  padding:10px 12px;
-  text-align: left;
-}
-
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#customers th {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  text-align: left;
-  background-color: rgb(237 236 236 / 68%);
-  color: #444;
-  font-size: 16px;
-}
-#customers td{
-  color: #656262;
-  font-size: 14px;
-}
-.delete-icon{
-    color: #eb1613;
-    cursor: pointer;
-}
 </style>

@@ -83,11 +83,11 @@ const getCarts = async () => {
                                 up</router-link>
                         </li>
                         <li class="btn_login" v-if="state.is_admin">
-                            <router-link active-class="active" :to="{ name: 'admin' }"
+                            <router-link active-class="active" :to="{ name: 'dashboard' }"
                                 style=" color: #9c4202 ;">Admin</router-link>
                         </li>
                         <li class="btn_login" v-if="state.is_owner">
-                            <router-link active-class="active" :to="{ name: 'owner' }"
+                            <router-link active-class="active" :to="{ name: 'owner-dashboard' }"
                                 style=" color: #9c4202 ;">Owner</router-link>
                         </li>
                         <li v-if="state.loggedIn">
