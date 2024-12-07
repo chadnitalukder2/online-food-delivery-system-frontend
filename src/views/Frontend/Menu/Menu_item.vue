@@ -116,7 +116,7 @@ const getRestaurant = async () => {
             </div>
         </section>
         
-        <section class="menu-card">
+        <section class="menu-card" v-if="restaurant.status === 'open'">
             <div class="menu-item" v-for="(item, index) in restaurant.categories" :key="index">
                 <div class="section-title">
                     <h1>{{ item.name }}</h1>
@@ -133,6 +133,10 @@ const getRestaurant = async () => {
             </div>
 
         </section>
+
+        <div v-else class="close" >
+            <p>Our restaurant is closed for now. Come back soon for your favorite dishes!</p>
+        </div>
 
     </div>
 
@@ -387,6 +391,19 @@ const getRestaurant = async () => {
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+.close{
+    padding: 40px 80px;
+    p{
+        text-align: center;
+    background: #fff;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 6px;
+    color: #cf0e0e;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    }
 }
 }
 </style>

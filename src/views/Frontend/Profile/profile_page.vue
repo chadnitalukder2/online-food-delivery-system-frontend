@@ -116,7 +116,7 @@ const closeModalView = () => {
                             <td>{{ item.payment_status }}</td>
                             <td>{{ formatDate(item.created_at) }}</td>
                             <td>
-                                <p v-if="item.status === 'padding'" @click="openModalDelete(item.id)"
+                                <p v-if="item.status === 'pending'" @click="openModalDelete(item.id)"
                                     style="color: rgb(191 42 42);cursor: pointer;">
                                     Cancel</p>
                                 <p v-else> Delivered</p>
