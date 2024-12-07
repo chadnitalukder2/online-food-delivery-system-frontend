@@ -10,16 +10,42 @@ const router = useRouter();
 //---------------------------------------------------
 const menus = ref([]);
 const deleteVisibleId = ref(null);
+const restaurants = ref([]);
+const restaurantId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
-  getMenu();
+  getMenuById();
+  fetchRestaurants();
 });
 //---------------------------------------------------
-const getMenu = async () => {
-  let response = await axios.get("/api/menus");
-  console.log('response', response);
-  menus.value = response.data;
+const fetchRestaurants = async () => {
+  try {
+    const response = await axios.get("/api/restaurants");
+    restaurants.value = response.data;
+    restaurantId.value = restaurants.value[0]?.id || null; 
+    if (restaurantId.value) {
+      getMenuById();
+      console.log(restaurantId.value, 'hello')
+    }
+  } catch (error) {
+    console.error("Error fetching restaurants:", error);
+  }
+}
+//--------------------------------------------------
+const getMenuById = async () => {
+  try {
+    const response = await axios.get(`api/getMenuByRestaurantIds/${restaurantId.value}`);
+    menus.value = response.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
 };
+//-------------------------------------------------------------
+// const getMenu = async () => {
+//   let response = await axios.get("/api/menus");
+//   console.log('response', response);
+//   menus.value = response.data;
+// };
 //---------------------------------------------------
 const deleteMenu = (id) => {
   axios.delete(`/api/menus/${id}`).then(() => {
