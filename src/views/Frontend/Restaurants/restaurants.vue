@@ -9,31 +9,31 @@ const searchRestaurant = ref('');
 const results = ref([]);
 
 const restaurantSearch = async () => {
-  if (searchRestaurant.value.length > 2) {
-    axios
-      .get('/api/searchRestaurant', { params: { searchValue: searchRestaurant.value } })
-      .then((response) => {
-        results.value = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else {
-    results.value = [];
-  }
+    if (searchRestaurant.value.length > 2) {
+        axios
+            .get('/api/searchRestaurant', { params: { searchValue: searchRestaurant.value } })
+            .then((response) => {
+                results.value = response.data;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    } else {
+        results.value = [];
+    }
 };
 
 const getRestaurants = async () => {
-  try {
-    const response = await axios.get("/api/restaurants");
-    restaurants.value = response.data;
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        const response = await axios.get("/api/restaurants");
+        restaurants.value = response.data;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 onMounted(() => {
-  getRestaurants();
+    getRestaurants();
 });
 </script>
 
@@ -54,13 +54,14 @@ onMounted(() => {
                     <p>Result: {{ restaurants.length }} items Found</p>
                 </div>
                 <div class="search-section">
-                    <input type="text" v-model="searchRestaurant" @input="restaurantSearch"  placeholder="Search any keyword...">
+                    <input type="text" v-model="searchRestaurant" @input="restaurantSearch"
+                        placeholder="Search any keyword...">
                     <!-- <button type="submit" class="search-btn" >Search</button> -->
                 </div>
             </div>
             <div class="body-section">
-                <RestaurantCard   v-for="restaurant in (results.length ? results : restaurants)" 
-                 :key="restaurant.id" :restaurant="restaurant" />
+                <RestaurantCard v-for="restaurant in (results.length ? results : restaurants)" :key="restaurant.id"
+                    :restaurant="restaurant" />
 
             </div>
             <p v-if="results.length === 0 && searchRestaurant.value">No results found.</p>
@@ -99,16 +100,32 @@ onMounted(() => {
             justify-content: center;
             align-items: center;
 
+            @media (max-width: 396px) {
+                top: 131px;
+            }
+
             h1 {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
+
+                @media (max-width: 473px) {
+                    font-size: 30px;
+                }
             }
         }
     }
 
     .restaurant-content {
         padding: 64px 80px;
+
+        @media (max-width: 1150px) {
+            padding: 40px 40px;
+        }
+
+        @media (max-width: 587px) {
+            padding: 30px 20px;
+        }
 
         .header-section {
             background: #fff;
@@ -119,6 +136,10 @@ onMounted(() => {
             justify-content: space-between;
             align-items: center;
 
+            @media (max-width: 549px) {
+                display: block;
+            }
+
             .total-section {
                 font-size: 16px;
                 color: #787878;
@@ -127,6 +148,10 @@ onMounted(() => {
             .search-section {
                 flex-basis: 40%;
                 display: flex;
+
+                @media (max-width: 549px) {
+                    padding-top: 20px;
+                }
 
                 input {
                     width: 100%;
@@ -164,6 +189,22 @@ onMounted(() => {
             grid-template-columns: repeat(4, 1fr);
             gap: 25px;
             padding-top: 30px;
+
+            @media (max-width: 1150px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @media (max-width: 774px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 851px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 473px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
         }
     }
 

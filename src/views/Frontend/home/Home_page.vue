@@ -74,16 +74,14 @@ const getMenus = async () => {
                     <div class="food-item">
                         <div class="food-item-box">
                             <div class="food-item-box__thumb">
-                                <router-link
-                                    :to="{ name: 'category', params: { id: category.id } }">
+                                <router-link :to="{ name: 'category', params: { id: category.id } }">
                                     <img :src="category.image">
                                 </router-link>
                             </div>
                         </div>
                         <div class="food-item__title">
                             <h1>
-                                <router-link
-                                    :to="{ name: 'category', params: { id: category.id } }">
+                                <router-link :to="{ name: 'category', params: { id: category.id } }">
                                     {{ category.name }}
                                 </router-link>
                             </h1>
@@ -127,8 +125,7 @@ const getMenus = async () => {
                 </div>
             </div>
             <div class="popular-foods-wrapper">
-                <CategoryMenuCard v-for="menuItem in menus.slice(0, 9)" :key="menuItem.id"
-                :menuItem="menuItem" />
+                <CategoryMenuCard v-for="menuItem in menus.slice(0, 9)" :key="menuItem.id" :menuItem="menuItem" />
             </div>
         </div>
     </section>
@@ -149,9 +146,19 @@ a {
             justify-content: space-between;
             padding: 64px 80px;
 
+            @media (max-width: 1251px) {
+                padding: 40px 50px 30px;
+            }
+
+            @media (max-width: 615px) {
+                padding: 40px 20px 30px;
+            }
+
             .left_details {
                 flex-basis: 58%;
-
+                @media (max-width: 1014px) {
+                flex-basis: 100%;
+            }
                 .banner-area {
                     font-family: "Poppins", sans-serif;
 
@@ -268,7 +275,10 @@ a {
 
             .banner_img {
                 flex-basis: 40%;
-
+                @media (max-width: 1014px) {
+                display: none;
+                flex-basis: 0%;
+            }
                 img {
                     width: 100%;
                     height: 100%;
@@ -284,6 +294,14 @@ a {
 .category_section {
     background: #f7f7f7;
     padding: 40px 80px 64px;
+
+    @media (max-width: 1251px) {
+        padding: 0px 50px 30px;
+    }
+
+    @media (max-width: 615px) {
+        padding: 0px 20px 30px;
+    }
 
     .row {
         // .food-category {
@@ -364,6 +382,14 @@ a {
     background: #f7f7f7;
     padding: 0px 80px 64px;
 
+    @media (max-width: 1251px) {
+        padding: 0px 50px 30px;
+    }
+
+    @media (max-width: 615px) {
+        padding: 0px 20px 30px;
+    }
+
     .container {
         .header_section {
             display: flex;
@@ -408,6 +434,17 @@ a {
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
 
+            @media (max-width: 1251px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @media (max-width: 928px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 500px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
         }
     }
 }
@@ -418,6 +455,13 @@ a {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
+    @media (max-width: 1089px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 500px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 
 }
 </style>

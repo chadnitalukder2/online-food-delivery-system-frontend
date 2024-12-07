@@ -76,12 +76,18 @@ const getCategories = async () => {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
+                @media (max-width: 610px) {
+                    font-size: 32px;
+        }
             }
         }
     }
 
     .restaurant-content {
         padding: 64px 80px;
+        @media (max-width: 610px) {
+            padding: 40px 20px;
+        }
         .header-section {
             background: #fff;
             box-shadow: 1px solid gray;
@@ -136,6 +142,9 @@ const getCategories = async () => {
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
             padding-top: 30px;
+            @media (max-width: 501px) {
+                grid-template-columns: repeat(1, 1fr);
+        }
         }
     }
 

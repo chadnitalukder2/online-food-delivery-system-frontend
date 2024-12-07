@@ -3,52 +3,47 @@
 </script>
 
 <template>
- <div class="dashboard-container">
+  <div class="dashboard-container">
     <div class="dashboard-stats">
       <div class="stat-card">
-        <h3>Sum Items</h3>
+        <h3>Total Order : 10</h3>
+        <h3>Total Order Amount : 10</h3>
+      </div>
+      <div class="stat-card">
+        <h3>Total Category Items</h3>
         <p class="stat-value" id="sum-items">0</p>
       </div>
       <div class="stat-card">
-        <h3>Total Orders</h3>
-        <p class="stat-value" id="total-orders">0</p>
+        <h3>Total Menu Items</h3>
+        <p class="stat-value" id="sum-items">0</p>
       </div>
-      <div class="stat-card">
-        <h3>Total Categories</h3>
-        <p class="stat-value" id="total-categories">0</p>
-      </div>
-      <div class="stat-card">
-        <h3>Total Menus</h3>
-        <p class="stat-value" id="total-menus">0</p>
-      </div>
+    
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 50px 50px;
+  width: 100%;
 }
 
-
-
-/* Stats Section */
 .dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
   gap: 20px;
-}
+  justify-content: space-between;
 
-/* Stat Card */
-.stat-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
+
+
+  .stat-card {
+    flex-basis: 33%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
 }
 
 .stat-card:hover {
@@ -78,6 +73,4 @@
     font-size: 28px;
   }
 }
-
-
 </style>

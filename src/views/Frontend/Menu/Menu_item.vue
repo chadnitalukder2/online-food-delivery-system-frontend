@@ -15,23 +15,23 @@ const searchMenu = ref();
 const results = ref([]);
 //--------------------------------------------
 const menuSearch = async () => {
-  if (searchMenu.value.length > 2) {
-    axios
-      .get('/api/searchMenu', { params: { searchValue: searchMenu.value } })
-      .then((response) => {
-        results.value = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else {
-    results.value = [];
-  }
+    if (searchMenu.value.length > 2) {
+        axios
+            .get('/api/searchMenu', { params: { searchValue: searchMenu.value } })
+            .then((response) => {
+                results.value = response.data;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    } else {
+        results.value = [];
+    }
 };
 //--------------------------------------
 function filteredMenus(categoryId) {
-  const sourceMenus = results.value.length ? results.value : restaurant.value.menus;
-  return sourceMenus.filter(menu => menu.category_id === categoryId);
+    const sourceMenus = results.value.length ? results.value : restaurant.value.menus;
+    return sourceMenus.filter(menu => menu.category_id === categoryId);
 }
 //---------------------------------------------------
 onMounted(async () => {
@@ -115,7 +115,7 @@ const getRestaurant = async () => {
                     </a></div>
             </div>
         </section>
-        
+
         <section class="menu-card" v-if="restaurant.status === 'open'">
             <div class="menu-item" v-for="(item, index) in restaurant.categories" :key="index">
                 <div class="section-title">
@@ -123,7 +123,7 @@ const getRestaurant = async () => {
                 </div>
                 <div v-if="filteredMenus(item.id).length === 0">
                     <h1 class="no-data">No items available in this category.</h1>
-              
+
                 </div>
                 <div class="menu-card-details" v-else>
                     <MenuCard v-for="menuItem in filteredMenus(item.id)" :key="menuItem.id" :menuItem="menuItem" />
@@ -134,7 +134,7 @@ const getRestaurant = async () => {
 
         </section>
 
-        <div v-else class="close" >
+        <div v-else class="close">
             <p>Our restaurant is closed for now. Come back soon for your favorite dishes!</p>
         </div>
 
@@ -174,6 +174,14 @@ const getRestaurant = async () => {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
+
+                @media (max-width: 590px) {
+                    font-size: 30px;
+                }
+
+                @media (max-width: 410px) {
+                    font-size: 25px;
+                }
             }
 
         }
@@ -183,6 +191,10 @@ const getRestaurant = async () => {
         padding: 40px 80px;
         background-color: #fff;
         border-bottom: 1px solid #e6e2e2;
+
+        @media (max-width: 590px) {
+            padding: 30px 20px;
+        }
 
         .restaurant-info {
             display: flex;
@@ -291,9 +303,17 @@ const getRestaurant = async () => {
         gap: 20px;
         box-shadow: 1px 2px 4px #f0ecec;
 
+        @media (max-width: 590px) {
+            padding: 20px 20px;
+        }
+
         .search-bar {
             display: flex;
             flex-basis: 20%;
+
+            @media (max-width: 590px) {
+                display: none;
+            }
 
             input {
                 width: 100%;
@@ -352,6 +372,10 @@ const getRestaurant = async () => {
     .menu-card {
         padding: 0px 80px 40px;
 
+        @media (max-width: 590px) {
+            padding: 0px 20px 30px;
+        }
+
         .menu-item {
             padding-top: 40px;
 
@@ -375,6 +399,13 @@ const getRestaurant = async () => {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
 
+                @media (max-width: 1181px) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                @media (max-width: 451px) {
+                    grid-template-columns: repeat(1, 1fr);
+                }
             }
 
         }
@@ -382,28 +413,31 @@ const getRestaurant = async () => {
 
 
     }
-.no-data{
-    font-size: 18px;
-    color: #bc0d0d;
-    text-align: center;
-    margin: 20px 0;
-    padding: 10px;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-.close{
-    padding: 40px 80px;
-    p{
+
+    .no-data {
+        font-size: 18px;
+        color: #bc0d0d;
         text-align: center;
-    background: #fff;
-    padding: 20px;
-    font-size: 20px;
-    border-radius: 6px;
-    color: #cf0e0e;
-    letter-spacing: 1.2px;
-    font-weight: 600;
+        margin: 20px 0;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
     }
-}
+
+    .close {
+        padding: 40px 80px;
+
+        p {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 6px;
+            color: #cf0e0e;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+    }
 }
 </style>

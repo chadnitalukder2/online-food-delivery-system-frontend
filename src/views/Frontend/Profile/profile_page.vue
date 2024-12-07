@@ -31,6 +31,7 @@ const getOrdersById = async () => {
     const id = localStorage.getItem('user_id');
     let response = await axios.get(`/api/getOrdersByUserId/${id}`);
     orders.value = response.data;
+    console.log(orders.value)
 }
 //---------------------------------------------------
 const deleteOrder = (id) => {
@@ -58,7 +59,7 @@ const closeModalView = () => {
 };
 </script>
 <template>
-    <div class="container" style="display: flex; justify-content: space-between; gap: 40px;">
+    <div class="container">
         <div class="left_content">
             <div class="profile_section">
                 <div class="profile_img">
@@ -163,7 +164,8 @@ const closeModalView = () => {
 
                                     <p> <span style="font-weight: 600;">Name </span> : {{ item.name }}</p>
                                     <p> <span style="font-weight: 600;">Email </span> : {{ item.email }}</p>
-                                    <p> <span style="font-weight: 600;">Address </span> : {{ item.delivery_address  }} </p>
+                                    <p> <span style="font-weight: 600;">Address </span> : {{ item.delivery_address }}
+                                    </p>
                                     <p> <span style="font-weight: 600;">Phone </span> : {{ item.phone }} </p>
                                 </div>
 
@@ -208,6 +210,16 @@ const closeModalView = () => {
     padding: 50px;
     text-align: center;
     background: #d7d1d130;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+
+    @media (max-width: 1137px) {
+        display: block;
+    }
+    @media (max-width: 652px) {
+        padding: 20px;
+    }
 
     .left_content {
         flex-basis: 25%;
@@ -295,6 +307,9 @@ const closeModalView = () => {
 }
 
 .table-box {
+    @media (max-width: 1137px) {
+       padding-top: 40px;
+    }
     .title {
         text-align: left;
         margin: 0px;

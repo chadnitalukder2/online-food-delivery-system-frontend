@@ -21,44 +21,44 @@ const addToCart = async () => {
         });
         router.push({ name: 'Login' });
     }
-    else{
-    const formData = new FormData();
-    formData.append("user_id", user_id );
-    formData.append("restaurant_id", props.menuItem.restaurant_id );
-    formData.append("menu_id", props.menuItem.id);
-    formData.append("quantity", '1');
-    formData.append("order_id", '');
-    formData.append("line_total", props.menuItem.price);
-    formData.append("status", 'cart');
-    try {
-        await axios.post("/api/carts", formData);
-        notify({
-            title: "Carts Item Added Successfully",
-            type: "success",
-        });
-        location.reload();
-    } catch (error) {
-        console.error("Failed to add Cart:", error);
-        notify({
-            title: "Failed to Add Cart",
-            type: "error",
-        });
+    else {
+        const formData = new FormData();
+        formData.append("user_id", user_id);
+        formData.append("restaurant_id", props.menuItem.restaurant_id);
+        formData.append("menu_id", props.menuItem.id);
+        formData.append("quantity", '1');
+        formData.append("order_id", '');
+        formData.append("line_total", props.menuItem.price);
+        formData.append("status", 'cart');
+        try {
+            await axios.post("/api/carts", formData);
+            notify({
+                title: "Carts Item Added Successfully",
+                type: "success",
+            });
+            location.reload();
+        } catch (error) {
+            console.error("Failed to add Cart:", error);
+            notify({
+                title: "Failed to Add Cart",
+                type: "error",
+            });
+        }
     }
-    }
-  
+
 };
 </script>
 
 <template>
-  
-    <div class="food_item" >
+
+    <div class="food_item">
         <div class="food__item-thumb">
-   
+
             <a href="#">
                 <img :src="menuItem.image">
             </a>
         </div>
-        <div class="add-btn" @click="addToCart">
+        <div class="add-btn-long" @click="addToCart">
             <a href="#">
                 <i class="fa-solid fa-plus"></i>
             </a>
@@ -67,21 +67,26 @@ const addToCart = async () => {
             <div class="food-name">
                 <h1> <a href="#">{{ menuItem.name }}</a> </h1>
             </div>
-            <div class="price" >
+            <div class="price">
                 From Tk {{ menuItem.price }}
             </div>
             <div class="description">
                 <p>{{ menuItem.description }}</p>
             </div>
         </div>
-        <div class="heart">
+        <div class="add-btn-short" @click="addToCart">
+            <a href="#">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+        <!-- <div class="heart">
             <a href="#">
                 <i class="fa-regular fa-heart"></i>
             </a>
-        </div>
+        </div> -->
     </div>
 
-    
+
 </template>
 
 <style lang="scss" scoped>
@@ -95,6 +100,10 @@ const addToCart = async () => {
     align-items: center;
     display: flex;
 
+    @media (max-width: 826px) {
+        display: block;
+    }
+
     .food__item-thumb {
         position: relative;
         margin-right: 15px;
@@ -103,6 +112,12 @@ const addToCart = async () => {
         border-radius: 6px;
         overflow: hidden;
 
+        @media (max-width: 826px) {
+            height: 175px;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
         img {
             height: 100%;
             width: 100%;
@@ -110,7 +125,7 @@ const addToCart = async () => {
         }
     }
 
-    .add-btn {
+    .add-btn-long {
         position: absolute;
         font-size: 12px;
         background: #fff;
@@ -123,6 +138,40 @@ const addToCart = async () => {
         align-items: center;
         margin: 60px 0px 10px 8px;
         transition: all ease .3s;
+
+        @media (max-width: 826px) {
+            display: none;
+        }
+
+        a {
+            color: #787878;
+        }
+
+        &:hover {
+            background: #f6f5f5;
+
+            a {
+                color: #9c4202;
+            }
+
+        }
+    }
+    .add-btn-short {
+        font-size: 15px;
+        background: #fff;
+        width: 25px;
+        display: flex;
+        border-radius: 50%;
+        box-shadow: 0px 0px 8px #ddd;
+        justify-content: center;
+        height: 25px;
+        align-items: center;
+        margin: 16px 0px 0px 0px;
+        transition: all ease .3s;
+
+        @media (min-width: 826px) {
+            display: none;
+        }
 
         a {
             color: #787878;

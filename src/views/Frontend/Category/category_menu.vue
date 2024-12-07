@@ -17,7 +17,7 @@ const props = defineProps(["menuItem"]);
 
     <div class="food_item">
         <div class="food__item-thumb">
-            <router-link >
+            <router-link>
                 <img :src="menuItem.image">
             </router-link>
 
@@ -26,8 +26,8 @@ const props = defineProps(["menuItem"]);
         <div class="popular-food__item-info">
             <div class="food-name">
                 <h1>
-                    <router-link :to="{ name: 'restaurant', params: { id: menuItem.restaurant_id} }"  >
-                       {{menuItem.name}}
+                    <router-link :to="{ name: 'restaurant', params: { id: menuItem.restaurant_id } }">
+                        {{ menuItem.name }}
                     </router-link>
                 </h1>
             </div>
@@ -38,11 +38,11 @@ const props = defineProps(["menuItem"]);
                 <p>{{ menuItem.description }}</p>
             </div>
         </div>
-        <div class="heart">
+        <!-- <div class="heart">
             <a href="#">
                 <i class="fa-regular fa-heart"></i>
             </a>
-        </div>
+        </div> -->
     </div>
 
 
@@ -60,6 +60,10 @@ const props = defineProps(["menuItem"]);
     justify-content: space-between;
     display: flex;
 
+    @media (max-width: 779px) {
+        display: ruby;
+    }
+
     .food__item-thumb {
         flex-basis: 25%;
         position: relative;
@@ -68,6 +72,12 @@ const props = defineProps(["menuItem"]);
         width: 125px;
         border-radius: 6px;
         overflow: hidden;
+
+        @media (max-width: 779px) {
+            height: 170px;
+            width: 100%;
+            padding-bottom: 12px;
+        }
 
         img {
             height: 100%;
