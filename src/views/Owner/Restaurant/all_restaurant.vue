@@ -16,9 +16,10 @@ onMounted(async () => {
 });
 //---------------------------------------------------
 const getRestaurant = async () => {
-    const id = localStorage.getItem('user_id');
-    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
-    restaurants.value = response.data;
+  const id = localStorage.getItem('user_id');
+  let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
+  restaurants.value = response.data;
+  console.log(restaurants.value)
 }
 //---------------------------------------------------
 const deleteRestaurants = (id) => {
@@ -41,38 +42,31 @@ const closeModalDelete = () => {
 </script>
 
 <template>
-  <div class="container">
-    <div class="table-box">
-
+  <div class="profile-warper">
+    <div class="restaurant-profile" v-for="(item, index) in restaurants">
       <div class="header">
-        <h1>All Restaurants</h1>
-
-  <!--  <div class="btn">
-          <button>
-            <router-link :to="{ name: 'owner-add-restaurant' }">
-              Add Restaurant
-            </router-link>
-          </button>
-        </div> -->
+        <img class="background-img" src="../../../assets/baner-img.jpg" alt="Restaurant Background">
+        <div class="logo-container">
+          <img class="logo" src="../../../assets/res-logo-1.png" alt="Restaurant Logo">
+        </div>
       </div>
 
-      <table id="customers">
-        <tr>
-          <th style="width: 80px;"># ID</th>
-          <th>Owner Id</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Status</th>
-          <th>Delivery Fee</th>
-          <th>Delivery Time</th>
-          <th>Address</th>
-          <th>Image </th>
-          <th style="text-align: center;width: 158px;">Action</th>
-        </tr>
-
-        <tbody v-for="item in restaurants" :key="item.id">
-          <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
+      <div class="info-section">
+        <h1 class="name">{{ item.name }}</h1>
+        <p class="status open" v-if="item.status === 'open'">{{ item.status }} Now</p>
+        <p class="status close" v-else>{{ item.status }} Now</p>
+        <p class="phone"><strong>Phone:</strong> {{ item.phone }}</p>
+        <p class="email"><strong>Email:</strong> {{ item.email }}</p>
+        <p class="address"><strong>Address:</strong> {{ item.address }}</p>
+        <p class="delivery">
+          <strong>Delivery Time:</strong> {{ item.delivery_time }} mins |
+          <strong>Fee:</strong> ${{ item.delivery_fee }}
+        </p>
+        <p class="action">
+          <button class="edit-btn"><router-link :to="{ name: 'owner-edit-restaurants', params: { id: item.id } }">Edit</router-link></button>
+          <button class="delete-btn" @click="openModalDelete(item.id)">Delete</button>
+        </p>
+        <Modal :show="deleteVisibleId === item.id" @close="closeModalDelete">
             <div id="myModal" style="text-align: center;">
               <h4 class="delete-title">Are you sure?</h4>
               <div class="modal-body">
@@ -85,33 +79,15 @@ const closeModalDelete = () => {
               </div>
             </div>
           </Modal>
-          <tr>
-            <td># {{ item.id }}</td>
-            <td>{{ item.owner_id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.phone }}</td>
-            <td>{{ item.email }}</td>
-            <td>{{ item.status }}</td>
-            <td>{{ item.delivery_fee }}</td>
-            <td>{{ item.delivery_time }}</td>
-            <td>{{ item.address }}</td>
-            <td>
-              <div style="width: 80px; height: 70px">
-                <img :src="item.image" style="width: 100%; height: 100%" />
-              </div>
+      </div>
 
-            </td>
-            <td style="text-align: center;">
-              <button @click="openModalDelete(item.id)" class="delete-btn">Delete </button>
-              <button class="edit-btn">
-                <router-link :to="{ name: 'owner-edit-restaurants', params: { id: item.id } }">Edit</router-link>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="description">
+        <h2>About Us</h2>
+        <p>{{ item.description }}</p>
+      </div>
     </div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -140,137 +116,137 @@ const closeModalDelete = () => {
       border-radius: 3px;
       margin: 0 5px;
     }
-
   }
-
 }
 
-
-
-table {
-  border-radius: 6px;
+.profile-warper{
+  padding: 40px 95px;
+}
+.restaurant-profile {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.container {
-  width: 100%;
+/* Header Section */
+.header {
+  position: relative;
 }
 
-.table-box {
-  padding: 50px 30px;
-  border-radius: 8px;
+.background-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    text-align: center;
-    align-items: center;
+.logo-container {
+  position: absolute;
+  bottom: -50px;
+  left: 20px;
+}
 
-    .btn {
-      text-align: right;
-      padding-bottom: 20px;
+.logo {
+  width: 100px;
+  height: 100px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-      button {
-        padding: 10px 20px;
-        border: 1px solid #9c4202;
-        background: #9c4202;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all ease-in .3s;
+/* Info Section */
+.info-section {
+  text-align: center;
+  padding: 70px 20px 20px;
+}
 
-        a {
-          text-decoration: none;
-          font-size: 16px;
-          font-weight: 500;
-          color: #fff;
-        }
+.name {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
 
-        &:hover {
-          transform: scale(1.05);
-          background-color: #fff;
+.status {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-          a {
-            color: #9c4202;
-          }
-        }
+.status.open {
+  color: #27ae60;
+  text-transform: capitalize;
+}
+.status.close {
+  text-transform: capitalize;
+  color: #cf0e0e;
+}
+
+.status.closed {
+  color: #e74c3c;
+}
+
+.phone,
+.email,
+.address,
+.delivery {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 8px;
+}
+.action{
+  padding-top: 10px;
+  .edit-btn{
+    background: rgba(237, 236, 236, 0.68);
+    border: 1px solid rgb(0, 179, 255);
+    border-radius: 6px;
+    padding: 5px 17px;
+    margin-right: 12px;
+    transition: all 0.3s;
+    a{
+      color: rgb(0, 179, 255);
+    }
+    &:hover{
+      background: rgb(0, 179, 255);
+      a{
+        color: #fff;
       }
     }
-
-    h1 {
-      margin-top: 0px;
-      font-size: 22px;
-      color: #444;
-      font-weight: 600;
-    }
   }
-
-}
-
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td,
-#customers th {
-  border: 1px solid #f3ededad;
-  padding: 10px 12px;
-  text-align: left;
-}
-
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#customers th {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  text-align: left;
-  background-color: rgb(237 236 236 / 68%);
-  color: #444;
-  font-size: 16px;
-}
-
-#customers td {
-  color: #656262;
-  font-size: 14px;
-}
-
-.delete-btn {
-  color: #da0808;
-  background: rgb(237 236 236 / 68%);
-  border-radius: 6px;
-  font-size: 14px;
-  border: 1px solid rgb(237 236 236 / 68%);
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: all .3s;
-
-  &:hover {
-    background: #da0808;
-    color: #fff;
-  }
-}
-.edit-btn {
-  background: rgb(237 236 236 / 68%);
-  border: 1px solid rgb(237 236 236 / 68%);
-  border-radius: 6px;
-  padding: 5px 17px;
-  transition: all .3s;
-
-  a {
-    color: rgb(0, 179, 255);
-  }
-
-  &:hover {
-    background: rgb(0, 179, 255);
-
-    a {
+  .delete-btn{
+    background: rgba(237, 236, 236, 0.68);
+    border: 1px solid #cf0e0e;
+    border-radius: 6px;
+    padding: 5px 17px;
+    margin-right: 12px;
+    transition: all 0.3s;
+    color: #cf0e0e;
+    cursor: pointer;
+   
+    &:hover{
+      background-color: #cf0e0e;
       color: #fff;
     }
   }
+
+}
+
+/* Description Section */
+.description {
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.description h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.description p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
 }
 </style>
