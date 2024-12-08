@@ -161,15 +161,19 @@ const getRestaurant = async () => {
 
         .banner_title {
             position: absolute;
-            height: 200px;
-            top: 115px;
+            height: 201px;
+            top: 62px;
             width: 100%;
-            z-index: 999;
             display: flex;
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-
+            @media (max-width: 942px) {
+                top: 62px;
+            }
+            @media (max-width: 914px) {
+                top: 70px;
+            }
             h1 {
                 font-size: 42px;
                 font-weight: 700;

@@ -136,15 +136,19 @@ const handleApiRequest = async () => {
 
         .banner_title {
             position: absolute;
-            height: 200px;
-            top: 115px;
+            height: 201px;
+            top: 62px;
             width: 100%;
-            z-index: 999;
             display: flex;
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-
+            @media (max-width: 942px) {
+                top: 62px;
+            }
+            @media (max-width: 914px) {
+                top: 70px;
+            }
             h1 {
                 font-size: 42px;
                 font-weight: 700;
@@ -159,7 +163,13 @@ const handleApiRequest = async () => {
         display: flex;
         justify-content: center;
         align-items: center;
-
+        @media (max-width: 1088px) {
+            padding: 50px 0px;
+            }
+        @media (max-width: 611px) {
+            padding: 30px 0px;
+            }
+          
         .login_page {
             flex-basis: 50%;
             text-align: center;
@@ -167,7 +177,12 @@ const handleApiRequest = async () => {
             box-shadow: 0px 1px 7px #e7e4e4;
             border-radius: 6px;
             padding: 40px 0px;
-
+            @media (max-width: 1088px) {
+                flex-basis: 80%;
+            }
+            @media (max-width: 611px) {
+                flex-basis: 90%;
+            }
             .form-title {
                 font-size: 32px;
                 padding-bottom: 30px;
@@ -178,7 +193,9 @@ const handleApiRequest = async () => {
             .form-header {
                 text-align: left;
                 padding: 0px 80px;
-
+                @media (max-width: 611px) {
+                    padding: 0px 40px;
+            }
                 label {
                     font-size: 16px;
                     color: #484646;

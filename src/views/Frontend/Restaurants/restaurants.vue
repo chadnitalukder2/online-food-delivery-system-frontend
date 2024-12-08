@@ -91,17 +91,19 @@ onMounted(() => {
 
         .banner_title {
             position: absolute;
-            height: 200px;
-            top: 115px;
+            height: 201px;
+            top: 62px;
             width: 100%;
-            z-index: 999;
             display: flex;
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
 
-            @media (max-width: 396px) {
-                top: 131px;
+            @media (max-width: 942px) {
+                top: 62px;
+            }
+            @media (max-width: 914px) {
+                top: 70px;
             }
 
             h1 {

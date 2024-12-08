@@ -40,10 +40,6 @@ const getCarts = async () => {
 
 <template>
     <div class="nav">
-        <div class="top_nav">
-            <p>Do you need a business account?</p>
-            <el-button class="btn" type="primary">Singup Now</el-button>
-        </div>
         <div class="ofd_nav">
             <div class="header-main">
                 <div class="logo">
@@ -105,39 +101,6 @@ const getCarts = async () => {
 <style lang="scss" scoped>
 .nav {
     font-family: Tahoma;
-
-    .top_nav {
-        background-color: #9c4202;
-        text-align: center;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-
-        p {
-            color: #fff;
-            font-size: 18px;
-            font-family: Tahoma;
-            font-weight: 500;
-        }
-
-        .btn {
-            padding: 8px 12px;
-            color: #fff;
-            background: #9c4202;
-            border-radius: 6px;
-            border: 1px solid #fff;
-            cursor: pointer;
-            font: 14px;
-            transition: all .3s;
-
-            &:hover {
-                color: #9c4202;
-                background: #fff;
-            }
-        }
-    }
 
     .ofd_nav {
         box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
