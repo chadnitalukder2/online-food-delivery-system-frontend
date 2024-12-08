@@ -28,6 +28,12 @@ const router = createRouter({
       component: () => import("../views/Frontend/Cart/cart_page.vue"),
     },
     {
+      path: "/payment",
+      name: "payment",
+      meta: { requiresAuth: true },
+      component: () => import("../views/Frontend/Payment/PaymentForm.vue"),
+    },
+    {
       path: "/category/:id",
       name: "category",
       component: () => import("../views/Frontend/Category/category_page.vue"),

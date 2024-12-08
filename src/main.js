@@ -14,3 +14,5 @@ app.use(ElementPlus)
 app.use(router)
 
 app.mount('#app')
+
+this.stripe = await loadStripe('pk_test_12345ABCDE');

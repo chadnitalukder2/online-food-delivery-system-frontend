@@ -45,7 +45,7 @@ const getMenus = async () => {
                         <p class="banner-area-subtitle">Our job fill your tummy with delicious food and with fast
                             and free delivery</p>
                     </div>
-                    <form class="search-form">
+                    <!-- <form class="search-form">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control form--control" id="search">
                             <label for="address">Enter Your Favourite restaurant</label>
@@ -53,7 +53,7 @@ const getMenus = async () => {
                         <div class="banner-search-btn">
                             <button class="btn btn--base" type="submit">Search</button>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
 
                 <div class="banner_img">
@@ -156,9 +156,11 @@ a {
 
             .left_details {
                 flex-basis: 58%;
+
                 @media (max-width: 1014px) {
-                flex-basis: 100%;
-            }
+                    flex-basis: 100%;
+                }
+
                 .banner-area {
                     font-family: "Poppins", sans-serif;
 
@@ -170,6 +172,9 @@ a {
                         line-height: 1.2;
                         font-weight: 600;
 
+                        @media (max-width: 532px) {
+                            font-size: 42px;
+                        }
                     }
 
                     .banner-area-subtitle {
@@ -275,10 +280,12 @@ a {
 
             .banner_img {
                 flex-basis: 40%;
+
                 @media (max-width: 1014px) {
-                display: none;
-                flex-basis: 0%;
-            }
+                    display: none;
+                    flex-basis: 0%;
+                }
+
                 img {
                     width: 100%;
                     height: 100%;
