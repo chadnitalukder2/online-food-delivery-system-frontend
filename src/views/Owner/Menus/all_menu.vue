@@ -20,7 +20,8 @@ onMounted(async () => {
 //---------------------------------------------------
 const fetchRestaurants = async () => {
   try {
-    const response = await axios.get("/api/restaurants");
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
     restaurants.value = response.data;
     restaurantId.value = restaurants.value[0]?.id || null; 
     if (restaurantId.value) {
@@ -36,6 +37,7 @@ const getMenuById = async () => {
   try {
     const response = await axios.get(`api/getMenuByRestaurantIds/${restaurantId.value}`);
     menus.value = response.data;
+    console.log(menus.value, 'menu')
   } catch (error) {
     console.error("Error fetching orders:", error);
   }

@@ -170,7 +170,7 @@ const addOrders = async () => {
             </table>
         </div>
         <!-- ============================= -->
-        <div class="order-wrapper" style="display: flex;">
+        <div class="order-wrapper" >
             <div class="cart">
                 <div class="cart_total">
                     <h3>Cart Totals</h3>
@@ -253,11 +253,18 @@ const addOrders = async () => {
 .container {
     padding: 80px 100px;
     text-align: center;
+    @media (max-width: 750px) {
+        padding: 40px 20px;
+    }
 }
 
 .order-wrapper {
     gap: 20px;
     justify-content: space-between;
+    display: flex;
+    @media (max-width: 1158px) {
+        display: block;
+    }
 
     .cart {
         flex-basis: 35%;
