@@ -1,63 +1,70 @@
 <template>
-    <form @submit.prevent="handleSubmit">
-        <div id="card-element"></div>
-        <button type="submit" :disabled="processing">
-            {{ processing ? 'Processing...' : 'Pay' }}
-        </button>
-    </form>
+    <div class="payment-form">
+        <h2>Make a Payment</h2>
+        <form @submit.prevent="submitPayment">
+            <label for="amount">Amount (USD):</label>
+            <input type="number" v-model="amount" placeholder="Enter amount" required />
+            <div id="card-element"></div>
+            <button type="submit">Pay</button>
+        </form>
+        <p v-if="message">{{ message }}</p>
+    </div>
 </template>
 
 <script>
- import { loadStripe } from '@stripe/stripe-js';
-
+import { loadStripe } from '@stripe/stripe-js';
+import axios from "axios";
 export default {
+
     data() {
         return {
             stripe: null,
-            cardElement: null,
-            processing: false,
+            card: null,
+            amount: '',
+            message: '',
         };
     },
     async mounted() {
-        this.stripe = await loadStripe('your_stripe_public_key');
+        this.stripe = await loadStripe('pk_test_51PE5utRxZcQKYHRCdpA2kGx5R9DAG7N76AhTfc9wr1j4kqynkh9YqmS6ihDkOK2cFPfDdy2Dyb0LeW3CoD2oyDa300jAtsVhvx');
         const elements = this.stripe.elements();
-        this.cardElement = elements.create('card');
-        this.cardElement.mount('#card-element');
+        this.card = elements.create('card');
+        this.card.mount('#card-element');
     },
     methods: {
-        async handleSubmit() {
-            this.processing = true;
-
-            // Fetch client secret from the backend
-            const response = await fetch('/api/create-payment-intent', {
-                method: 'POST',
-            });
-            const { clientSecret } = await response.json();
-
-            // Confirm payment
-            const { error } = await this.stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: this.cardElement,
-                },
-            });
-
-            if (error) {
-                console.error(error.message);
-                this.processing = false;
+        async submitPayment() {
+            if (!this.amount || this.amount <= 0) {
+                this.message = 'Please enter a valid amount.';
                 return;
             }
 
-            alert('Payment successful!');
-            this.processing = false;
+            // Create token without address details
+            const { token, error } = await this.stripe.createToken(this.card);
+
+            if (error) {
+                this.message = error.message;
+                return;
+            }
+
+            // Send token and amount to the backend
+            // const response = await fetch('/api/payment', {
+                const response = await axios.post("/api/payment" , {
+                    amount: this.amount, token: token.id
+                })
+            console.log(response, 'response')
+            const data = await response.json();
+            this.message = data.message;
         },
     },
+
 };
 </script>
 
-<style>
-#card-element {
+<style scoped>
+.payment-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
     border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 </style>
