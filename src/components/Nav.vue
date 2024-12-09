@@ -441,7 +441,7 @@ margin: auto;
                 display: flex;
                 flex-direction: column;
                 text-align: center;
-                margin-left: -40px;
+                margin-left: -75px;
                 padding-left: 40px;
                 transition: transform 0.5s ease-in-out;
                 box-shadow: 5px 0px 10px 0px #aaa;
@@ -487,8 +487,6 @@ margin: auto;
                 right: 15px;
                 font-size: 2.0rem;
                 margin: 0;
-
-               
             }
 
             input[type="checkbox"]:checked {
@@ -514,8 +512,9 @@ margin: auto;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 651px) {
     .navbar-container {
+        width: 95%;
         input[type="checkbox"]:checked {
             ~.logo {
                 display: none;
