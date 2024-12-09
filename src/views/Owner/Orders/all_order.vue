@@ -21,7 +21,8 @@ onMounted(async () => {
 //---------------------------------------------------
 const fetchRestaurants = async () => {
   try {
-    const response = await axios.get("/api/restaurants");
+    const id = localStorage.getItem('user_id');
+    let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
     restaurants.value = response.data;
     restaurantId.value = restaurants.value[0]?.id || null; 
     if (restaurantId.value) {

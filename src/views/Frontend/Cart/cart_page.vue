@@ -2,7 +2,7 @@
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
 import Modal from '@/components/global/Modal.vue';
-import { ref, onMounted,computed  } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -46,7 +46,7 @@ const subTotal = () => {
             result += carts.value[i].line_total;
         }
     }
-   
+
     order.value.sub_total = result;
     let totalValue = order.value.sub_total + Number(totalDeliveryFee.value) - 5;
 
@@ -71,45 +71,82 @@ const deleteCart = (id) => {
 //----------------------------------------------
 
 const addOrders = async () => {
-  let data = {
-    restaurant_id: carts.value?.[0]?.restaurant_id,
-    user_id: localStorage.getItem('user_id'),
-    order_items_id : order.value.selectedItems,
-    total_amount : order.value.total,
-    delivery_address : order.value.address, 
-    name: order.value.name,
-    email: order.value.email,
-    phone: order.value.phone
-  }
-  console.log(carts.value?.[0]?.restaurant_id, 'data');
-   await axios.post("/api/orders", data).then( (res) => {
-    if(res.status == 201){
-      notify({
-        title: "Order Placed Successfully",
-        type: "success",
-      });
-
-      let parse_url = JSON.parse(res.data.payment_redirect_url);
-      if (parse_url.status == "success") {
-        window.location.replace(parse_url.data);
-      }
-
-    } else {
-      notify({
-        title: "Order Placed Failed",
-        text: res.data.message,
-        type: "error",
-      });
+    try {
+        if (order.value.payment_status === 'cash on delivery') {
+            let data = {
+            restaurant_id: carts.value?.[0]?.restaurant_id,
+            user_id: localStorage.getItem('user_id'),
+            order_items_id: order.value.selectedItems,
+            total_amount: order.value.total,
+            delivery_address: order.value.address,
+            payment_status: order.value.payment_status,
+            name: order.value.name,
+            email: order.value.email,
+            phone: order.value.phone
+        }
+            const response = await axios.post("/api/orders", data);
+            if (response.status === 201) {
+                notify({ title: "Order Placed Successfully", type: "success" });
+            }
+        } else {
+            console.log("Pay using card");
+        }
+    } catch (error) {
+        notify({
+            title: "Order Placement Failed",
+            text: error.response?.data?.message || "An error occurred",
+            type: "error",
+        });
     }
-  }).catch( (err) => {
-    notify({
-      title: "Order Placed Failed",
-      text: err.response.data.message,
-      type: "error",
-    });
-  })
-  order.value = [];
-}
+};
+//-------------------------------------------
+// const addOrders2 = async () => {
+//     if (order.value.payment_status === 'cash on delivery') {
+//         let data = {
+//             restaurant_id: carts.value?.[0]?.restaurant_id,
+//             user_id: localStorage.getItem('user_id'),
+//             order_items_id: order.value.selectedItems,
+//             total_amount: order.value.total,
+//             delivery_address: order.value.address,
+//             payment_status: order.value.payment_status,
+//             name: order.value.name,
+//             email: order.value.email,
+//             phone: order.value.phone
+//         }
+//         console.log(carts.value?.[0]?.restaurant_id, 'data');
+//         await axios.post("/api/orders", data).then((res) => {
+//             if (res.status == 201) {
+//                 notify({
+//                     title: "Order Placed Successfully",
+//                     type: "success",
+//                 });
+
+//                 let parse_url = JSON.parse(res.data.payment_redirect_url);
+//                 if (parse_url.status == "success") {
+//                     window.location.replace(parse_url.data);
+//                 }
+
+//             } else {
+//                 notify({
+//                     title: "Order Placed Failed",
+//                     text: res.data.message,
+//                     type: "error",
+//                 });
+//             }
+//         }).catch((err) => {
+//             notify({
+//                 title: "Order Placed Failed",
+//                 text: err.response.data.message,
+//                 type: "error",
+//             });
+//         })
+//         order.value= [];
+//     }
+//     else{
+//         console.log('pay using card');
+//     }
+
+// }
 
 </script>
 
@@ -157,12 +194,12 @@ const addOrders = async () => {
                     <td>{{ item.menu.name }}</td>
                     <td>${{ item.menu.price }}</td>
                     <td>
-                        <input type="number" @change="updateLineTotal(item)"  v-model="item.quantity">
+                        <input type="number" @change="updateLineTotal(item)" v-model="item.quantity">
 
                     </td>
                     <td>${{ item.line_total }}</td>
-                    <td @click="openModalDelete(item.id)">
-                        <i class="fa-solid fa-trash-can delete-icon "></i>
+                    <td @click="openModalDelete(item.id)" style="color: #f15e5e; cursor: pointer;">
+                        Remove
                     </td>
                 </tr>
 
@@ -170,7 +207,7 @@ const addOrders = async () => {
             </table>
         </div>
         <!-- ============================= -->
-        <div class="order-wrapper" >
+        <div class="order-wrapper">
             <div class="cart">
                 <div class="cart_total">
                     <h3>Cart Totals</h3>
@@ -216,6 +253,15 @@ const addOrders = async () => {
                         <input type="text" v-model="order.address" name="message" placeholder="address" required>
                     </div>
 
+                    <div class="input_box">
+                        <label><b>Payment Type : </b></label><br>
+                        <select v-model="order.payment_status">
+                            <option disabled>Select one</option>
+                            <option value="cash on delivery">Cash On Delivery</option>
+                            <option value="pay using card"> Pay Using Card</option>
+                        </select>
+                    </div>
+
                     <input type="submit" class="check_out" value="Place pick-up order">
                 </form>
             </div>
@@ -253,6 +299,7 @@ const addOrders = async () => {
 .container {
     padding: 80px 100px;
     text-align: center;
+
     @media (max-width: 750px) {
         padding: 40px 20px;
     }
@@ -262,6 +309,7 @@ const addOrders = async () => {
     gap: 20px;
     justify-content: space-between;
     display: flex;
+
     @media (max-width: 1158px) {
         display: block;
     }
@@ -334,6 +382,7 @@ const addOrders = async () => {
             font-size: 14px;
         }
 
+        select,
         input {
             width: 100%;
             padding: 12px 20px;
@@ -345,25 +394,24 @@ const addOrders = async () => {
 
             &:focus-visible {
                 outline: none;
-                border: 1px solid #9c4202;
+                border: 1px solid #0064d1;
             }
         }
 
         .check_out {
             border-radius: 8px;
             cursor: pointer;
-            background: #9c4202;
+            background: #0064d1;
             font-size: 16px;
             margin-top: 20px;
             padding: 14px;
             color: #fff;
-            border: 1px solid #9c4202;
+            border: 1px solid #0064d1;
             transition: all 0.3s ease;
 
             &:hover {
-                background: white;
-                color: #9c4202;
-                border: 1px solid #9c4202;
+                background: #0271e8;
+                border: 1px solid #0064d1;
             }
         }
     }

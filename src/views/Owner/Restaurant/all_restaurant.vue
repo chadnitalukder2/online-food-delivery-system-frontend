@@ -120,6 +120,7 @@ const closeModalDelete = () => {
 }
 
 .profile-warper{
+  flex-basis: 80%;
   padding: 40px 95px;
 }
 .restaurant-profile {
