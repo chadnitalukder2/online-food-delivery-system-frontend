@@ -172,7 +172,7 @@ const getRestaurant = async () => {
                 top: 62px;
             }
             @media (max-width: 914px) {
-                top: 70px;
+                top: 65px;
             }
             h1 {
                 font-size: 42px;

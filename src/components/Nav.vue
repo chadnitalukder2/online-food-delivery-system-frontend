@@ -272,9 +272,83 @@ const getCarts = async () => {
 
 //=========================================
 .navbar {
-    .menu-items{
-        z-index: 99;
+
+input[type="checkbox"],
+.hamburger-lines {
+    display: none;
+}
+
+box-shadow: 0px 2px 7px 0px #EAECF0;
+/* border-bottom: 1px solid #aaaaaaa1; */
+background: #fff;
+color: #000;
+
+a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all .3s ease;
+    color: #232630;
+    &.active {
+        color: #117964;
     }
+    &:hover {
+        color: #117964;
+    }
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    align-items: center;
+
+    .menu-items {
+        order: 2;
+        display: flex;
+    }
+
+    .logo {
+        order: 1;
+        font-size: 2.3rem;
+    }
+}
+
+.menu-items {
+    // background: #fff;
+
+    li {
+        list-style: none;
+        margin-left: 1.5rem;
+    }
+
+    button {
+        padding: 8px 16px;
+        border: 1px solid #8080803b;
+        border-radius: 4px;
+        cursor: pointer;
+        height: 36px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #444;
+        margin-top: -10px;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+}
+}
+
+.container {
+width: 90%;
+margin: auto;
+}
+.navbar {
+    
     @media (min-width: 900px) {
         display: none;
         box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
@@ -283,7 +357,7 @@ const getCarts = async () => {
     .logo {
         h1 {
             color: #212121;
-            font-size: 32px;
+            font-size: 25px;
             font-weight: 600;
             cursor: pointer;
 
@@ -299,10 +373,11 @@ const getCarts = async () => {
     .navbar {
 
         .navbar-container {
-
+            z-index: 99999;
             input[type="checkbox"],
             .hamburger-lines {
                 display: block;
+               
             }
 
             display: block;
@@ -323,8 +398,8 @@ const getCarts = async () => {
 
             .hamburger-lines {
                 display: block;
-                height: 28px;
-                width: 35px;
+                height: 20px;
+                width: 25px;
                 position: absolute;
                 top: 20px;
                 left: 20px;
@@ -335,7 +410,7 @@ const getCarts = async () => {
 
                 .line {
                     display: block;
-                    height: 4px;
+                    height: 2px;
                     width: 100%;
                     border-radius: 10px;
                     background: #000;

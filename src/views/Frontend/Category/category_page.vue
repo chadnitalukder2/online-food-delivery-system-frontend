@@ -75,16 +75,22 @@ const getCategories = async () => {
                 top: 62px;
             }
             @media (max-width: 914px) {
-                top: 70px;
+                top: 65px;
             }
             h1 {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
-                @media (max-width: 610px) {
-                    font-size: 32px;
-        }
+
+                @media (max-width: 590px) {
+                    font-size: 30px;
+                }
+
+                @media (max-width: 410px) {
+                    font-size: 25px;
+                }
             }
+
         }
     }
 

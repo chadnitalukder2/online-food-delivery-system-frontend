@@ -82,10 +82,7 @@ onMounted(() => {
             width: 100%;
             height: 200px;
             position: relative;
-            @media (max-width: 942px) {
-                z-index: -2;
-                top: 62px;
-            }
+
             img {
                 width: 100%;
                 height: 100%;
@@ -101,24 +98,26 @@ onMounted(() => {
             background: #0e1212a1;
             justify-content: center;
             align-items: center;
-
             @media (max-width: 942px) {
-                z-index: -1;
                 top: 62px;
             }
             @media (max-width: 914px) {
-                top: 70px;
+                top: 65px;
             }
-
             h1 {
                 font-size: 42px;
                 font-weight: 700;
                 color: #fff;
 
-                @media (max-width: 473px) {
+                @media (max-width: 590px) {
                     font-size: 30px;
                 }
+
+                @media (max-width: 410px) {
+                    font-size: 25px;
+                }
             }
+
         }
     }
 

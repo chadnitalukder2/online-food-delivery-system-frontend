@@ -48,7 +48,7 @@ export default {
             // Send token and amount to the backend
             // const response = await fetch('/api/payment', {
                 const response = await axios.post("/api/payment" , {
-                    amount: this.amount, token: token.id
+                   amount: this.amount, token: token.id
                 })
             console.log(response, 'response')
             const data = await response.json();
