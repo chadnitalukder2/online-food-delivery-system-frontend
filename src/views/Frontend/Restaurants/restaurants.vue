@@ -82,7 +82,10 @@ onMounted(() => {
             width: 100%;
             height: 200px;
             position: relative;
-
+            @media (max-width: 942px) {
+                z-index: -2;
+                top: 62px;
+            }
             img {
                 width: 100%;
                 height: 100%;
@@ -100,6 +103,7 @@ onMounted(() => {
             align-items: center;
 
             @media (max-width: 942px) {
+                z-index: -1;
                 top: 62px;
             }
             @media (max-width: 914px) {

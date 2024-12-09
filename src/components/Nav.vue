@@ -154,7 +154,7 @@ const getCarts = async () => {
             align-items: center;
 
             @media (max-width: 1251px) {
-                padding: 0px 50px;
+                padding: 12px 50px;
             }
 
             @media (max-width: 900px) {
@@ -272,8 +272,12 @@ const getCarts = async () => {
 
 //=========================================
 .navbar {
+    .menu-items{
+        z-index: 99;
+    }
     @media (min-width: 900px) {
         display: none;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
     }
 
     .logo {
@@ -293,7 +297,6 @@ const getCarts = async () => {
 
 @media (max-width: 900px) {
     .navbar {
-
 
         .navbar-container {
 
