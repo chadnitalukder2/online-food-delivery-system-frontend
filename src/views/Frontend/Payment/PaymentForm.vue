@@ -6,11 +6,15 @@ const { notify } = useNotification();
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const orderData = JSON.parse(route.query.date); // Parse the data if serialized
+console.log(orderData.total_amount, 'total');
 
 
 
 const name = ref("");
-const amount = ref();
+const amount = ref(orderData.total_amount);
 const message = ref("");
 let stripe = null;
 let card = null;
@@ -23,25 +27,48 @@ onMounted(async () => {
 });
 
 const submitPayment = async () => {
+    if (!amount.value || !card) {
+        notify({ type: "error", text: "Payment amount or card information is missing." });
+        return;
+    }
+
     try {
         const { token, error } = await stripe.createToken(card);
 
         if (error) {
-            message.value = error.message;
+            notify({ type: "error", text: error.message });
             return;
         }
 
-        const response = await axios.post("api/payment", {
+        const paymentResponse = await axios.post("api/payment", {
             amount: amount.value,
             token: token.id,
         });
-        
+
+        if (paymentResponse.status === 200) {
+            const orderResponse = await axios.post("/api/orders", orderData);
+
+            if (orderResponse.status === 201) {
+                notify({ type: "success", title: "Order Placed Successfully" });
+            }
+        }
+        router.push('profile-page')
         amount.value = '';
         token.id = '';
-        notify({ type: "success", text: response.data.message });
+
+        notify({ type: "success", text: paymentResponse.data.message });
     } catch (err) {
-        message.value = "An error occurred during the payment process.";
-        console.error(err);
+        console.error("Payment Error:", err);
+
+        if (err.response) {
+            notify({
+                type: "error",
+                title: "Payment Failed",
+                text: err.response.data.message || "An error occurred while processing the payment.",
+            });
+        } else {
+            notify({ type: "error", text: "A network or server error occurred." });
+        }
     }
 };
 </script>
@@ -65,7 +92,7 @@ const submitPayment = async () => {
                             </div>
                             <div class="form-group">
                                 <label>Amount</label>
-                                <input v-model="amount" type="number" class="form-control" placeholder="Amount">
+                                <input v-model="amount" type="number" class="form-control" placeholder="Amount" readonly>
                             </div>
                             <div id="card-element" class="form-group"></div>
 
