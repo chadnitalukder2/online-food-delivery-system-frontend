@@ -41,6 +41,7 @@ const updateLineTotal = (item) => {
 }
 const subTotal = () => {
     let result = 0;
+
     for (let i = 0; i < carts.value.length; i++) {
         if (order.value.selectedItems.includes(carts.value[i].id)) {
             result += carts.value[i].line_total;
@@ -51,6 +52,7 @@ const subTotal = () => {
     let totalValue = order.value.sub_total + Number(totalDeliveryFee.value) - 5;
 
     order.value.total = totalValue;
+    console.log(order.value);
 }
 //---------------------------------------------------
 const openModalDelete = (id) => {
@@ -74,22 +76,22 @@ const addOrders = async () => {
     try {
         if (order.value.payment_status === 'cash on delivery') {
             let data = {
-            restaurant_id: carts.value?.[0]?.restaurant_id,
-            user_id: localStorage.getItem('user_id'),
-            order_items_id: order.value.selectedItems,
-            total_amount: order.value.total,
-            delivery_address: order.value.address,
-            payment_status: order.value.payment_status,
-            name: order.value.name,
-            email: order.value.email,
-            phone: order.value.phone
-        }
+                restaurant_id: carts.value?.[0]?.restaurant_id,
+                user_id: localStorage.getItem('user_id'),
+                order_items_id: order.value.selectedItems,
+                total_amount: order.value.total,
+                delivery_address: order.value.address,
+                payment_status: order.value.payment_status,
+                name: order.value.name,
+                email: order.value.email,
+                phone: order.value.phone
+            }
             const response = await axios.post("/api/orders", data);
             if (response.status === 201) {
                 notify({ title: "Order Placed Successfully", type: "success" });
             }
         } else {
-            console.log("Pay using card");
+            router.push('payment');
         }
     } catch (error) {
         notify({
@@ -100,53 +102,7 @@ const addOrders = async () => {
     }
 };
 //-------------------------------------------
-// const addOrders2 = async () => {
-//     if (order.value.payment_status === 'cash on delivery') {
-//         let data = {
-//             restaurant_id: carts.value?.[0]?.restaurant_id,
-//             user_id: localStorage.getItem('user_id'),
-//             order_items_id: order.value.selectedItems,
-//             total_amount: order.value.total,
-//             delivery_address: order.value.address,
-//             payment_status: order.value.payment_status,
-//             name: order.value.name,
-//             email: order.value.email,
-//             phone: order.value.phone
-//         }
-//         console.log(carts.value?.[0]?.restaurant_id, 'data');
-//         await axios.post("/api/orders", data).then((res) => {
-//             if (res.status == 201) {
-//                 notify({
-//                     title: "Order Placed Successfully",
-//                     type: "success",
-//                 });
 
-//                 let parse_url = JSON.parse(res.data.payment_redirect_url);
-//                 if (parse_url.status == "success") {
-//                     window.location.replace(parse_url.data);
-//                 }
-
-//             } else {
-//                 notify({
-//                     title: "Order Placed Failed",
-//                     text: res.data.message,
-//                     type: "error",
-//                 });
-//             }
-//         }).catch((err) => {
-//             notify({
-//                 title: "Order Placed Failed",
-//                 text: err.response.data.message,
-//                 type: "error",
-//             });
-//         })
-//         order.value= [];
-//     }
-//     else{
-//         console.log('pay using card');
-//     }
-
-// }
 
 </script>
 

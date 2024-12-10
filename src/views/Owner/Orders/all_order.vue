@@ -90,7 +90,7 @@ const closeModalDelete = () => {
           <th>Address</th>
           <th>Phone</th>
           <th>Total Amount</th>
-          <th>Payment Method</th>
+          <th>Payment Status</th>
           <th>Status</th>
           <th style="text-align: center;width: 158px;">Action</th>
         </tr>
