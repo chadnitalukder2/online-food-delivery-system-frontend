@@ -82,16 +82,30 @@ const addOrders = async () => {
                 total_amount: order.value.total,
                 delivery_address: order.value.address,
                 payment_status: order.value.payment_status,
+                status: 'pending',
                 name: order.value.name,
                 email: order.value.email,
                 phone: order.value.phone
             }
             const response = await axios.post("/api/orders", data);
             if (response.status === 201) {
+                data.value = [];
                 notify({ title: "Order Placed Successfully", type: "success" });
             }
         } else {
-            router.push('payment');
+            let data = {
+                restaurant_id: carts.value?.[0]?.restaurant_id,
+                user_id: localStorage.getItem('user_id'),
+                order_items_id: order.value.selectedItems,
+                total_amount: order.value.total,
+                delivery_address: order.value.address,
+                payment_status: order.value.payment_status,
+                status: 'pending',
+                name: order.value.name,
+                email: order.value.email,
+                phone: order.value.phone
+            }
+            router.push('payment',data);
         }
     } catch (error) {
         notify({

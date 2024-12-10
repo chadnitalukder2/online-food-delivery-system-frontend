@@ -4,9 +4,11 @@ import axios from "axios";
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const name = ref("");
-const amount = ref(0);
+const amount = ref();
 const message = ref("");
 let stripe = null;
 let card = null;
@@ -31,7 +33,9 @@ const submitPayment = async () => {
             amount: amount.value,
             token: token.id,
         });
-
+        router.push('/profile-page')
+        amount.value = '';
+        token.id  = '';
         notify({ type: "success", text: response.data.message });
     } catch (err) {
         message.value = "An error occurred during the payment process.";
