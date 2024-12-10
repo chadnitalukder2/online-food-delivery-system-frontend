@@ -93,7 +93,7 @@ const addOrders = async () => {
                 notify({ title: "Order Placed Successfully", type: "success" });
             }
         } else {
-            let data = {
+           let data = {
                 restaurant_id: carts.value?.[0]?.restaurant_id,
                 user_id: localStorage.getItem('user_id'),
                 order_items_id: order.value.selectedItems,
@@ -105,7 +105,12 @@ const addOrders = async () => {
                 email: order.value.email,
                 phone: order.value.phone
             }
-            router.push('payment',data);
+            const response = await axios.post("/api/orders", data);
+            if (response.status === 201) {
+                data.value = [];
+                notify({ title: "Order Placed Successfully", type: "success" });
+            }
+            router.push('payment');
         }
     } catch (error) {
         notify({

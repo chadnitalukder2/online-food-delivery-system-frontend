@@ -7,6 +7,8 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
+
+
 const name = ref("");
 const amount = ref();
 const message = ref("");
@@ -33,9 +35,9 @@ const submitPayment = async () => {
             amount: amount.value,
             token: token.id,
         });
-        router.push('/profile-page')
+        
         amount.value = '';
-        token.id  = '';
+        token.id = '';
         notify({ type: "success", text: response.data.message });
     } catch (err) {
         message.value = "An error occurred during the payment process.";
@@ -66,7 +68,7 @@ const submitPayment = async () => {
                                 <input v-model="amount" type="number" class="form-control" placeholder="Amount">
                             </div>
                             <div id="card-element" class="form-group"></div>
-                            
+
                             <button type="submit" class="btn">Pay Now</button>
                             <div v-if="message" class="alert alert-warning">
                                 <p>{{ message }}</p>
@@ -164,7 +166,8 @@ label {
 .btn:hover {
     background: #0056b3;
 }
-.alert-warning{
+
+.alert-warning {
     color: rgb(197, 5, 5);
     font-size: 12px;
 }
