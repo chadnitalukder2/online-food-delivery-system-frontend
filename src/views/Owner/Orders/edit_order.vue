@@ -74,9 +74,8 @@ const UpdateCategory = async () => {
                         <p>Payment Method<span style="color: #9c4202">*</span></p>
                         <select v-model="orders.payment_status">
                             <option disabled>Select one</option>
-                            <option value="unpaid">Unpaid</option>
-                            <option value="paid">Paid</option>
-                            <option value="failed">Failed</option>
+                            <option value="cash on delivery">Cash on delivery</option>
+                            <option value="pay using card">Pay using card</option>
                         </select>
                       
                     </div>
