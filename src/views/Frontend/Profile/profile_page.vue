@@ -146,14 +146,14 @@ const closeModalView = () => {
 
                                         <tr>
                                             <td style="color: blue; padding: 5px"># {{ cartItem.id }}</td>
-                                            <!-- <td style="width: 90px; height: 70px;padding: 5px">
-                                                <img :src="cartItem.product.product_img"
+                                            <td style="width: 90px; height: 70px;padding: 5px">
+                                                <img :src="cartItem.menu.image"
                                                     style="width: 100%; height: 100%" />
                                             </td>
                                             
-                                            <td style="padding: 5px">{{ cartItem.product.product_name }}</td> -->
-                                            <td style="padding: 5px">{{ cartItem.quantity }}</td>{{ cartItem }}
-                                            <!-- <td style="padding: 5px">{{ cartItem.product.product_price }}</td> -->
+                                            <td style="padding: 5px">{{ cartItem.menu.name }}</td>
+                                            <td style="padding: 5px">{{ cartItem.quantity }}</td>
+                                            <td style="padding: 5px"> {{ cartItem.menu.price }}</td>
 
                                         </tr>
                                     </tbody>

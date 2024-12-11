@@ -152,7 +152,7 @@ const handleApiRequest = async () => {
             h1 {
                 font-size: 42px;
                 font-weight: 700;
-                color: #fff;
+                color: var(--text-color-white);
 
                 @media (max-width: 590px) {
                     font-size: 30px;
@@ -181,7 +181,7 @@ const handleApiRequest = async () => {
         .login_page {
             flex-basis: 50%;
             text-align: center;
-            background: #fff;
+            background: var(--text-color-white);
             box-shadow: 0px 1px 7px #e7e4e4;
             border-radius: 6px;
             padding: 40px 0px;
@@ -218,7 +218,7 @@ const handleApiRequest = async () => {
                     border: 2px solid #e7e4e4;
 
                     &:focus-visible {
-                        border: 2px solid #9c4202;
+                        border: 2px solid var(--primary-color);
                         outline: none;
                     }
                 }
@@ -226,9 +226,9 @@ const handleApiRequest = async () => {
                 .login_btn {
                     padding: 10px;
                     width: 100%;
-                    border: 1px solid #9c4202;
-                    color: #fff;
-                    background: #9c4202;
+                    border: 1px solid var(--primary-color);
+                    color: var(--text-color-white);
+                    background: var(--primary-color);
                     border-radius: 6px;
                     cursor: pointer;
                     font-size: 18px;
@@ -237,7 +237,7 @@ const handleApiRequest = async () => {
                     transition: all .5s;
 
                     &:hover {
-                        background: #bb5003;
+                        background: var( --primary-color-hover);
                     }
                 }
             }
@@ -252,7 +252,7 @@ const handleApiRequest = async () => {
                 transition: all .3s;
 
                 &:hover {
-                    color: #0303a4;
+                    color: var(--text-color-link);
                 }
             }
 
@@ -262,7 +262,7 @@ const handleApiRequest = async () => {
                 font-size: 16px;
 
                 a {
-                    color: #9c4202;
+                    color: var(--text-color-link);
                     text-decoration: none;
                 }
             }

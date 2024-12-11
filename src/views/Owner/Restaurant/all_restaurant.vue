@@ -45,9 +45,9 @@ const closeModalDelete = () => {
   <div class="profile-warper">
     <div class="restaurant-profile" v-for="(item, index) in restaurants">
       <div class="header">
-        <img class="background-img" src="../../../assets/baner-img.jpg" alt="Restaurant Background">
+        <img class="background-img" :src="item.bg_image" alt="Restaurant Background">
         <div class="logo-container">
-          <img class="logo" src="../../../assets/res-logo-1.png" alt="Restaurant Logo">
+          <img class="logo" :src="item.image" alt="Restaurant Logo">
         </div>
       </div>
 

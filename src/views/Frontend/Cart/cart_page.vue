@@ -364,30 +364,30 @@ const addOrders = async () => {
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
-            border: 1px solid #ccc;
+            border: 1.5px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
 
             &:focus-visible {
                 outline: none;
-                border: 1px solid #0064d1;
+                border: 1.5px solid var(--primary-color);
             }
         }
 
         .check_out {
             border-radius: 8px;
             cursor: pointer;
-            background: #0064d1;
+            background: var(--primary-color);
             font-size: 16px;
             margin-top: 20px;
             padding: 14px;
             color: #fff;
-            border: 1px solid #0064d1;
+            border: 1px solid var(--primary-color);
             transition: all 0.3s ease;
 
             &:hover {
-                background: #0271e8;
-                border: 1px solid #0064d1;
+                background: var(--primary-color-hover);
+                border: 1px solid var(--primary-color);
             }
         }
     }
