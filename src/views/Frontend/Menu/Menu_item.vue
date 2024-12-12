@@ -109,10 +109,10 @@ const getRestaurant = async () => {
                 <!-- <button type="submit"  class="search-btn">Search</button> -->
             </div>
             <div class="category">
-                <div class="category-item active"> <a href="#">All </a></div>
-                <div class="category-item" v-for="(item, index) in restaurant.categories" :key="index"><a href="#">
+                <div class="category-item active"> All </div>
+                <div class="category-item" v-for="(item, index) in restaurant.categories" :key="index">
                         {{ item.name }}
-                    </a></div>
+                    </div>
             </div>
         </section>
 
@@ -356,7 +356,7 @@ const getRestaurant = async () => {
             margin: 0 auto;
 
             .category-item {
-                a {
+               
                     text-transform: capitalize;
                     text-decoration: none;
                     color: #524d4d;
@@ -367,7 +367,7 @@ const getRestaurant = async () => {
                     &:hover {
                         color: var(--primary-color);
                     }
-                }
+                
             }
         }
 

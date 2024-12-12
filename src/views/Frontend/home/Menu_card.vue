@@ -155,6 +155,7 @@ const addToCart = async () => {
         background: var(--text-color-white);
         width: 25px;
         display: flex;
+        border: 1px solid #017EF3;
         border-radius: 50%;
         box-shadow: 0px 0px 8px #ddd;
         justify-content: center;
