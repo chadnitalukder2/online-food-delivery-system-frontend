@@ -1,7 +1,6 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import Modal from "@/components/global/Modal.vue";
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -13,6 +12,8 @@ const menus = ref([]);
 const orders = ref([]);
 const restaurants = ref([]);
 const restaurantId = ref(null);
+const totalAmount = ref(0);
+
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -52,23 +53,23 @@ const getMenuById = async () => {
 };
 //-----------------------------------------------------
 const getOrderById = async () => {
-  
-  if (!restaurantId.value) {
-    console.error("Restaurant ID not set");
-    return;
-  }
-  try {
-    const response = await axios.get(`api/getOrdersByRestaurantIds/${restaurantId.value}`);
-    orders.value = response.data;
-    console.log(response, 'orders');
-  } catch (error) {
-    console.error("Error fetching orders:", error);
-  }
+    if (!restaurantId.value) {
+        console.error("Restaurant ID not set");
+        return;
+    }
+    try {
+        const response = await axios.get(`api/getOrdersByRestaurantIds/${restaurantId.value}`);
+        orders.value = response.data;
+     
+        totalAmount.value = orders.value
+            .filter(order => order.status === "completed")
+            .reduce((sum, order) => sum + (order.total_amount || 0), 0);
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+    }
 };
-//-----------------------------------------------
-const totalOrder = async () => {
-  
-}
+//-------------------------------------------------------
+
 </script>
 
 <template>
@@ -76,7 +77,7 @@ const totalOrder = async () => {
     <div class="dashboard-stats">
       <div class="stat-card">
         <h3>Total Order : {{ orders.length }}</h3>
-        <h3>Total Order Amount : 10</h3>
+        <h3>Total Order Amount : {{ totalAmount }}</h3>
       </div>
       <div class="stat-card">
         <h3>Total Category Items</h3>
@@ -102,8 +103,6 @@ const totalOrder = async () => {
   gap: 20px;
   justify-content: space-between;
 
-
-
   .stat-card {
     flex-basis: 33%;
     background: var(--text-color-white);
@@ -128,11 +127,10 @@ const totalOrder = async () => {
 .stat-value {
   font-size: 32px;
   font-weight: bold;
-  color: #27ae60;
+  color: var(--primary-color);
   margin: 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .stat-card h3 {
     font-size: 16px;
