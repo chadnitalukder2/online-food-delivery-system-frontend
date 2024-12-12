@@ -380,7 +380,7 @@ td {
         cursor: pointer;
 
         &:hover {
-            color: rgb(14 159 159);
+            color: var(--primary-color);
         }
     }
 }
