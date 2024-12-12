@@ -33,6 +33,12 @@ const router = createRouter({
       meta: { requiresAuth: true },
       component: () => import("../views/Frontend/Payment/PaymentForm.vue"),
     },
+     {
+      path: "/payment",
+      name: "payment",
+      meta: { requiresAuth: true },
+      component: () => import("../views/Frontend/Payment/PaymentForm.vue"),
+    },
     {
       path: "/category/:id",
       name: "category",
@@ -190,6 +196,12 @@ const router = createRouter({
           name: "payments",
           meta: { requiresOwner: true },
           component: () => import("../views/Owner/Payments/all_payment.vue"),
+        },
+        {
+          path: "edit-payments/:id",
+          name: "edit-payments",
+          meta: { requiresOwner: true },
+          component: () => import("../views/Owner/Payments/edit_payment.vue"),
         },
         {
           path: "order-trackings",
