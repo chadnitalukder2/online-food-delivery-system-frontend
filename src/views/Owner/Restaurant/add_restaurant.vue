@@ -279,7 +279,7 @@ console.log('hello');
                 transition: all .3s;
 
                 &:hover {
-                    background: #ba4f03;
+                    background: var(--primary-color-hover);
                 }
             }
         }

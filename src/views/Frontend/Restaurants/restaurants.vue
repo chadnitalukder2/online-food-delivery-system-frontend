@@ -183,7 +183,7 @@ onMounted(() => {
                     transition: all .3s;
 
                     &:hover {
-                        background: #b84e02;
+                        background: var(--primary-color-hover);
                     }
                 }
             }

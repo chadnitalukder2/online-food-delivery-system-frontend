@@ -99,7 +99,7 @@ const closeModalView = () => {
                             <div id="myModal" style="text-align: center;">
                                 <h4 class="delete-title">Are you sure?</h4>
                                 <div class="modal-body">
-                                    <p style="font-size: 14px; color: #999999;">Do you really want to delete these
+                                    <p style="font-size: 14px; color: var(--text-color-small-font);">Do you really want to delete these
                                         records? This process
                                         cannot be undone.</p>
                                 </div>
@@ -272,11 +272,11 @@ const closeModalView = () => {
                 border: 1px solid var(--primary-color);
                 cursor: pointer;
                 margin-bottom: 30px;
-                color: white;
+                color: var(--text-color-white);
                 transition: all .3s;
 
                 &:hover {
-                    background: #b84f03;
+                    background: var(--primary-color-hover);
                 }
             }
         }

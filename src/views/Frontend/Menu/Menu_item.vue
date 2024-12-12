@@ -224,7 +224,7 @@ const getRestaurant = async () => {
                     font-weight: 600;
                     font-size: 24px;
                     line-height: 1.2;
-                    color: #212121;
+                    color: var(--text-color-big);
                     margin-bottom: 10px;
                 }
 
@@ -344,7 +344,7 @@ const getRestaurant = async () => {
                 transition: all .3s;
 
                 &:hover {
-                    background: #b84e02;
+                    background: var(--primary-color-hover);
                 }
             }
         }
@@ -392,7 +392,7 @@ const getRestaurant = async () => {
                     line-height: 1.2;
                     font-weight: 600;
                     position: relative;
-                    color: #212121;
+                    color: var(--text-color-big);
                     letter-spacing: 1.1px;
                     display: inline-block;
                 }

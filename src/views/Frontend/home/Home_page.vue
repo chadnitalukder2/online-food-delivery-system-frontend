@@ -165,7 +165,7 @@ a {
                     font-family: "Poppins", sans-serif;
 
                     .banner-area-title {
-                        color: #212121;
+                        color: var(--text-color-big);
                         font-size: 60px;
                         margin-bottom: 25px;
                         max-width: 550px;
@@ -188,7 +188,7 @@ a {
                 }
 
                 .search-form {
-                    color: #999999;
+                    color: var(--text-color-small-font);
                     border-radius: 10px;
                     background: var(--text-color-white);
                     width: 100%;
@@ -240,7 +240,7 @@ a {
 
                         input:focus+label {
                             top: 0%;
-                            color: #212121;
+                            color: var(--text-color-big);
                         }
 
                     }
@@ -269,7 +269,7 @@ a {
                             transform: all .3s;
 
                             &:hover {
-                                background: #a94804;
+                                background: var(--primary-color-hover);
                             }
 
                         }
@@ -359,14 +359,14 @@ a {
 
                 a {
                     text-decoration: none;
-                    color: #212121;
+                    color: var(--text-color-big);
 
                 }
             }
 
             &:hover {
                 .food-item-box {
-                    box-shadow: 0px 0px 18px 0px #d5681b70;
+                    box-shadow: 0px 0px 18px 0px var(--text-color-sidebar);
                 }
 
                 .food-item__title a {
@@ -410,7 +410,7 @@ a {
                     line-height: 1.2;
                     font-weight: 600;
                     position: relative;
-                    color: #212121;
+                    color: var(--text-color-big);
                     display: inline-block;
                 }
             }
@@ -430,7 +430,7 @@ a {
 
                     &:hover {
                         transform: scale(1.1);
-                        background: #b54d02;
+                        background: --primary-color-hover;
                     }
                 }
             }

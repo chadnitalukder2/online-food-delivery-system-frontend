@@ -125,14 +125,14 @@ const props = defineProps(["restaurant"]);
                     text-decoration: none;
                     font-size: 18px;
                     font-weight: 600;
-                    color: #212121;
+                    color: var(--text-color-big);
                     transition: all .3s;
                 }
             }
 
             .restaurant__info-content-location {
                 font-size: 16px;
-                color: #999999;
+                color: var(--text-color-small-font);
 
                 i {
                     color: var(--primary-color);

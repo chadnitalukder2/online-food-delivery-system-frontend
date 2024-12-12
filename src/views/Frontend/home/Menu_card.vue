@@ -220,7 +220,7 @@ const addToCart = async () => {
 
                 a {
                     font-weight: 600;
-                    color: #212121;
+                    color: var(--text-color-big);
 
                     &:hover {
                         color: var(--primary-color);
@@ -237,7 +237,7 @@ const addToCart = async () => {
         }
 
         .description {
-            color: #999999;
+            color: var(--text-color-small-font);
             font-size: 15px;
             font-weight: bold
         }
@@ -248,7 +248,7 @@ const addToCart = async () => {
         margin: -70px 0px 0px 0px;
 
         a {
-            color: #999999;
+            color: var(--text-color-small-font);
         }
     }
 

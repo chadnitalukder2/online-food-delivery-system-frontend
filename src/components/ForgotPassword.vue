@@ -100,7 +100,7 @@
                 font-size: 32px;
                 padding-bottom: 30px;
                 font-weight: 500;
-                color: #484646;
+                color: var(--text-color-middle);
             }
 
             .form-header {
@@ -109,7 +109,7 @@
 
                 label {
                     font-size: 16px;
-                    color: #484646;
+                    color: var(--text-color-middle);
                 }
 
                 input {

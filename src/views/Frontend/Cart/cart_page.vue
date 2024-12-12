@@ -147,7 +147,7 @@ const addOrders = async () => {
                         <div id="myModal" style="text-align: center;">
                             <h4 class="delete-title">Are you sure?</h4>
                             <div class="modal-body">
-                                <p style="font-size: 14px; color: #999999;">Do you really want to delete these records?
+                                <p style="font-size: 14px; color: var(--text-color-small-font);">Do you really want to delete these records?
                                     This process
                                     cannot be undone.</p>
                             </div>
@@ -202,7 +202,7 @@ const addOrders = async () => {
                     <hr style="background: rgba(255, 255, 255, 0.1)" />
                     <p>
                         <span>TOTAL</span>
-                        <span style="color: #484646; font-weight: 600">${{ order.total }}</span>
+                        <span style="color: var(--text-color-middle); font-weight: 600">${{ order.total }}</span>
                     </p>
                 </div>
             </div>
@@ -307,7 +307,7 @@ const addOrders = async () => {
                 letter-spacing: 2px;
                 margin-bottom: 20px;
                 font-weight: 700;
-                color: #484646
+                color: var(--text-color-middle)
             }
 
             p {
@@ -341,7 +341,7 @@ const addOrders = async () => {
         border-radius: 8px;
 
         .title {
-            color: #484646;
+            color: var(--text-color-middle);
             font-size: 22px;
             font-weight: 600;
             letter-spacing: 1.1px;

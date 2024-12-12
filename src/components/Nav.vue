@@ -163,7 +163,7 @@ const getCarts = async () => {
 
             .logo {
                 h1 {
-                    color: #212121;
+                    color: var(--text-color-big);
                     font-size: 32px;
                     font-weight: 600;
                     cursor: pointer;
@@ -192,7 +192,7 @@ const getCarts = async () => {
                         a {
                             text-decoration: none;
                             font-weight: 500;
-                            color: #484646;
+                            color: var(--text-color-middle);
 
                             &:hover {
                                 color: var(--primary-color);
@@ -232,7 +232,7 @@ const getCarts = async () => {
                 .profile {
                     i {
                         font-size: 20px;
-                        color: #484646;
+                        color: var(--text-color-middle);
                         transition: all .3s;
 
                         &:hover {
@@ -356,7 +356,7 @@ margin: auto;
 
     .logo {
         h1 {
-            color: #212121;
+            color: var(--text-color-big);
             font-size: 25px;
             font-weight: 600;
             cursor: pointer;
@@ -441,7 +441,7 @@ margin: auto;
                 display: flex;
                 flex-direction: column;
                 text-align: center;
-                margin-left: -75px;
+                margin-left: -51px;
                 padding-left: 40px;
                 transition: transform 0.5s ease-in-out;
                 box-shadow: 5px 0px 10px 0px #aaa;
@@ -449,7 +449,6 @@ margin: auto;
 
                 li {
                     font-size: 1.3rem;
-                    // background: rgb(247 229 229);
                     padding: 15px;
                     border: 1px solid var(--primary-color);
                     margin: 9px 15px;

@@ -191,7 +191,7 @@ label {
 }
 
 .btn:hover {
-    background: #0056b3;
+    background: var(--primary-color-hover);
 }
 
 .alert-warning {

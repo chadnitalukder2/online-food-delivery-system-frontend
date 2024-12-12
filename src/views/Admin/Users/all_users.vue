@@ -61,7 +61,7 @@ const closeModalDelete = () => {
             <div id="myModal" style="text-align: center;">
               <h4 class="delete-title">Are you sure?</h4>
               <div class="modal-body">
-                <p style="font-size: 14px; color: #999999;">Do you really want to delete these records? This process
+                <p style="font-size: 14px; color: var(--text-color-small-font);">Do you really want to delete these records? This process
                   cannot be undone.</p>
               </div>
               <div class="modal_footer" style="padding: 20px;">

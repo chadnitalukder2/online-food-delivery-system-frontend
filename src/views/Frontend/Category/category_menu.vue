@@ -97,7 +97,7 @@ const props = defineProps(["menuItem"]);
 
                 a {
                     font-weight: 600;
-                    color: #212121;
+                    color: var(--text-color-big);
 
                     &:hover {
                         color: var(--primary-color-hover);
@@ -114,7 +114,7 @@ const props = defineProps(["menuItem"]);
         }
 
         .description {
-            color: #999999;
+            color: var(--text-color-small-font);
             font-size: 15px;
             font-weight: bold
         }
@@ -126,7 +126,7 @@ const props = defineProps(["menuItem"]);
         margin: -70px -30px 0px 0px;
 
         a {
-            color: #999999;
+            color: var(--text-color-small-font);
         }
     }
 

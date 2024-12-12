@@ -195,7 +195,7 @@ const handleApiRequest = async () => {
                 font-size: 32px;
                 padding-bottom: 30px;
                 font-weight: 500;
-                color: #484646;
+                color: var(--text-color-middle);
             }
 
             .form-header {
@@ -206,7 +206,7 @@ const handleApiRequest = async () => {
             }
                 label {
                     font-size: 16px;
-                    color: #484646;
+                    color: var(--text-color-middle);
                 }
 
                 input {
@@ -258,7 +258,7 @@ const handleApiRequest = async () => {
 
             .text-base {
                 margin-top: 12px;
-                color: #212121;
+                color: var(--text-color-big);
                 font-size: 16px;
 
                 a {
