@@ -2,6 +2,7 @@
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
 import Modal from "@/components/global/Modal.vue";
+import ModalView from "@/components/global/ModalView.vue";
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -12,6 +13,7 @@ const orders = ref([]);
 const deleteVisibleId = ref(null);
 const restaurants = ref([]);
 const restaurantId = ref(null);
+const VisibleId = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
   //getOrder();
@@ -24,7 +26,7 @@ const fetchRestaurants = async () => {
     const id = localStorage.getItem('user_id');
     let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
     restaurants.value = response.data;
-    restaurantId.value = restaurants.value[0]?.id || null; 
+    restaurantId.value = restaurants.value[0]?.id || null;
     if (restaurantId.value) {
       getOrderById();
       console.log(restaurantId.value, 'hello')
@@ -35,7 +37,7 @@ const fetchRestaurants = async () => {
 }
 //--------------------------------------------------
 const getOrderById = async () => {
-  
+
   if (!restaurantId.value) {
     console.error("Restaurant ID not set");
     return;
@@ -71,6 +73,12 @@ const closeModalDelete = () => {
   deleteVisibleId.value = null;
 };
 //--------------------------------------------
+const openModalView = (id) => {
+  VisibleId.value = id;
+};
+const closeModalView = () => {
+  VisibleId.value = null;
+};
 </script>
 
 <template>
@@ -100,7 +108,8 @@ const closeModalDelete = () => {
             <div id="myModal" style="text-align: center;">
               <h4 class="delete-title">Are you sure?</h4>
               <div class="modal-body">
-                <p style="font-size: 14px; color: var(--text-color-small-font);">Do you really want to delete these records? This process
+                <p style="font-size: 14px; color: var(--text-color-small-font);">Do you really want to delete these
+                  records? This process
                   cannot be undone.</p>
               </div>
               <div class="modal_footer" style="padding: 20px;">
@@ -124,8 +133,46 @@ const closeModalDelete = () => {
               <button class="edit-btn">
                 <router-link :to="{ name: 'edit-order', params: { id: item.id } }">Edit</router-link>
               </button>
+
+              <button @click="openModalView(item.id)" class="view"> View</button>
+
             </td>
           </tr>
+          <ModalView :show="VisibleId === item.id" @close="closeModalView">
+            <div>
+              <h1 style="text-align: left; font-size: 22px; margin-top: 10px;">Order Details</h1>
+            </div>
+            <div class="container" style="padding: 10px; background: transparent;">
+
+
+              <table id="customers" style="flex-basis: 80%;">
+                <tr>
+                  <th style="font-size: 18px;padding: 15px 0px"></th>
+                  <th style="font-size: 18px; padding: 15px 0px">Image</th>
+                  <th style="font-size: 18px; padding: 15px 0px">Name</th>
+                  <th style="font-size: 18px; padding: 15px 0px">Quantity</th>
+                  <th style="font-size: 18px; padding: 15px 0px">Price</th>
+                </tr>
+                <tbody v-for="cartItem in item.cart_item" :key="cartItem.id">
+
+                  <tr>
+                    <td style="color: blue; padding: 5px"># {{ cartItem.id }}</td>
+                    <td style="width: 90px; height: 70px;padding: 5px">
+                      <img :src="cartItem.menu.image" style="width: 100%; height: 100%" />
+                    </td>
+
+                    <td style="padding: 5px">{{ cartItem.menu.name }}</td>
+                    <td style="padding: 5px">{{ cartItem.quantity }}</td>
+                    <td style="padding: 5px"> {{ cartItem.menu.price }}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+
+
+
+            </div>
+          </ModalView>
         </tbody>
       </table>
     </div>
@@ -257,18 +304,17 @@ table {
 }
 
 .delete-btn {
-  color: #da0808;
+  color: var(--fiv-red-700);
   background: rgb(237 236 236 / 68%);
   border-radius: 6px;
   font-size: 14px;
   border: 1px solid rgb(237 236 236 / 68%);
   padding: 5px 10px;
   cursor: pointer;
-  margin-right: 10px;
   transition: all .3s;
 
   &:hover {
-    background: #da0808;
+    background: var(--fiv-red-700);
     color: var(--text-color-white);
   }
 }
@@ -281,15 +327,33 @@ table {
   transition: all .3s;
 
   a {
-    color: rgb(0, 179, 255);
+    color: var(--primary-color);
   }
 
   &:hover {
-    background: rgb(0, 179, 255);
+    background: var(--primary-color);
 
     a {
       color: var(--text-color-white);
     }
+  }
+}
+
+.view {
+  background: rgb(237 236 236 / 68%);
+  border: 1px solid rgb(237 236 236 / 68%);
+  border-radius: 6px;
+  padding: 5px 17px;
+  transition: all .3s;
+  cursor: pointer;
+
+  color: var(--fiv-success-500);
+
+
+  &:hover {
+    background: var(--fiv-success-500);
+    color: var(--text-color-white);
+
   }
 }
 </style>
