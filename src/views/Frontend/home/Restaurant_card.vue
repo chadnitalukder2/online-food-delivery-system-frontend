@@ -53,7 +53,7 @@ const props = defineProps(["restaurant"]);
 <style lang="scss" scoped>
 
 .restaurant_item {
-    background-color: #fff;
+    background-color: var(--text-color-white);
     border-radius: 8px;
     .restaurant__thumb {
         position: relative;
@@ -80,7 +80,7 @@ const props = defineProps(["restaurant"]);
             margin: 0 auto;
             top: 0;
             right: 0;
-            background: #fff;
+            background: var(--text-color-white);
             color: #8f8787;
             height: 40px;
             width: 40px;
@@ -97,7 +97,7 @@ const props = defineProps(["restaurant"]);
 
     .restaurant__info {
         padding: 25px 15px 20px 15px;
-        background-color: #fff;
+        background-color: var(--text-color-white);
         border-radius: 0px 0px 8px 8px;
         display: flex;
         justify-content: space-between;
@@ -135,7 +135,7 @@ const props = defineProps(["restaurant"]);
                 color: #999999;
 
                 i {
-                    color: #9c4202;
+                    color: var(--primary-color);
                     font-size: 16px;
                     margin-right: 5px;
                 }
@@ -163,7 +163,7 @@ const props = defineProps(["restaurant"]);
     }
 
     .restaurant__info-content-title a {
-        color: #9c4202 !important;
+        color: var(--primary-color) !important;
     }
 }
 </style>

@@ -72,23 +72,23 @@ const getCarts = async () => {
 
                         <li class="btn_login" v-if="!state.loggedIn">
                             <router-link active-class="active" :to="{ name: 'Login' }"
-                                style=" color: #9c4202 ;">Login</router-link>
+                                style=" color: #017EF3 ;">Login</router-link>
                         </li>
                         <li class="btn_singup" v-if="!state.loggedIn">
-                            <router-link active-class="active" :to="{ name: 'register' }" style=" color: #fff ;">Sing
+                            <router-link active-class="active" :to="{ name: 'register' }" style=" color: var(--text-color-white) ;">Sing
                                 up</router-link>
                         </li>
                         <li class="btn_login" v-if="state.is_admin">
                             <router-link active-class="active" :to="{ name: 'dashboard' }"
-                                style=" color: #9c4202 ;">Admin</router-link>
+                                style=" color: #017EF3 ;">Admin</router-link>
                         </li>
                         <li class="btn_login" v-if="state.is_owner">
                             <router-link active-class="active" :to="{ name: 'owner-dashboard' }"
-                                style=" color: #9c4202 ;">Owner</router-link>
+                                style=" color: #017EF3 ;">Owner</router-link>
                         </li>
                         <li v-if="state.loggedIn">
                             <button @click="handleLogout" class="btn_singup"
-                                style="color: #fff; cursor: pointer;">Logout</button>
+                                style="color: var(--text-color-white); cursor: pointer;">Logout</button>
                         </li>
                     </ul>
                 </div>
@@ -147,7 +147,7 @@ const getCarts = async () => {
         box-shadow: 0 3px 5px rgba(0, 0, 0, .02), 0 0 2px rgba(0, 0, 0, .05), 0 1px 4px rgba(0, 0, 0, .08) !important;
 
         .header-main {
-            background: #fff;
+            background: var(--text-color-white);
             padding: 12px 80px;
             display: flex;
             justify-content: space-between;
@@ -169,7 +169,7 @@ const getCarts = async () => {
                     cursor: pointer;
 
                     span {
-                        color: #9c4202;
+                        color: var(--primary-color);
                         font-weight: 500;
                     }
                 }
@@ -186,7 +186,7 @@ const getCarts = async () => {
                         font-size: 18px;
 
                         .router-link-exact-active {
-                            color: #9c4202;
+                            color: var(--primary-color);
                         }
 
                         a {
@@ -195,15 +195,15 @@ const getCarts = async () => {
                             color: #484646;
 
                             &:hover {
-                                color: #9c4202;
+                                color: var(--primary-color);
                             }
                         }
                     }
                 }
 
                 .btn_login {
-                    background: #fff;
-                    border: 1px solid #9c4202;
+                    background: var(--text-color-white);
+                    border: 1px solid var(--primary-color);
                     padding: 6px 12px;
                     border-radius: 6px;
                     font-size: 14px !important;
@@ -215,8 +215,8 @@ const getCarts = async () => {
                 }
 
                 .btn_singup {
-                    background: #9c4202;
-                    border: 1px solid #9c4202;
+                    background: var(--primary-color);
+                    border: 1px solid var(--primary-color);
                     padding: 6px 12px;
                     border-radius: 6px;
                     font-size: 14px !important;
@@ -224,7 +224,7 @@ const getCarts = async () => {
 
                     &:hover {
                         transform: scale(1.1);
-                        color: #fff;
+                        color: var(--text-color-white);
                     }
                 }
 
@@ -236,13 +236,13 @@ const getCarts = async () => {
                         transition: all .3s;
 
                         &:hover {
-                            color: #9c4202;
+                            color: var(--primary-color);
                         }
                     }
 
                     .router-link-exact-active {
                         i {
-                            color: #9c4202;
+                            color: var(--primary-color);
                         }
                     }
                 }
@@ -253,7 +253,7 @@ const getCarts = async () => {
                     p {
                         position: absolute;
                         background: red;
-                        color: #fff;
+                        color: var(--text-color-white);
                         font-size: 10px;
                         font-weight: bold;
                         text-align: center;
@@ -280,7 +280,7 @@ input[type="checkbox"],
 
 box-shadow: 0px 2px 7px 0px #EAECF0;
 /* border-bottom: 1px solid #aaaaaaa1; */
-background: #fff;
+background: var(--text-color-white);
 color: #000;
 
 a {
@@ -316,7 +316,7 @@ a {
 }
 
 .menu-items {
-    // background: #fff;
+    // background: var(--text-color-white);
 
     li {
         list-style: none;
@@ -362,7 +362,7 @@ margin: auto;
             cursor: pointer;
 
             span {
-                color: #9c4202;
+                color: var(--primary-color);
                 font-weight: 500;
             }
         }
@@ -432,7 +432,7 @@ margin: auto;
             }
 
             .menu-items {
-                background: #fff;
+                background: var(--text-color-white);
                 padding-top: 64px;
                 margin-top: 0px;
                 height: 100vh;
@@ -451,7 +451,7 @@ margin: auto;
                     font-size: 1.3rem;
                     // background: rgb(247 229 229);
                     padding: 15px;
-                    border: 1px solid #9c4202;
+                    border: 1px solid var(--primary-color);
                     margin: 9px 15px;
                     border-radius: 6px;
                     list-style: none;
@@ -460,21 +460,21 @@ margin: auto;
                     a {
                         text-decoration: none;
                         font-weight: 500;
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
 
                     &:hover {
-                        background: #9c4202;
+                        background: var(--primary-color);
 
                         a {
-                            color: #fff;
+                            color: var(--text-color-white);
                         }
                     }
 
                     button {
                         border: none;
                         background-color: transparent;
-                        color: #9c4202;
+                        color: var(--primary-color);
                         font-size: 1.3rem;
                         cursor: pointer;
                     }

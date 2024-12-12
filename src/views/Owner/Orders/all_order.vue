@@ -147,7 +147,7 @@ const closeModalDelete = () => {
 
       cursor: pointer;
       background: #c1c1c1;
-      color: #fff;
+      color: var(--text-color-white);
       border-radius: 4px;
       text-decoration: none;
       transition: all 0.4s;
@@ -191,8 +191,8 @@ table {
 
       button {
         padding: 10px 20px;
-        border: 1px solid #9c4202;
-        background: #9c4202;
+        border: 1px solid var(--primary-color);
+        background: var(--primary-color);
         border-radius: 6px;
         cursor: pointer;
         transition: all ease-in .3s;
@@ -201,15 +201,15 @@ table {
           text-decoration: none;
           font-size: 16px;
           font-weight: 500;
-          color: #fff;
+          color: var(--text-color-white);
         }
 
         &:hover {
           transform: scale(1.05);
-          background-color: #fff;
+          background-color: var(--text-color-white);
 
           a {
-            color: #9c4202;
+            color: var(--primary-color);
           }
         }
       }
@@ -269,7 +269,7 @@ table {
 
   &:hover {
     background: #da0808;
-    color: #fff;
+    color: var(--text-color-white);
   }
 }
 
@@ -288,7 +288,7 @@ table {
     background: rgb(0, 179, 255);
 
     a {
-      color: #fff;
+      color: var(--text-color-white);
     }
   }
 }

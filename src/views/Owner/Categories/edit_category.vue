@@ -60,7 +60,7 @@ const UpdateCategory = async () => {
             <form @submit.prevent="UpdateCategory" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Category Name <span style="color: #9c4202">*</span></p>
+                        <p>Category Name <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="category.name" placeholder="Enter a category name">
                     </div>
 
@@ -68,7 +68,7 @@ const UpdateCategory = async () => {
 
 
                 <div class="input-box">
-                    <p>Category Description <span style="color: #9c4202">*</span></p>
+                    <p>Category Description <span style="color: var(--primary-color)">*</span></p>
                     <textarea v-model="category.description" rows="5" cols="50"> </textarea>
                 </div>
 
@@ -93,8 +93,8 @@ const UpdateCategory = async () => {
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -103,15 +103,15 @@ const UpdateCategory = async () => {
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -165,7 +165,7 @@ const UpdateCategory = async () => {
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -175,10 +175,10 @@ const UpdateCategory = async () => {
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;

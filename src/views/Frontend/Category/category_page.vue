@@ -80,7 +80,7 @@ const getCategories = async () => {
             h1 {
                 font-size: 42px;
                 font-weight: 700;
-                color: #fff;
+                color: var(--text-color-white);
 
                 @media (max-width: 590px) {
                     font-size: 30px;
@@ -100,7 +100,7 @@ const getCategories = async () => {
             padding: 40px 20px;
         }
         .header-section {
-            background: #fff;
+            background: var(--text-color-white);
             box-shadow: 1px solid gray;
             padding: 20px;
             border-radius: 6px;
@@ -127,22 +127,22 @@ const getCategories = async () => {
 
                     &:focus {
                         outline: none;
-                        border: 1px solid #9c4202;
+                        border: 1px solid var(--primary-color);
                     }
                 }
 
                 .search-btn {
                     font-size: 16px;
-                    background: #9c4202;
-                    color: #fff;
-                    border: 1px solid #9c4202;
+                    background: var(--primary-color);
+                    color: var(--text-color-white);
+                    border: 1px solid var(--primary-color);
                     border-radius: 0px 6px 6px 0px;
                     padding: 10px 12px;
                     cursor: pointer;
                     transition: all .3s;
 
                     &:hover {
-                        background: #b84e02;
+                        background: var(--primary-color-hover);
                     }
                 }
             }

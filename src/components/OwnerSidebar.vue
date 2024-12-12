@@ -40,19 +40,19 @@
         padding: 10px 15px;
         width: calc(100% - 30px);
         color: #444;
-        background: #fff;
-        border: 1px solid #9c4202;
-        color: #9c4202;
+        background: var(--text-color-white);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
         border-radius: 8px;
         transition: all ease .3s;
         &:hover{
-            background: #9c4202;
-            color: #fff;
+            background: var(--primary-color);
+            color: var(--text-color-white);
             border-radius: 8px;
         }
         &.router-link-exact-active {
-            background: #9c4202;
-            color: #fff;
+            background: var(--primary-color);
+            color: var(--text-color-white);
             border-radius: 8px;
         }
     }

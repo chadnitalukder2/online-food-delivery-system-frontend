@@ -76,7 +76,7 @@
             h1 {
                 font-size: 42px;
                 font-weight: 700;
-                color: #fff;
+                color: var(--text-color-white);
             }
 
         }
@@ -91,7 +91,7 @@
         .login_page {
             flex-basis: 50%;
             text-align: center;
-            background: #fff;
+            background: var(--text-color-white);
             box-shadow: 0px 1px 7px #e7e4e4;
             border-radius: 6px;
             padding: 40px 0px;
@@ -121,7 +121,7 @@
                     border: 2px solid #e7e4e4;
 
                     &:focus-visible {
-                        border: 2px solid #9c4202;
+                        border: 2px solid var(--primary-color);
                         outline: none;
                     }
                 }
@@ -129,9 +129,9 @@
                 .login_btn {
                     padding: 10px;
                     width: 100%;
-                    border: 1px solid #9c4202;
-                    color: #fff;
-                    background: #9c4202;
+                    border: 1px solid var(--primary-color);
+                    color: var(--text-color-white);
+                    background: var(--primary-color);
                     border-radius: 6px;
                     cursor: pointer;
                     font-size: 18px;

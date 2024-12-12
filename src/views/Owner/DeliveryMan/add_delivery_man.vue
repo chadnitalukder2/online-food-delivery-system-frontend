@@ -91,13 +91,13 @@ const addDeliveryPersonnel = async () => {
             <form @submit.prevent="addDeliveryPersonnel">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Delivery Personnel Name <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Personnel Name <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="deliveryPersonnel.name" placeholder="Enter a delivery personnel name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Delivery Personnel Number <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Personnel Number <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="deliveryPersonnel.phone" placeholder="Enter a delivery personnel number">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.phone }}</p>
                     </div>
@@ -105,13 +105,13 @@ const addDeliveryPersonnel = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Delivery Personnel Email  <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Personnel Email  <span style="color: var(--primary-color)">*</span></p>
                         <input type="email" v-model="deliveryPersonnel.email" placeholder="Enter a delivery personnel email.">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email  }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Delivery Personnel Vehicle Type <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Personnel Vehicle Type <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="deliveryPersonnel.vehicle_type" placeholder="Enter a delivery personnel vehicle type.">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.vehicle_type }}</p>
                     </div>
@@ -119,7 +119,7 @@ const addDeliveryPersonnel = async () => {
                 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Availability <span style="color: #9c4202">*</span></p>
+                        <p>Availability <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="deliveryPersonnel.availability">
                             <option disabled>Select one</option>
                             <option value="unavailable" >Unavailable </option>
@@ -150,8 +150,8 @@ const addDeliveryPersonnel = async () => {
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -160,15 +160,15 @@ const addDeliveryPersonnel = async () => {
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -222,7 +222,7 @@ const addDeliveryPersonnel = async () => {
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -232,10 +232,10 @@ const addDeliveryPersonnel = async () => {
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;

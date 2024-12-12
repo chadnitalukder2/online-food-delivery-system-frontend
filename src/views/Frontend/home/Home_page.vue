@@ -190,7 +190,7 @@ a {
                 .search-form {
                     color: #999999;
                     border-radius: 10px;
-                    background: #fff;
+                    background: var(--text-color-white);
                     width: 100%;
                     max-width: 830px;
                     padding: 25px;
@@ -206,7 +206,7 @@ a {
 
                         input {
                             border-radius: 6px !important;
-                            background: #fff;
+                            background: var(--text-color-white);
                             height: 60px;
                             padding: 0px 20px 0px 20px;
                             position: relative;
@@ -227,7 +227,7 @@ a {
                             transform: translateY(-50%);
                             left: 20px;
                             transition: 0.2s linear;
-                            background-color: #fff;
+                            background-color: var(--text-color-white);
                             padding: 1px 5px;
                             z-index: 11;
                             pointer-events: none;
@@ -235,7 +235,7 @@ a {
 
                         input:focus {
                             outline: none;
-                            border: 1px solid #9c4202;
+                            border: 1px solid var(--primary-color);
                         }
 
                         input:focus+label {
@@ -257,9 +257,9 @@ a {
                             font-weight: 400;
                             text-transform: inherit;
                             text-align: center;
-                            border: 1px solid #9c4202;
-                            color: #fff;
-                            background: #9c4202;
+                            border: 1px solid var(--primary-color);
+                            color: var(--text-color-white);
+                            background: var(--primary-color);
                             cursor: pointer;
                             border-radius: 6px !important;
                             font-family: var(--body-font);
@@ -327,7 +327,7 @@ a {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #fff;
+                background-color: var(--text-color-white);
                 margin: 0 auto;
                 margin-bottom: 20px;
                 transition: all .5s;
@@ -370,7 +370,7 @@ a {
                 }
 
                 .food-item__title a {
-                    color: #9c4202;
+                    color: var(--primary-color);
                 }
 
             }
@@ -421,9 +421,9 @@ a {
                     font-size: 16px;
                     border-radius: 6px;
                     position: relative;
-                    background: #9c4202;
+                    background: var(--primary-color);
                     border: 1px solid;
-                    color: #fff;
+                    color: var(--text-color-white);
                     text-decoration: none;
                     outline: none !important;
                     transition: all .3s;

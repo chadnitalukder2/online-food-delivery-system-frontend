@@ -54,7 +54,7 @@ const props = defineProps(["menuItem"]);
     height: 100%;
     border: 0.5px solid rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--text-color-white);
     transition: all ease 0.3s;
     align-items: center;
     justify-content: space-between;
@@ -100,7 +100,7 @@ const props = defineProps(["menuItem"]);
                     color: #212121;
 
                     &:hover {
-                        color: #9c4202;
+                        color: var(--primary-color-hover);
                     }
                 }
             }
@@ -134,7 +134,7 @@ const props = defineProps(["menuItem"]);
         transform: translateY(-5px);
 
         .food-name h1 a {
-            color: #9c4202;
+            color: var(--primary-color);
         }
 
     }

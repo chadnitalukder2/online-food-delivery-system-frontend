@@ -95,7 +95,7 @@ const addToCart = async () => {
     height: 100%;
     border: 0.5px solid rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--text-color-white);
     transition: all ease 0.3s;
     align-items: center;
     display: flex;
@@ -128,7 +128,7 @@ const addToCart = async () => {
     .add-btn-long {
         position: absolute;
         font-size: 12px;
-        background: #fff;
+        background: var(--text-color-white);
         width: 25px;
         display: flex;
         border-radius: 50%;
@@ -151,14 +151,14 @@ const addToCart = async () => {
             background: #f6f5f5;
 
             a {
-                color: #9c4202;
+                color: var(--primary-color);
             }
 
         }
     }
     .add-btn-short {
         font-size: 15px;
-        background: #fff;
+        background: var(--text-color-white);
         width: 25px;
         display: flex;
         border-radius: 50%;
@@ -181,7 +181,7 @@ const addToCart = async () => {
             background: #f6f5f5;
 
             a {
-                color: #9c4202;
+                color: var(--primary-color);
             }
 
         }
@@ -199,7 +199,7 @@ const addToCart = async () => {
                     color: #212121;
 
                     &:hover {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -232,7 +232,7 @@ const addToCart = async () => {
         transform: translateY(-5px);
 
         .food-name h1 a {
-            color: #9c4202;
+            color: var(--primary-color);
         }
 
     }

@@ -105,7 +105,7 @@ const closeModalDelete = () => {
 
       cursor: pointer;
       background: #c1c1c1;
-      color: #fff;
+      color: var(--text-color-white);
       border-radius: 4px;
       text-decoration: none;
       transition: all 0.4s;
@@ -126,7 +126,7 @@ const closeModalDelete = () => {
 .restaurant-profile {
   max-width: 800px;
   margin: 20px auto;
-  background: #fff;
+  background: var(--text-color-white);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -152,7 +152,7 @@ const closeModalDelete = () => {
 .logo {
   width: 100px;
   height: 100px;
-  border: 4px solid #fff;
+  border: 4px solid var(--text-color-white);
   border-radius: 50%;
   object-fit: cover;
 }
@@ -211,7 +211,7 @@ const closeModalDelete = () => {
     &:hover{
       background: rgb(0, 179, 255);
       a{
-        color: #fff;
+        color: var(--text-color-white);
       }
     }
   }
@@ -227,7 +227,7 @@ const closeModalDelete = () => {
    
     &:hover{
       background-color: #cf0e0e;
-      color: #fff;
+      color: var(--text-color-white);
     }
   }
 

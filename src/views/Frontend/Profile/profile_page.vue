@@ -189,7 +189,7 @@ const closeModalView = () => {
 
             cursor: pointer;
             background: #c1c1c1;
-            color: #fff;
+            color: var(--text-color-white);
             border-radius: 4px;
             text-decoration: none;
             transition: all 0.4s;
@@ -224,7 +224,7 @@ const closeModalView = () => {
     .left_content {
         flex-basis: 25%;
         height: 100%;
-        background: #fff;
+        background: var(--text-color-white);
         box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
         border-radius: 5px;
 
@@ -268,8 +268,8 @@ const closeModalView = () => {
                 font-size: 15px;
                 padding: 8px;
                 border-radius: 5px;
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 cursor: pointer;
                 margin-bottom: 30px;
                 color: white;
@@ -286,7 +286,7 @@ const closeModalView = () => {
         flex-basis: 75%;
 
         .info {
-            background: #fff;
+            background: var(--text-color-white);
             padding: 10px 10px;
             text-align: left;
             box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
@@ -328,7 +328,7 @@ table {
 }
 
 th {
-    background: #fff;
+    background: var(--text-color-white);
     padding: 20px 10px !important;
     border: 1px solid transparent;
     font-size: 16px;
@@ -351,7 +351,7 @@ td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    background: #fff;
+    background: var(--text-color-white);
 
 }
 

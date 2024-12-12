@@ -121,26 +121,26 @@ console.log(menus.value);
             <form @submit.prevent="addMenus">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Menu Item Name <span style="color: #9c4202">*</span></p>
+                        <p>Menu Item Name <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="menus.name" placeholder="Enter a item name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Menu Item Image <span style="color: #9c4202">*</span></p>
+                        <p>Menu Item Image <span style="color: var(--primary-color)">*</span></p>
                         <input @change="handleFileChange" type="file">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.image }}</p>
                     </div>
                 </div>
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Menu Item price <span style="color: #9c4202">*</span></p>
+                        <p>Menu Item price <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="menus.price" placeholder="Enter a item price">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.price }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Menu Item Availability <span style="color: #9c4202">*</span></p>
+                        <p>Menu Item Availability <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="menus.availability ">
                             <option disabled>Select one</option>
                             <option value="out of stock">Out of stock </option>
@@ -151,7 +151,7 @@ console.log(menus.value);
                 </div>
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Category Name <span style="color: #9c4202">*</span></p>
+                        <p>Category Name <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="menus.category_id ">
                             <option disabled>Select a Category</option>
                             <option v-for="item in category" :key="item.id" :value="item.id" >{{ item.name }} </option>
@@ -160,7 +160,7 @@ console.log(menus.value);
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant Name<span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Name<span style="color: var(--primary-color)">*</span></p>
                         <select v-model="menus.restaurant_id" >
                             <option disabled>Select one</option>
                             <option v-for="item in restaurant " :key="item.id" :value="item.id">{{ item.name }} </option>
@@ -170,7 +170,7 @@ console.log(menus.value);
                 </div>
 
                 <div class="input-box">
-                    <p>Menu Item Description <span style="color: #9c4202">*</span></p>
+                    <p>Menu Item Description <span style="color: var(--primary-color)">*</span></p>
                     <textarea v-model="menus.description" rows="5" cols="50"></textarea>
                 </div>
 
@@ -195,8 +195,8 @@ console.log(menus.value);
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -205,15 +205,15 @@ console.log(menus.value);
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -268,7 +268,7 @@ console.log(menus.value);
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -278,10 +278,10 @@ console.log(menus.value);
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;

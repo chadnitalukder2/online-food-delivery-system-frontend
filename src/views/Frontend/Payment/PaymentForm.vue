@@ -113,7 +113,7 @@ const submitPayment = async () => {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background: #fff;
+    background: var(--text-color-white);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -131,8 +131,8 @@ h1 {
 }
 
 .panel-heading {
-    background: #007bff;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--text-color-white);
     padding: 15px;
     text-align: center;
 }
@@ -182,8 +182,8 @@ label {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background: #007bff;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--text-color-white);
     border: none;
     border-radius: 5px;
     cursor: pointer;

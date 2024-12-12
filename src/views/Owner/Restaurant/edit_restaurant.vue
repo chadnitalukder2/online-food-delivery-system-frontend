@@ -111,13 +111,13 @@ const UpdateRestaurant = async () => {
             <form @submit.prevent="UpdateRestaurant"  enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant Name <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Name <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="restaurants.name" placeholder="Enter a restaurant name">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.name }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>User Name  <span style="color: #9c4202">*</span></p>
+                        <p>User Name  <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="restaurants.owner_id" >
                             <option disabled>Select one</option>
                             <option v-for="item in users " :key="item.id" :value="item.id">{{ item.name }} </option>
@@ -128,13 +128,13 @@ const UpdateRestaurant = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant Phone <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Phone <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="restaurants.phone" placeholder="Enter a restaurant phone">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.phone }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant Email  <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Email  <span style="color: var(--primary-color)">*</span></p>
                         <input type="email" v-model="restaurants.email" placeholder="Enter a restaurant email">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email }}</p>
                     </div>
@@ -142,13 +142,13 @@ const UpdateRestaurant = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant Address  <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant Address  <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="restaurants.address" placeholder="Enter a restaurant address ">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.address }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant status  <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant status  <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="restaurants.status" >
                             <option disabled>Select one</option>
                             <option value="open">Open </option>
@@ -159,12 +159,12 @@ const UpdateRestaurant = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Delivery Fee  <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Fee  <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="restaurants.delivery_fee" placeholder="Enter a restaurant delivery fee ">
                     </div>
 
                     <div class="input-box">
-                        <p>Delivery Time  <span style="color: #9c4202">*</span></p>
+                        <p>Delivery Time  <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="restaurants.delivery_time" placeholder="Enter a restaurant delivery time as a min ">
                     </div>
                 </div>
@@ -172,7 +172,7 @@ const UpdateRestaurant = async () => {
                
              
                 <div class="input-box">
-                    <p>Restaurant Description <span style="color: #9c4202">*</span></p>
+                    <p>Restaurant Description <span style="color: var(--primary-color)">*</span></p>
                     <textarea v-model="restaurants.description" rows="5" cols="50"></textarea>
                 </div>
 
@@ -197,8 +197,8 @@ const UpdateRestaurant = async () => {
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -207,15 +207,15 @@ const UpdateRestaurant = async () => {
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -269,7 +269,7 @@ const UpdateRestaurant = async () => {
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -279,10 +279,10 @@ const UpdateRestaurant = async () => {
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;

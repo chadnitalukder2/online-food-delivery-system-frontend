@@ -256,7 +256,7 @@ const addOrders = async () => {
 
             cursor: pointer;
             background: #c1c1c1;
-            color: #fff;
+            color: var(--text-color-white);
             border-radius: 4px;
             text-decoration: none;
             transition: all 0.4s;
@@ -381,7 +381,7 @@ const addOrders = async () => {
             font-size: 16px;
             margin-top: 20px;
             padding: 14px;
-            color: #fff;
+            color: var(--text-color-white);
             border: 1px solid var(--primary-color);
             transition: all 0.3s ease;
 

@@ -114,13 +114,13 @@ const addDiscount = async () => {
             <form @submit.prevent="addDiscount">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Discount Code <span style="color: #9c4202">*</span></p>
+                        <p>Discount Code <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="discount.code" placeholder="Enter a discount code">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.code }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Discount Percentage <span style="color: #9c4202">*</span></p>
+                        <p>Discount Percentage <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="discount.discount_percentage" placeholder="Enter a discount percentage">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.discount_percentage }}</p>
                     </div>
@@ -128,33 +128,33 @@ const addDiscount = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Discount Usage limit <span style="color: #9c4202">*</span></p>
+                        <p>Discount Usage limit <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="discount.usage_limit" placeholder="Enter a discount usage limit">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.usage_limit }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Discount Min Order Amount <span style="color: #9c4202">*</span></p>
+                        <p>Discount Min Order Amount <span style="color: var(--primary-color)">*</span></p>
                         <input type="number" v-model="discount.min_order_amount" placeholder="Enter a discount min order amount">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.min_order_amount }}</p>
                     </div>
                 </div>
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Discount Start Date <span style="color: #9c4202">*</span></p>
+                        <p>Discount Start Date <span style="color: var(--primary-color)">*</span></p>
                         <input type="date" v-model="discount.start_date" placeholder="Enter a discount start date">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.start_date }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Discount End Date <span style="color: #9c4202">*</span></p>
+                        <p>Discount End Date <span style="color: var(--primary-color)">*</span></p>
                         <input type="date" v-model="discount.end_date" placeholder="Enter a discount end date">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.end_date }}</p>
                     </div>
                 </div>
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant name  <span style="color: #9c4202">*</span></p>
+                        <p>Restaurant name  <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="discount.restaurant_id" >
                             <option disabled>Select one</option>
                             <option v-for="item in restaurant " :key="item.id" :value="item.id">{{ item.name }} </option>
@@ -187,8 +187,8 @@ const addDiscount = async () => {
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -197,15 +197,15 @@ const addDiscount = async () => {
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -259,7 +259,7 @@ const addDiscount = async () => {
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -269,10 +269,10 @@ const addDiscount = async () => {
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;

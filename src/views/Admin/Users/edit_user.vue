@@ -58,19 +58,19 @@ const UpdateUser = async () => {
             <form @submit.prevent="UpdateUser" enctype="multipart/form-data">
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>User Name <span style="color: #9c4202">*</span></p>
+                        <p>User Name <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="user.name" placeholder="Enter a user name">
                     </div>
 
                     <div class="input-box">
-                        <p>User Email <span style="color: #9c4202">*</span></p>
+                        <p>User Email <span style="color: var(--primary-color)">*</span></p>
                         <input type="email" placeholder=" Enter your email" v-model="user.email">
                     </div>
                 </div>
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>User Role <span style="color: #9c4202">*</span></p>
+                        <p>User Role <span style="color: var(--primary-color)">*</span></p>
                         <select v-model="user.role">
                             <option disabled>Select one</option>
                             <option value="admin">Admin </option>
@@ -100,8 +100,8 @@ const UpdateUser = async () => {
 
             button {
                 padding: 10px 20px;
-                border: 1px solid #9c4202;
-                background: #9c4202;
+                border: 1px solid var(--primary-color);
+                background: var(--primary-color);
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all ease-in .3s;
@@ -110,15 +110,15 @@ const UpdateUser = async () => {
                     text-decoration: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #fff;
+                    color: var(--text-color-white);
                 }
 
                 &:hover {
                     transform: scale(1.05);
-                    background-color: #fff;
+                    background-color: var(--text-color-white);
 
                     a {
-                        color: #9c4202;
+                        color: var(--primary-color);
                     }
                 }
             }
@@ -172,7 +172,7 @@ const UpdateUser = async () => {
 
                 &:focus {
                     outline: none;
-                    border: 1.5px solid #9c4202;
+                    border: 1.5px solid var(--primary-color);
                 }
             }
         }
@@ -182,10 +182,10 @@ const UpdateUser = async () => {
             padding-top: 10px;
 
             button {
-                background: #9c4202;
-                border: 1px solid #9c4202;
+                background: var(--primary-color);
+                border: 1px solid var(--primary-color);
                 border-radius: 6px;
-                color: #fff;
+                color: var(--text-color-white);
                 font-size: 18px;
                 padding: 8px 28px;
                 cursor: pointer;
