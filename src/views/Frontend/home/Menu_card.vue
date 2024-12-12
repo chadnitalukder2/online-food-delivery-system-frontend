@@ -50,8 +50,32 @@ const addToCart = async () => {
 </script>
 
 <template>
+    <div v-if="menuItem.availability === 'out of stock'">
+        <div class="food_item" >
+        <div class="food__item-thumb">
 
-    <div class="food_item">
+            <a href="#">
+                <img :src="menuItem.image">
+            </a>
+        </div>
+        <div class="popular-food__item-info">
+            <div class="food-name">
+                <h1> <a href="#">{{ menuItem.name }}</a> </h1>
+            </div>
+            <div class="price">
+                From Tk {{ menuItem.price }}
+            </div>
+            <div class="description">
+                <p>{{ menuItem.description }}</p>
+            </div>
+            <p style="color: red; padding-top: 4px;">{{ menuItem.availability  }}</p>
+        </div>
+      
+    
+    </div>
+    </div>
+
+    <div class="food_item" v-else>
         <div class="food__item-thumb">
 
             <a href="#">

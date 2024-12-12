@@ -1,164 +1,117 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
+import Modal from "@/components/global/Modal.vue";
 
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+//---------------------------------------------------
+const restaurants = ref();
+const users = ref();
+const owners = ref();
+//---------------------------------------------------
+onMounted(async () => {
+  getRestaurants();
+  getUsers();
+  getOwner();
+});
+//---------------------------------------------------
+const getRestaurants = async () => {
+  let response = await axios.get("/api/restaurants");
+  restaurants.value = response.data.length;
+};
+//--------------------------------------------------
+const getUsers = async () => {
+  let response = await axios.get("/api/users");
+  users.value = response.data.length;
+};
+//---------------------------------------
+const getOwner = async () => {
+    try {
+        const response = await axios.get("/api/users");
+        owners.value = response.data
+            .filter(user => user && user.role == "owner"); // Filter users who are not "owner"
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        notify({
+            title: "Failed to fetch users",
+            type: "error",
+        });
+    }
+};
 </script>
 
 <template>
-  <div class="container">
-    <div class="table-box">
-      <div class="header">
-        <h1>All Category</h1>
-
-        <div class="btn">
-          <button>
-            <router-link>
-              Add Category
-            </router-link>
-          </button>
-        </div>
+  <div class="dashboard-container">
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <h3>Total Restaurant </h3>
+        <p class="stat-value" id="sum-items">{{ restaurants }}</p>
       </div>
-
-
-      <table id="customers">
-        <tr>
-          <th># ID</th>
-          <th>Image </th>
-          <th>Name</th>
-          <th>Action</th>
-        </tr>
-        <tbody>
-
-          <tr>
-            <td>#1</td>
-            <td style="width: 120px; height: 100px">
-              <img src="../../../assets/food-2.png" style="width: 100%; height: 100%" />
-            </td>
-            <td>hello</td>
-            <td @click="openModalDelete()">
-              <i class="fa-solid fa-trash-can delete-icon "></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="stat-card">
+        <h3>Total User</h3>
+        <p class="stat-value" id="sum-items">{{ users }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total Owner </h3>
+        <p class="stat-value" id="sum-items">{{ owners.length }}</p>
+      </div>
+    
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-#myModal {
-  .modal_footer {
-    button {
-
-      cursor: pointer;
-      background: #c1c1c1;
-      color: var(--text-color-white);
-      border-radius: 4px;
-      text-decoration: none;
-      transition: all 0.4s;
-      line-height: normal;
-      min-width: 120px;
-      border: none;
-      min-height: 40px;
-      border-radius: 3px;
-      margin: 0 5px;
-    }
-
-  }
-
-}
-
-
-
-table {
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.container {
+.dashboard-container {
+  padding: 50px 50px;
   width: 100%;
 }
 
-.table-box {
-  padding: 50px 30px;
-  border-radius: 8px;
+.dashboard-stats {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 20px;
+
+
+  .stat-card {
+    flex-basis: 33%;
+    background: var(--text-color-white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    align-items: center;
+    transition: transform 0.3s ease;
+  }
+}
 
-    .btn {
-      text-align: right;
-      padding-bottom: 10px;
+.stat-card:hover {
+  transform: scale(1.05);
+}
 
-      button {
-        padding: 10px 20px;
-        border: 1px solid var(--primary-color);
-        background: var(--primary-color);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all ease-in .3s;
+.stat-card h3 {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
 
-        a {
-          text-decoration: none;
-          font-size: 16px;
-          font-weight: 500;
-          color: var(--text-color-white);
-        }
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+}
 
-        &:hover {
-          transform: scale(1.05);
-          background-color: var(--text-color-white);
-
-          a {
-            color: var(--primary-color);
-          }
-        }
-      }
-    }
-
-    h1 {
-      margin-top: 0px;
-      font-size: 22px;
-      color: #444;
-      font-weight: 600;
-    }
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stat-card h3 {
+    font-size: 16px;
   }
 
-}
-
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td,
-#customers th {
-  border: 1px solid #f3ededad;
-  padding:10px 12px;
-  text-align: left;
-}
-
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#customers th {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  text-align: left;
-  background-color: rgb(237 236 236 / 68%);
-  color: #444;
-  font-size: 16px;
-}
-#customers td{
-  color: #656262;
-  font-size: 14px;
-}
-.delete-icon{
-    color: #eb1613;
-    cursor: pointer;
+  .stat-value {
+    font-size: 28px;
+  }
 }
 </style>

@@ -23,7 +23,7 @@
     gap: 10px;
     border-right: 1px solid #EAECF0;
     min-height: 100vh;
-    background: #f7e5e5cf;
+    background: var(--text-color-sidebar);
     padding: 14px;
     padding-top: 30px;
     a {
@@ -32,7 +32,7 @@
         font-size: 18px;
         padding: 10px 15px;
         width: calc(100% - 30px);
-        color: #444;
+        color: var(--text-color-middle);
         background: var(--text-color-white);
         border: 1px solid var(--primary-color);
         color: var(--primary-color);

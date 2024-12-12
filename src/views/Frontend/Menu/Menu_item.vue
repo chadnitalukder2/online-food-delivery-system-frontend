@@ -53,7 +53,7 @@ const getRestaurant = async () => {
     <div class="container">
         <div class="title_section">
             <div class="inner-banner">
-                <img :src="restaurant.bg_image">
+                <img src="../../../assets/menu-cover.png">
             </div>
             <div class="banner_title">
                 <h1>{{ restaurant.name }}</h1>

@@ -30,7 +30,7 @@
     gap: 10px;
     border-right: 1px solid #EAECF0;
     min-height: 100vh;
-    background: #f7e5e5cf;
+    background: var(--text-color-sidebar);
     padding: 14px;
     padding-top: 30px;
     a {

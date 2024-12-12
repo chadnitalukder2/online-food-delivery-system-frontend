@@ -138,7 +138,7 @@ a {
 
 .header_section {
     .container {
-        background: #f7e5e5cf;
+        background: var(--text-color-sidebar);
 
         .details_wrapper {
             display: flex;
