@@ -18,8 +18,17 @@ onMounted(async () => {
 });
 //---------------------------------------------------
 const getUsers = async () => {
-  let response = await axios.get(`/api/users`);
-  users.value = response.data;
+    try {
+        const response = await axios.get("/api/users");
+        users.value = response.data
+            .filter(user => user && user.role !== "owner"); // Filter users who are not "owner"
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        notify({
+            title: "Failed to fetch users",
+            type: "error",
+        });
+    }
 };
 //=====================================================
 const getRestaurant = async () => {

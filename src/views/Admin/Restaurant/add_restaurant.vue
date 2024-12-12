@@ -1,7 +1,7 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import { ref,onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -13,12 +13,21 @@ const validation = ref({});
 const users = ref([]);
 //==================================================
 onMounted(async () => {
-  getUsers();
+    getUsers();
 });
 //---------------------------------------------------
 const getUsers = async () => {
-  let response = await axios.get("/api/users");
-  users.value = response.data;
+    try {
+        const response = await axios.get("/api/users");
+        users.value = response.data
+            .filter(user => user && user.role !== "owner"); // Filter users who are not "owner"
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        notify({
+            title: "Failed to fetch users",
+            type: "error",
+        });
+    }
 };
 //=====================================================
 const clearValidationMessage = (field) => {
@@ -33,7 +42,7 @@ const handleFileChange = (event) => {
 const handleFileChangeBgImage = (event) => {
     bg_image.value = event.target.files[0];
 };
-const validateCategory = () => {
+const validateRestaurant = () => {
     let errors = {};
     if (!restaurants.value.owner_id) {
         errors.owner_id = "User Name is required.";
@@ -52,20 +61,21 @@ const validateCategory = () => {
         clearValidationMessage("phone");
     }
     if (!restaurants.value.address) {
-        errors.address  = "Restaurant address is required.";
+        errors.address = "Restaurant address is required.";
         clearValidationMessage("address");
     }
-    
+
     return errors;
 };
 //==========================================
 const addRestaurant = async () => {
     validation.value = {};
-    const errors = validateCategory();
+    const errors = validateRestaurant();
     if (Object.keys(errors).length > 0) {
         validation.value = errors;
         return;
     }
+
 
     const formData = new FormData();
     formData.append("owner_id", restaurants.value.owner_id)
@@ -77,7 +87,7 @@ const addRestaurant = async () => {
     formData.append("delivery_fee", restaurants.value.delivery_fee || '');
     formData.append("delivery_time", restaurants.value.delivery_time || '');
     formData.append("description", restaurants.value.description || "");
-    formData.append("image", image.value || '') ;
+    formData.append("image", image.value || '');
     formData.append("bg_image", bg_image.value || '');
     try {
         await axios.post("/api/restaurants", formData);
@@ -132,7 +142,7 @@ const addRestaurant = async () => {
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant Email  <span style="color: var(--primary-color)">*</span></p>
+                        <p>Restaurant Email <span style="color: var(--primary-color)">*</span></p>
                         <input type="email" v-model="restaurants.email" placeholder="Enter a restaurant email">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.email }}</p>
                     </div>
@@ -140,50 +150,54 @@ const addRestaurant = async () => {
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant Address  <span style="color: var(--primary-color)">*</span></p>
+                        <p>Restaurant Address <span style="color: var(--primary-color)">*</span></p>
                         <input type="text" v-model="restaurants.address" placeholder="Enter a restaurant address ">
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.address }}</p>
                     </div>
 
                     <div class="input-box">
-                        <p>Restaurant status  <span style="color: var(--primary-color)">*</span></p>
-                        <select v-model="restaurants.status" >
+                        <p>Restaurant status <span style="color: var(--primary-color)">*</span></p>
+                        <select v-model="restaurants.status">
                             <option disabled>Select one</option>
                             <option value="open">Open </option>
-                            <option value="close" >Close</option>
+                            <option value="close">Close</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Delivery Fee  <span style="color: var(--primary-color)">*</span></p>
-                        <input type="number" v-model="restaurants.delivery_fee" placeholder="Enter a restaurant delivery fee ">
+                        <p>Delivery Fee <span style="color: var(--primary-color)">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_fee"
+                            placeholder="Enter a restaurant delivery fee ">
                     </div>
 
                     <div class="input-box">
-                        <p>Delivery Time  <span style="color: var(--primary-color)">*</span></p>
-                        <input type="number" v-model="restaurants.delivery_time" placeholder="Enter a restaurant delivery time as a min ">
+                        <p>Delivery Time <span style="color: var(--primary-color)">*</span></p>
+                        <input type="number" v-model="restaurants.delivery_time"
+                            placeholder="Enter a restaurant delivery time as a min ">
                     </div>
                 </div>
 
                 <div class="form-wrapper">
                     <div class="input-box">
-                        <p>Restaurant background image  <span style="color: var(--primary-color)">*</span></p>
+                        <p>Restaurant background image <span style="color: var(--primary-color)">*</span></p>
                         <input @change="handleFileChangeBgImage" type="file">
                     </div>
 
                     <div class="input-box">
-                        <p>User Name  <span style="color: var(--primary-color)">*</span></p>
-                        <select v-model="restaurants.owner_id" >
+                        <p>User Name <span style="color: var(--primary-color)">*</span></p>
+                        <select v-model="restaurants.owner_id">
                             <option disabled>Select one</option>
-                            <option v-for="item in users " :key="item.id" :value="item.id">{{ item.name }} </option>
+                            <option v-for="item in users" :key="item.id" :value="item.id">
+                                {{ item.name }}
+                            </option>
                         </select>
                         <p style="margin: 0px; color: #da0808; font-size: 14px;">{{ validation.owner_id }}</p>
                     </div>
 
                 </div>
-             
+
                 <div class="input-box">
                     <p>Restaurant Description <span style="color: var(--primary-color)">*</span></p>
                     <textarea v-model="restaurants.description" rows="5" cols="50"></textarea>
@@ -272,7 +286,8 @@ const addRestaurant = async () => {
                 font-weight: 500;
             }
 
-            textarea,select,
+            textarea,
+            select,
             input {
                 width: 100%;
                 padding: 15px;
