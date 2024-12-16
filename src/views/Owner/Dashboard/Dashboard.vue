@@ -87,6 +87,10 @@ const getOrderById = async () => {
         <h3>Total Menu Items</h3>
         <p class="stat-value" id="sum-items">{{ menus }}</p>
       </div>
+      <div class="stat-card">
+        <h3>Total Menu Items</h3>
+        <p class="stat-value" id="sum-items">{{ menus }}</p>
+      </div>
     
     </div>
   </div>
