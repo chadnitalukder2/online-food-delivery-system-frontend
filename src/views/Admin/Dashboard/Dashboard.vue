@@ -29,17 +29,18 @@ const getUsers = async () => {
 };
 //---------------------------------------
 const getOwner = async () => {
-    try {
-        const response = await axios.get("/api/users");
-        owners.value = response.data
-            .filter(user => user && user.role == "owner"); // Filter users who are not "owner"
-    } catch (error) {
-        console.error("Error fetching users:", error);
-        notify({
-            title: "Failed to fetch users",
-            type: "error",
-        });
-    }
+  try {
+    const response = await axios.get("/api/users");
+    const owner = response.data.filter(user => user && user.role === "owner");
+    owners.value = owner.length;
+  } catch (error) {
+    console.error("Error fetching owners:", error);
+    notify({
+      title: "Failed to fetch owners",
+      text: "An error occurred while trying to retrieve owner data.",
+      type: "error",
+    });
+  }
 };
 </script>
 
@@ -56,7 +57,7 @@ const getOwner = async () => {
       </div>
       <div class="stat-card">
         <h3>Total Owner </h3>
-        <p class="stat-value" id="sum-items">{{ owners.length }}</p>
+        <p class="stat-value" id="sum-items">{{ owners }}</p>
       </div>
     
     </div>
