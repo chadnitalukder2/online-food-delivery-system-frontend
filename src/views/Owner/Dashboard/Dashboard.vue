@@ -83,16 +83,16 @@ const getOrderById = async () => {
   <div class="dashboard-container">
     <div class="dashboard-stats">
       <div class="stat-card">
-        <h3>Total Order : <span class="number">{{ orders.length }}</span></h3>
-        <h3>Total Order Amount : <span class="number">{{ OrdersTotal }}</span></h3>
+        <h3 class="order-item">Total Order : <span class="number">{{ orders.length }}</span></h3>
+        <h3 class="order-item" >Total Amount : <span class="number">{{ OrdersTotal }}</span></h3>
       </div>
       <div class="stat-card">
-        <h3>Total Completed Order : <span class="number">{{ completeOrders.length }}</span></h3>
-        <h3>Total Completed Order Amount : <span class="number">{{ totalCompleteAmount }}</span></h3>
+        <h3 class="order-item">Total Completed Order : <span class="number">{{ completeOrders.length }}</span></h3>
+        <h3 class="order-item">Total Amount : <span class="number">{{ totalCompleteAmount }}</span></h3>
       </div>
       <div class="stat-card">
-        <h3>Total Pending Order : <span class="number">{{ pendingOrders.length }}</span></h3>
-        <h3>Total Pending Order Amount : <span class="number">{{ pendingOrdersTotal }}</span></h3>
+        <h3 class="order-item">Total Pending Order : <span class="number">{{ pendingOrders.length }}</span></h3>
+        <h3 class="order-item">Total Amount : <span class="number">{{ pendingOrdersTotal }}</span></h3>
       </div>
       <div class="stat-card">
         <h3>Total Category Items</h3>
@@ -102,7 +102,7 @@ const getOrderById = async () => {
         <h3>Total Menu Items</h3>
         <p class="stat-value" id="sum-items">{{ menus }}</p>
       </div>
-     
+
 
     </div>
   </div>
@@ -127,6 +127,11 @@ const getOrderById = async () => {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -135,8 +140,8 @@ const getOrderById = async () => {
 }
 
 .stat-card h3 {
-  font-size: 18px;
-  color: #666;
+  font-size: 16px;
+  color: var(--text-color-small-font);
   margin-bottom: 10px;
 }
 
