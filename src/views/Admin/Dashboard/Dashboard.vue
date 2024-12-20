@@ -73,12 +73,9 @@ const getOwner = async () => {
 .dashboard-stats {
   display: flex;
   gap: 20px;
-  justify-content: space-between;
-
-
-
+  flex-wrap: wrap;
   .stat-card {
-    flex-basis: 33%;
+    flex-basis: 31%;
     background: var(--text-color-white);
     border-radius: 10px;
     padding: 20px;
