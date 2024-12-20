@@ -92,6 +92,7 @@ const addOrders = async () => {
                 data.value = [];
                 notify({ title: "Order Placed Successfully", type: "success" });
             }
+            router.push('profile-page')
         } else {
             let data = {
                 restaurant_id: carts.value?.[0]?.restaurant_id,

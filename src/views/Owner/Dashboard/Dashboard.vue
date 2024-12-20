@@ -12,8 +12,11 @@ const menus = ref([]);
 const orders = ref([]);
 const restaurants = ref([]);
 const restaurantId = ref(null);
-const totalAmount = ref(0);
-
+const totalCompleteAmount = ref(0);
+const completeOrders = ref(0);
+const pendingOrders = ref(0);
+const pendingOrdersTotal = ref(0);
+const OrdersTotal = ref(0);
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -33,7 +36,7 @@ const fetchRestaurants = async () => {
     const id = localStorage.getItem('user_id');
     let response = await axios.get(`/api/getRestaurantByOwner/${id}`);
     restaurants.value = response.data;
-    restaurantId.value = restaurants.value[0]?.id || null; 
+    restaurantId.value = restaurants.value[0]?.id || null;
     if (restaurantId.value) {
       getMenuById();
       getOrderById();
@@ -53,20 +56,24 @@ const getMenuById = async () => {
 };
 //-----------------------------------------------------
 const getOrderById = async () => {
-    if (!restaurantId.value) {
-        console.error("Restaurant ID not set");
-        return;
-    }
-    try {
-        const response = await axios.get(`api/getOrdersByRestaurantIds/${restaurantId.value}`);
-        orders.value = response.data;
-     
-        totalAmount.value = orders.value
-            .filter(order => order.status === "completed")
-            .reduce((sum, order) => sum + (order.total_amount || 0), 0);
-    } catch (error) {
-        console.error("Error fetching orders:", error);
-    }
+  if (!restaurantId.value) {
+    console.error("Restaurant ID not set");
+    return;
+  }
+  try {
+    const response = await axios.get(`api/getOrdersByRestaurantIds/${restaurantId.value}`);
+    orders.value = response.data;
+    OrdersTotal.value = orders.value.reduce((sum, order) => sum + (order.total_amount || 0), 0);;
+    completeOrders.value = orders.value.filter(order => order.status === "completed");
+    totalCompleteAmount.value = orders.value.filter(order => order.status === "completed").reduce((sum, order) => sum + (order.total_amount || 0), 0);
+    pendingOrders.value = orders.value.filter(order => order.status === "pending");
+    pendingOrdersTotal.value = orders.value.filter(order => order.status === "pending").reduce((sum, order) => sum + (order.total_amount || 0), 0);
+
+
+
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
 };
 //-------------------------------------------------------
 
@@ -76,8 +83,16 @@ const getOrderById = async () => {
   <div class="dashboard-container">
     <div class="dashboard-stats">
       <div class="stat-card">
-        <h3>Total Order : {{ orders.length }}</h3>
-        <h3>Total Order Amount : {{ totalAmount }}</h3>
+        <h3>Total Order : <span class="number">{{ orders.length }}</span></h3>
+        <h3>Total Order Amount : <span class="number">{{ OrdersTotal }}</span></h3>
+      </div>
+      <div class="stat-card">
+        <h3>Total Completed Order : <span class="number">{{ completeOrders.length }}</span></h3>
+        <h3>Total Completed Order Amount : <span class="number">{{ totalCompleteAmount }}</span></h3>
+      </div>
+      <div class="stat-card">
+        <h3>Total Pending Order : <span class="number">{{ pendingOrders.length }}</span></h3>
+        <h3>Total Pending Order Amount : <span class="number">{{ pendingOrdersTotal }}</span></h3>
       </div>
       <div class="stat-card">
         <h3>Total Category Items</h3>
@@ -87,11 +102,8 @@ const getOrderById = async () => {
         <h3>Total Menu Items</h3>
         <p class="stat-value" id="sum-items">{{ menus }}</p>
       </div>
-      <div class="stat-card">
-        <h3>Total Menu Items</h3>
-        <p class="stat-value" id="sum-items">{{ menus }}</p>
-      </div>
-    
+     
+
     </div>
   </div>
 </template>
@@ -106,6 +118,7 @@ const getOrderById = async () => {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+
   .stat-card {
     flex-basis: 31%;
     background: var(--text-color-white);
@@ -142,5 +155,11 @@ const getOrderById = async () => {
   .stat-value {
     font-size: 28px;
   }
+}
+
+.number {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 20px;
 }
 </style>
