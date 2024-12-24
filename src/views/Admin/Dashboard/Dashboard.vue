@@ -1,7 +1,6 @@
 <script setup>
 import { useNotification } from "@kyvg/vue3-notification";
 const { notify } = useNotification();
-import Modal from "@/components/global/Modal.vue";
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
