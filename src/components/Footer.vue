@@ -15,7 +15,6 @@
 </template>
 
 
-
 <style lang="scss" scoped>
 .footer-section {
     background: #141414;
@@ -35,3 +34,5 @@
     }
 }
 </style>
+
+
